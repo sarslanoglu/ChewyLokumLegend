@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<game>
+    <player>
+        <id>1</id>
+        <name>Sergen</name>
+    </player>
+    <board>
+        <lokums>
+            <lokum>
+                <color>Green</color>
+                <position>
+                    <xcoord></xcoord>
+                    <ycoord></ycoord>
+                </position>
+                <type>hazelnut</type>
+            </lokum>
+        </lokums>
+        <obstacles>
+            <obstacle>
+                <color>Blue</color>
+                <position>
+                    <xcoord>2</xcoord>
+                    <ycoord>3</ycoord>
+                </position>
+            </obstacle>
+        </obstacles>
+    </board>
+	<goalscore>1000</goalscore>
+    <currentscore>100</currentscore>
+    <movesleft>5</movesleft>
+	<level>3</level>
+</game>
