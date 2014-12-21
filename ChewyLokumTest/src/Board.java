@@ -387,21 +387,6 @@ public class Board {
 		return combinations;
 	}
 
-
-	/**
-	 * 
-	 * @return If theres a swap that leads combination it will return true.
-	 */
-	public boolean isThereValidSwap(){
-		return true;
-	}
-	/**
-	 * @requires lokumGrid
-	 * @modifies lokumGrid
-	 */
-	public void reconstructBoard(){
-
-	}
 	/**
 	 * @requires board needs to have empty spaces to be filled.
 	 * @modifies board.

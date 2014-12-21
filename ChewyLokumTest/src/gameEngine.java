@@ -707,8 +707,8 @@ public class gameEngine extends JFrame implements MouseListener{
 
 	}
 
-	public Level getSelectedLevel(){
-		return level;
+	public int getSelectedLevel(){
+		return (int) levelChooser.getSelectedItem();
 	}
 
 	@Override
