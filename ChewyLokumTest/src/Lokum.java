@@ -37,7 +37,7 @@ public abstract class Lokum {
 	public abstract void setType(String s);
 	public abstract boolean isSpecial();
 	public abstract boolean isEqual(Lokum l); 
-
+	public abstract boolean isTimeLokum();
 
 	public int getPositionX() {
 		return positionX;
@@ -54,5 +54,7 @@ public abstract class Lokum {
 	public void setPositionY(int positionY) {
 		this.positionY = positionY;
 	}
+ 
+	
 
 }

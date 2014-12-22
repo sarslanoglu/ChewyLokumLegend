@@ -10,16 +10,17 @@
 public class normalLokum extends Lokum {
 
 	private String color;
-
+	private boolean isTimeLokum;
 	/**
 	 * 	
 	 * @param color  the color of the lokum.
 	 */
+ 
 
-
-	public normalLokum (int x, int y,String color) {
+	public normalLokum (int x, int y,String color, boolean timeLokum) {
 		super(x, y);
 		this.color = color;
+		isTimeLokum = timeLokum;
 		/**
 		 * Default construction of normalLokum.
 		 * Constructs the normalLokum object 
@@ -56,6 +57,12 @@ public class normalLokum extends Lokum {
 	public boolean isEqual(Lokum l) {
 		// TODO Auto-generated method stub
 		if(l.getColor().equals(color)){
+			return true;
+		}
+		return false;
+	}
+	public boolean isTimeLokum(){
+		if(isTimeLokum == true){
 			return true;
 		}
 		return false;

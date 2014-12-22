@@ -4,15 +4,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -24,6 +29,7 @@ import javax.swing.Timer;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -47,6 +53,8 @@ public class gameEngine extends JFrame implements MouseListener{
 	private static final long serialVersionUID = 1L;
 	private int score;
 	private int swapsLeft;
+	private int specialSwapsLeft;
+	private long time;
 	private Level level;
 	private Lokum sLokum1;
 	private Lokum sLokum2;
@@ -61,9 +69,11 @@ public class gameEngine extends JFrame implements MouseListener{
 	private JPanel gamePanel; 
 	private JPanel startMenu; 
 	private JPanel lokumPanel; 
+	private JCheckBox specialSwapSelecter;
+	private JLabel specialSwapCountLabel;
+	private JLabel timeLabel;
 	private Timer timer; 
-	private AnimationEventListener eventListener; 
-	
+	private Timer gameTimer;
 	//Images for representing lokums
 	private ImageIcon red = new ImageIcon("Lokums/redone.png");
 	private ImageIcon redVStriped = new ImageIcon("Lokums/redVStriped.png");
@@ -101,13 +111,14 @@ public class gameEngine extends JFrame implements MouseListener{
 		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.addMouseListener(this);
-
-		eventListener = new AnimationEventListener();
-		timer = new Timer(100,eventListener);
-
-		lokumGrid = new Lokum[8][8];
-		board = new Board(lokumGrid);
 		
+		timer = new Timer(100,new AnimationEventListener());
+		gameTimer = new Timer(1000,new timeEventListener());
+
+		
+		board = new Board(8,8);
+		lokumGrid = board.getLokumGrid();
+
 		level= new Level(1,20,100000,board.getLokumGrid(),0);
 		swapsLeft = level.getswapAmount();
 		score = 0;
@@ -133,7 +144,24 @@ public class gameEngine extends JFrame implements MouseListener{
 		 */
 	}
 
+	public void readGameState(){
+		try {
+			BufferedReader rd = new BufferedReader(new FileReader("gameState.txt"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
+	public void writeGameState(){
+		try {
+			BufferedWriter wr = new BufferedWriter(new FileWriter("gameState.txt"));
+			wr.write(level.getlevelNumber());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 *  Method that saves current game.
@@ -186,7 +214,7 @@ public class gameEngine extends JFrame implements MouseListener{
 				}
 			}
 			bw.write("</lokums>\n");
-			
+
 			// Implementation does not have obstacles it is constructed for validation xsd file
 			bw.write("<obstacles>\n");
 			bw.write("<obstacle>\n");
@@ -197,7 +225,7 @@ public class gameEngine extends JFrame implements MouseListener{
 			bw.write("</position>\n");
 			bw.write("</obstacle>\n");
 			bw.write("</obstacles>\n");
-			
+
 			bw.write("</board>\n");
 			bw.write(String.format("<goalscore gscore=\"%d\"/>",level.getlevelRequirementScore()));
 			bw.write(String.format("<currentscore cscore=\"%d\"/>",score));
@@ -269,12 +297,12 @@ public class gameEngine extends JFrame implements MouseListener{
 			JOptionPane.showMessageDialog(null,"XML filepath is invalid! Please choose a valid XML file.");
 			loadGame();
 		}
-		
+
 		// NOTE:Since validation no longer required we dont validate XML file
-		
+
 		return xmlDocument;		
 	}
-	
+
 	public void XMLParser(Document XMLDoc){
 
 		Element root = XMLDoc.getDocumentElement();
@@ -300,12 +328,12 @@ public class gameEngine extends JFrame implements MouseListener{
 								int coordY = 0;
 								String type = "";
 								String color = "";
-								
+
 								Node lokumNode = lokums.item(k);
 								if(lokumNode instanceof Element){
 									Element lokumElement = (Element) lokumNode;
 									NodeList lokumNodes = lokumElement.getChildNodes();
-									
+
 									for (int l = 0; l < lokumNodes.getLength(); l++) {
 										Node nodeT = lokumNodes.item(l);
 										if(nodeT instanceof Element){
@@ -313,11 +341,11 @@ public class gameEngine extends JFrame implements MouseListener{
 											if(nodeTElem.getNodeName()=="color"){
 												color = nodeTElem.getAttribute("c");
 											}
-											
+
 											else if(nodeTElem.getNodeName() == "type"){
 												type = nodeTElem.getAttribute("t");
 											}
-											
+
 											else if(nodeTElem.getNodeName() == "position"){
 												NodeList positionNodes = nodeTElem.getChildNodes();
 												for (int m = 0; m < positionNodes.getLength(); m++) {
@@ -337,7 +365,7 @@ public class gameEngine extends JFrame implements MouseListener{
 									}
 								}
 								if(type.equals("NotSpecial")){
-									savedLokum = new normalLokum(coordX,coordY,color);
+									savedLokum = new normalLokum(coordX,coordY,color , false);
 									lokumGrid[savedLokum.getPositionX()][savedLokum.getPositionY()] = savedLokum;
 								}else{
 									savedLokum = new specialLokum(coordX,coordY,color,type);
@@ -365,37 +393,32 @@ public class gameEngine extends JFrame implements MouseListener{
 	public void updateRequiredScoreLabel(int x){
 		requiredScoreLabel.setText("Required Score:" + x);
 	}
-	
+
 	/**
 	 * @requires 2 selected lokums (in this case; a, b)
 	 * @modifies lokum a, lokum b.
 	 * @effects board.
 	 */
 	public void swap (Lokum a, Lokum b){
-
-		updateSwapsLeft(-1);
+		
+		if(specialSwapSelecter.isSelected()){
+			updateSpecialSwaps(-1);
+		}
+		else{
+			updateSwapsLeft(-1);
+		}
 		board.setScore(0);
+		board.setTime(0);
 		board.swap(a,b);
 		ArrayList<Combination> combinations = board.checkCombinations();
 
-		if(a.isSpecial() && b.isSpecial()){
-			ArrayList<Lokum> spLokums = new ArrayList<Lokum>();
-			spLokums.add(a);
-			spLokums.add(b);
-			Combination special = new Combination("Special",spLokums);
-			combinations.add(special);
-		}else if(a.getType().equals("BOMB") && !b.isSpecial() 
-				|| !a.isSpecial() && b.getType().equals("BOMB")){
-			ArrayList<Lokum> Lokums = new ArrayList<Lokum>();
-			Lokums.add(a);
-			Lokums.add(b);
-			Combination special = new Combination("Special",Lokums);
-			combinations.add(special);
+		if(!specialSwapSelecter.isSelected()){
+			if(combinations.size() == 0){
+				board.unswap(a, b);
+				updateSwapsLeft(1);
+			}
 		}
-		if(combinations.size() == 0){
-			board.unswap(a, b);
-			updateSwapsLeft(1);
-		}
+		
 		while(combinations.size() != 0){
 			for(Combination c : combinations){
 				board.eat(c);
@@ -405,7 +428,7 @@ public class gameEngine extends JFrame implements MouseListener{
 			combinations = board.checkCombinations();
 		}
 		increaseScore(board.getScore());
-
+		//updateTime(board.getTime());
 		checkGameStatus();
 	}
 	public void checkGameStatus(){
@@ -413,11 +436,23 @@ public class gameEngine extends JFrame implements MouseListener{
 			JOptionPane.showMessageDialog(null, "Level succeded test level is over returning start menu.");
 			frame.setContentPane(startMenu);
 			timer.stop();
+			gameTimer.stop();
 		}
 		if(isLevelFailed()){
 			JOptionPane.showMessageDialog(null,"Test Level failed returning start menu.");
 			frame.setContentPane(startMenu);
 			timer.stop();
+			gameTimer.stop();
+		}
+		if(isTimeFinished()){
+			JOptionPane.showMessageDialog(null,"Level failed(time finished) returning start menu.");
+			frame.setContentPane(startMenu);
+			timer.stop();
+			gameTimer.stop();
+		}
+		if(specialSwapsLeft== 0){
+			specialSwapSelecter.setSelected(false);
+			specialSwapSelecter.setEnabled(false);
 		}
 	}
 
@@ -428,7 +463,7 @@ public class gameEngine extends JFrame implements MouseListener{
 	 */
 	public void increaseScore(int x){
 		score = score + x;
-		scoreLabel.setText(Integer.toString(score));
+		scoreLabel.setText("Score:" + Integer.toString(score));
 	}
 
 	public int getScore(){
@@ -436,7 +471,7 @@ public class gameEngine extends JFrame implements MouseListener{
 	}
 	public void setScore(int score){
 		this.score=score;
-		scoreLabel.setText(Integer.toString(score));
+		scoreLabel.setText("Score:" + Integer.toString(score));
 	}
 
 
@@ -451,30 +486,40 @@ public class gameEngine extends JFrame implements MouseListener{
 		Lokum selected = null;
 		int XcoordInGrid = x/25;
 		int YcoordInGrid = y/22;
-		
+
 		selected = lokumGrid[YcoordInGrid][XcoordInGrid];
-		if(sLokum1 != null){
-			int Lok1X = sLokum1.getPositionX();
-			int Lok1Y = sLokum1.getPositionY();
-			int sLokX = selected.getPositionX();
-			int sLoky = selected.getPositionY();
-			if(Math.abs(Lok1X-sLokX)>1 || Math.abs(Lok1Y-sLoky)>1){	
-				System.out.println("Select adjacent of lokum.");
-				selected = null;
+		if(!specialSwapSelecter.isSelected()){
+			if(sLokum1 != null){
+				int Lok1X = sLokum1.getPositionX();
+				int Lok1Y = sLokum1.getPositionY();
+				int sLokX = selected.getPositionX();
+				int sLoky = selected.getPositionY();
+				if(Math.abs(Lok1X-sLokX)>1 || Math.abs(Lok1Y-sLoky)>1){	
+					System.out.println("Select adjacent of lokum.");
+					selected = null;
+				}
 			}
 		}
 		return selected;
 	}
 	public void setSwapsLeft(int x){
 		swapsLeft = x;
-		swapsLeftLabel.setText(Integer.toString(swapsLeft));
+		swapsLeftLabel.setText("Swaps:" + Integer.toString(swapsLeft));
 	}
 	/**
 	 * @effects scoreLabel
 	 */
 	public void updateSwapsLeft(int x){
 		swapsLeft = swapsLeft+x;
-		swapsLeftLabel.setText(Integer.toString(swapsLeft));
+		swapsLeftLabel.setText("Swaps:" + Integer.toString(swapsLeft));
+	}
+	public void updateSpecialSwaps(int x){
+		specialSwapsLeft = specialSwapsLeft + x;
+		specialSwapCountLabel.setText("SpecialSwaps:" + Integer.toString(specialSwapsLeft));
+	}
+	public void updateTime(long x){
+		time = time + x;
+		timeLabel.setText("Time:" + Integer.toString((int)time));
 	}
 	/**
 	 * 
@@ -483,6 +528,12 @@ public class gameEngine extends JFrame implements MouseListener{
 	public boolean isLevelRequirementReached(){
 		if(score>=level.getlevelRequirementScore()){
 			return true;	
+		}
+		return false;
+	}
+	public boolean isTimeFinished(){
+		if(level.isTimeBased() == true && time == 0){
+			return true;
 		}
 		return false;
 	}
@@ -504,7 +555,7 @@ public class gameEngine extends JFrame implements MouseListener{
 	 *  @modifies frame.
 	 */
 	public void paintLokumPanel(){
-		
+
 		lokumPanel.setSize(25*lokumGrid[0].length,22*lokumGrid.length);
 		lokumPanel.setOpaque(true);
 		lokumPanel.setLayout(null);
@@ -628,32 +679,33 @@ public class gameEngine extends JFrame implements MouseListener{
 		gamePanel.setLayout(null);
 		gamePanel.setSize(frame.getHeight(),frame.getWidth());
 
-		scoreLabel = new JLabel(Integer.toString(score));
-		JLabel scoreText = new JLabel("Score:");
+		scoreLabel = new JLabel("Score:" + Integer.toString(score));
 		requiredScoreLabel = new JLabel("Required Score:" + level.getlevelRequirementScore());
-		swapsLeftLabel = new JLabel(Integer.toString(swapsLeft));
-		JLabel moveCountText = new JLabel("Moves:");
+		swapsLeftLabel = new JLabel("Swaps:"+Integer.toString(swapsLeft));
 
-		scoreText.setLocation(frame.getWidth()/2-85,frame.getHeight()-50);
-		scoreLabel.setLocation(frame.getWidth()/2-40,frame.getHeight()-50);
-		scoreText.setSize(50,25);
-		scoreLabel.setSize(50,25);
+		scoreLabel.setLocation(frame.getWidth()/2-80,frame.getHeight()-50);
+		scoreLabel.setSize(75,25);
 
-		moveCountText.setLocation(frame.getWidth()/2+40,frame.getHeight()-50);
-		swapsLeftLabel.setLocation(frame.getWidth()/2+80,frame.getHeight()-50);
-		moveCountText.setSize(50,25);
-		swapsLeftLabel.setSize(50,25);
+		swapsLeftLabel.setLocation(frame.getWidth()/2+10,frame.getHeight()-50);
+		swapsLeftLabel.setSize(125,25);
 
 		requiredScoreLabel.setLocation(frame.getWidth()/2-75,frame.getHeight()-75);
 		requiredScoreLabel.setSize(160,25);
 
-		gamePanel.add(scoreText);
+		specialSwapSelecter = new JCheckBox("SpecialSwap");
+		specialSwapSelecter.setLocation(frame.getWidth()/2-250,frame.getHeight()-75);
+		specialSwapSelecter.setSize(100,25);
+
+		specialSwapCountLabel = new JLabel("SpecialSwaps:" + Integer.toString(specialSwapsLeft));
+		specialSwapCountLabel.setLocation(frame.getWidth()/2-245,frame.getHeight()-55);
+		specialSwapCountLabel.setSize(125,25);
+
 		gamePanel.add(scoreLabel);
-		gamePanel.add(moveCountText);
 		gamePanel.add(swapsLeftLabel);
 		gamePanel.add(requiredScoreLabel);
 		gamePanel.add(lokumPanel);
-
+		gamePanel.add(specialSwapSelecter);
+		gamePanel.add(specialSwapCountLabel);
 		return gamePanel;
 	}
 	public JToolBar constructTopMenu(){
@@ -685,10 +737,10 @@ public class gameEngine extends JFrame implements MouseListener{
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(frame.getContentPane() == startMenu){
-				JOptionPane.showMessageDialog(null,"You can not save in start menu.");
+					JOptionPane.showMessageDialog(null,"You can not save in start menu.");
 				}
 				else{
-				saveGame();
+					saveGame();
 				}
 			}
 		});
@@ -780,6 +832,11 @@ public class gameEngine extends JFrame implements MouseListener{
 	class AnimationEventListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			repaint();
+		}
+	}
+	class timeEventListener implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			updateTime(-1);
 		}
 	}
 

@@ -11,7 +11,6 @@ public class Level {
 	private int levelNumber;
 	private int swapAmount;
 	private int levelRequirementScore;
-	private Lokum[][] levelShape; 
 	private long time;
 
 	/**
@@ -21,7 +20,6 @@ public class Level {
 	 */
 	public Level (int levelNumber,int swapAmount,int levelRequirementScore, Lokum[][] levelShape, long time) {
 		this.levelRequirementScore = levelRequirementScore;
-		this.levelShape = levelShape;
 		this.levelNumber = levelNumber;
 		this.swapAmount = swapAmount;
 		this.time = time;
@@ -39,9 +37,6 @@ public class Level {
 			return true;
 		}
 	}
-	public Lokum[][] getLevelShape(){
-		return levelShape;
-	}
 	public int getlevelRequirementScore(){
 		return levelRequirementScore; 
 	}
@@ -51,4 +46,8 @@ public class Level {
 	public int getswapAmount(){
 		return swapAmount;
 	}
+	public long getTime(){
+		return time;
+	}
 }
+	

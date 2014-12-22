@@ -321,7 +321,7 @@ public class MainTest {
 		break;
 		case 3:  type="B";
 		} 
-		r = new normalLokum(0, 0, type);
+		r = new normalLokum(0, 0, type , false);
 		return r;
 	}
 	public static void printLokums(Lokum[][] lokums){

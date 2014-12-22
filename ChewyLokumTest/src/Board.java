@@ -12,18 +12,16 @@ public class Board {
 	private int score;
 	private int multiplier;
 	private long time;
+	private Lokum SLokum1;
+	private Lokum SLokum2;
 	/**
 	 * 
 	 * @param lokumGrid The two dimensional of lokum array that hold lokums in the board.
 	 */
-	public Board(Lokum[][] lokumGrid){
-		for (int i = 0; i < lokumGrid.length; i++) {
-			for (int j = 0; j < lokumGrid[0].length; j++) {
-				normalLokum lokum = new normalLokum(i,j,"NULL");
-				lokumGrid[i][j] = lokum;
-			}
-		}
-		this.lokumGrid = lokumGrid;
+	public Board(int width,int length){
+		this.lokumGrid = new Lokum[width][length];
+		SLokum1 = new normalLokum(0,0,"NULL",false);
+		SLokum2 = new normalLokum(0,0,"NULL",false);
 		/**
 		 *  The default constructor of board with lokumGrid .
 		 *  
@@ -34,6 +32,12 @@ public class Board {
 	}
 	public void setScore(int x){
 		score = x;
+	}
+	public long getTime(){
+		return time;
+	}
+	public void setTime(long x){
+		time = x;
 	}
 	/**
 	 * 
@@ -181,7 +185,9 @@ public class Board {
 	 */
 	public void swap (Lokum a, Lokum b){
 		multiplier = 1;
-
+		SLokum1 = a;
+		SLokum2 = b;
+		
 		int ax = a.getPositionX();
 		int ay = a.getPositionY();
 		int bx = b.getPositionX();
@@ -225,8 +231,25 @@ public class Board {
 	 * @return returns array list of combinations in the board.
 	 */
 	public ArrayList<Combination> checkCombinations(){
+		
 		ArrayList<Combination>  combinations = new ArrayList<Combination>();
-
+		
+		if(SLokum1.isSpecial() && SLokum2.isSpecial()){
+			ArrayList<Lokum> spLokums = new ArrayList<Lokum>();
+			spLokums.add(SLokum1);
+			spLokums.add(SLokum2);
+			Combination special = new Combination("Special",spLokums);
+			combinations.add(special);
+		}else if(SLokum1.getType().equals("BOMB") && !SLokum2.isSpecial() 
+				|| !SLokum1.isSpecial() && SLokum2.getType().equals("BOMB")){
+			ArrayList<Lokum> Lokums = new ArrayList<Lokum>();
+			Lokums.add(SLokum1);
+			Lokums.add(SLokum2);
+			Combination special = new Combination("Special",Lokums);
+			combinations.add(special);
+		}
+		SLokum1 = new normalLokum(0,0,"NULL",false);
+		SLokum2 = new normalLokum(0,0,"NULL",false);
 		for (int i = 0; i < lokumGrid.length; i++) {	
 			for (int j = 0; j < lokumGrid[0].length-2; j++) {
 				ArrayList<Lokum> lokums = new ArrayList<Lokum>();
@@ -435,7 +458,7 @@ public class Board {
 		break;
 		case 3:  type="B";
 		} 
-		r = new normalLokum(0, 0, type);
+		r = new normalLokum(0, 0, type,false);
 		return r;
 	}
 	public void eatLokum(Lokum l){
@@ -459,6 +482,9 @@ public class Board {
 			else{
 				lokumGrid[l.getPositionX()][l.getPositionY()] = null;
 			}
+			if(l.isTimeLokum()){
+				time = time + 5;
+			}
 		}
 	}
 	/**
@@ -469,9 +495,11 @@ public class Board {
 	 *
 	 */
 	public void eat(Combination c){
+		
 		score += calculateCombinationScore(c);
 		multiplier = multiplier * 2;
 		System.out.println("Multiplier:"+multiplier);
+		
 		ArrayList<Lokum> lokums = c.getLokums();
 		if(c.isSpecial()){
 			Lokum first = lokums.get(0);
@@ -585,7 +613,7 @@ public class Board {
 	public void eatForConstructingBoard(Combination c){
 		ArrayList<Lokum> lokums = c.getLokums();
 		for(Lokum l : lokums){
-			eatLokum(l);
+			lokumGrid[l.getPositionX()][l.getPositionY()] = null;
 		}
 	}
 	public void constructRandomBoard(){
@@ -601,7 +629,7 @@ public class Board {
 	public void removeAll(){
 		for (int i = 0; i < lokumGrid.length; i++) {
 			for (int j = 0; j < lokumGrid[0].length; j++) {
-				normalLokum lokum = new normalLokum(i,j,"NULL");
+				normalLokum lokum = new normalLokum(i,j,"NULL",false);
 				lokumGrid[i][j] = lokum;
 			}
 		}
