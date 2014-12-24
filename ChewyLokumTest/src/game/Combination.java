@@ -58,34 +58,25 @@ public class Combination {
 		return Lokums;
 
 	}
-	// Alternative toString() method
-	//	public String toString(){
-	//		String result = "";
-	//		result +="Combination type is:" + type +"\n";
-	//		result += "Combination includes these lokums:\n";
-	//		for(Lokum l : Lokums) {
-	//			result+=l.toString();
-	//			result+="\n";
-	//		}
-	//		if(isSpecial()){
-	//			result+="and combination is special";
-	//		}else{
-	//			result+="and combination is not special";
-	//		}
-	//		return result;
-	//	}
+	public boolean repOk(){
+		if(Lokums.size() <= 1 || type == null){
+			return false;
+		}
+		return true;
+	}
 	public String toString(){
 		String result = "";
-		result += type + "\n";
-		for(Lokum l : Lokums){
-			result += l.toString() + " ";
+		result +="Combination type is:" + type +"\n";
+		result += "Combination includes these lokums:\n";
+		for(Lokum l : Lokums) {
+			result+=l.toString();
+			result+="\n";
 		}
-		result += "\n";
-		for(Lokum l : Lokums){
-			result += "(" + l.getPositionX() +","+l.getPositionY()+")";
+		if(isSpecial()){
+			result+="and combination is special";
+		}else{
+			result+="and combination is not special";
 		}
-		result += "\n";
 		return result;
-
 	}
 }

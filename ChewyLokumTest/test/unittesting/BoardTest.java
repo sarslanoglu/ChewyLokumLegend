@@ -14,7 +14,8 @@ public class BoardTest {
 
 	@Before
 	public void setUp() throws Exception {
-	Board test = new Board(5,5);
+	Board testBoard = new Board(5,5);
+	
 	}
 
 	@Test

@@ -32,20 +32,6 @@ public class normalLokum extends Lokum {
 	public String getColor() {
 		return color;
 	}
-	
-// Alternative toString() method
-//	public String toString(){
-//		String result = "";
-//		result +="normalLokum.toString(): \n";
-//		result +="Positions: \n";
-//		result +="X:" + super.getPositionX();
-//		result +=" Y:" + super.getPositionY();
-//		result +="\nColor:" + color;
-//		return result;
-//	}
-	public String toString(){
-		return color;
-	}
 	public boolean isSpecial() {
 		return false;
 	}
@@ -74,6 +60,20 @@ public class normalLokum extends Lokum {
 		// TODO Auto-generated method stub
 		
 	}
-
+	public boolean repOk(){
+		if(super.getPositionX()<=1 || super.getPositionY()<=1 || color == null){
+			return false;
+		}
+		return true;
+	}
+	public String toString(){
+		String result = "";
+		result +="normalLokum.toString(): \n";
+		result +="Positions: \n";
+		result +="X:" + super.getPositionX();
+		result +=" Y:" + super.getPositionY();
+		result +="\nColor:" + color;
+		return result;
+	}
 	
 }

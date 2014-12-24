@@ -39,7 +39,7 @@ public abstract class Lokum {
 	public abstract boolean isSpecial();
 	public abstract boolean isEqual(Lokum l); 
 	public abstract boolean isTimeLokum();
-
+	public abstract boolean repOk();
 	public int getPositionX() {
 		return positionX;
 	}

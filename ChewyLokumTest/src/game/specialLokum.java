@@ -41,21 +41,6 @@ public class specialLokum extends Lokum {
 	public void setType (String type) {
 		this.type = type;
 	}
-// Alternative toString() method
-//	public String toString(){
-//		String result = "";
-//		result +="specialLokum.toString(): \n";
-//		result +="Positions: \n";
-//		result +="X:" + super.getPositionX();
-//		result +=" Y:" + super.getPositionY();
-//		result +="\nColor:" + color;
-//		result +="\nType:" + type;
-//		return result;
-//	}
-	public String toString(){
-		return color + " " + type;
-	}
-
 	public boolean isSpecial() {
 		return true;
 	}
@@ -71,5 +56,21 @@ public class specialLokum extends Lokum {
 
 	public boolean isTimeLokum() {
 		return false;
+	}
+	public boolean repOk(){
+		if(super.getPositionX()<=1 || super.getPositionY()<=1 || color == null || type == null){
+			return false;
+		}
+		return true;
+	}
+	public String toString(){
+		String result = "";
+		result +="specialLokum.toString(): \n";
+		result +="Positions: \n";
+		result +="X:" + super.getPositionX();
+		result +=" Y:" + super.getPositionY();
+		result +="\nColor:" + color;
+		result +="\nType:" + type;
+		return result;
 	}
 }

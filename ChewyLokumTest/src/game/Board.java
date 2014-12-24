@@ -741,4 +741,10 @@ public class Board {
 		}
 		return result;
 	}
+	public boolean repOk(){
+		if(lokumGrid==null){
+			return false;
+		}
+		return true;
+	}
 }
