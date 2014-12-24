@@ -41,7 +41,7 @@ import org.xml.sax.SAXException;
 /**
  * gameEngine is a class that opens game,
  * handles players actions and contains the graphics 
- * (buttons) of the game.
+ * of the game.
  * 
  *
  */
@@ -723,29 +723,28 @@ public class gameEngine extends JFrame implements MouseListener{
 		JToolBar topMenu = new JToolBar();
 		topMenu.setVisible(true);
 		topMenu.setSize(frame.getWidth(),30);
-		JButton button = null;
 
-		button = new JButton("StartMenu");
-		button.setToolTipText("Go back start menu(game won't be recorded)");
-		button.addActionListener(new ActionListener() {
+		JButton button1 = new JButton("StartMenu");
+		button1.setToolTipText("Go back start menu(game won't be recorded)");
+		button1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				initGame();
 			}
 		});
-		topMenu.add(button);
+		topMenu.add(button1);
 
-		button = new JButton("Load");
-		button.setToolTipText("Load an XML file");
-		button.addActionListener(new ActionListener() {
+		JButton button2 = new JButton("Load");
+		button2.setToolTipText("Load an XML file");
+		button2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				loadGame();
 			}
 		});
-		topMenu.add(button);
+		topMenu.add(button2);
 
-		button = new JButton("Save");
-		button.setToolTipText("Save the program into an XML file");
-		button.addActionListener(new ActionListener() {
+		JButton button3 = new JButton("Save");
+		button3.setToolTipText("Save the program into an XML file");
+		button3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(frame.getContentPane() == startMenu){
 					JOptionPane.showMessageDialog(null,"You can not save in start menu.");
@@ -755,16 +754,16 @@ public class gameEngine extends JFrame implements MouseListener{
 				}
 			}
 		});
-		topMenu.add(button);
+		topMenu.add(button3);
 
-		button = new JButton("Exit");
-		button.setToolTipText("Exit the program");
-		button.addActionListener(new ActionListener() {
+		JButton button4 = new JButton("Exit");
+		button4.setToolTipText("Exit the program");
+		button4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 		});
-		topMenu.add(button);
+		topMenu.add(button4);
 
 		return topMenu;
 
