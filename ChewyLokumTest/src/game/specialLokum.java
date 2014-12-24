@@ -1,3 +1,4 @@
+package game;
 /**
  * specialLokum extends lokum and has a type and color.
  *

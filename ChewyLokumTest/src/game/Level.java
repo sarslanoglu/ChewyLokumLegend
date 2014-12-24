@@ -1,3 +1,4 @@
+package game;
 /**
  * Level is an object class 
  * that holds the score of level requirements 
