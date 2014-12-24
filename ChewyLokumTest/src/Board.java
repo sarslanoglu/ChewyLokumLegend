@@ -187,7 +187,7 @@ public class Board {
 		multiplier = 1;
 		SLokum1 = a;
 		SLokum2 = b;
-		
+
 		int ax = a.getPositionX();
 		int ay = a.getPositionY();
 		int bx = b.getPositionX();
@@ -231,9 +231,9 @@ public class Board {
 	 * @return returns array list of combinations in the board.
 	 */
 	public ArrayList<Combination> checkCombinations(){
-		
+
 		ArrayList<Combination>  combinations = new ArrayList<Combination>();
-		
+
 		if(SLokum1.isSpecial() && SLokum2.isSpecial()){
 			ArrayList<Lokum> spLokums = new ArrayList<Lokum>();
 			spLokums.add(SLokum1);
@@ -457,8 +457,14 @@ public class Board {
 		case 2:  type="W";
 		break;
 		case 3:  type="B";
-		} 
-		r = new normalLokum(0, 0, type,false);
+		}
+		int randomNum2 = rand.nextInt(5);
+		if(randomNum2<1){
+			r = new normalLokum(0, 0, type,true);	
+		}
+		else{
+			r = new normalLokum(0, 0, type,false);
+		}
 		return r;
 	}
 	public void eatLokum(Lokum l){
@@ -495,11 +501,10 @@ public class Board {
 	 *
 	 */
 	public void eat(Combination c){
-		
 		score += calculateCombinationScore(c);
 		multiplier = multiplier * 2;
 		System.out.println("Multiplier:"+multiplier);
-		
+
 		ArrayList<Lokum> lokums = c.getLokums();
 		if(c.isSpecial()){
 			Lokum first = lokums.get(0);

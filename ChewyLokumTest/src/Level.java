@@ -10,6 +10,7 @@
 public class Level {
 	private int levelNumber;
 	private int swapAmount;
+	private int specialSwapAmount;
 	private int levelRequirementScore;
 	private long time;
 
@@ -18,10 +19,11 @@ public class Level {
 	 * @param levelRequirementScore     the score of the level requirement. 
 	 * @param levelShape				Shape of lokums in level. 
 	 */
-	public Level (int levelNumber,int swapAmount,int levelRequirementScore, Lokum[][] levelShape, long time) {
+	public Level (int levelNumber,int swapAmount,int specialSwapAmount,int levelRequirementScore, long time) {
 		this.levelRequirementScore = levelRequirementScore;
 		this.levelNumber = levelNumber;
 		this.swapAmount = swapAmount;
+		this.specialSwapAmount = specialSwapAmount;
 		this.time = time;
 		/**
 		 *  Default constructor of Level.
@@ -45,6 +47,9 @@ public class Level {
 	}
 	public int getswapAmount(){
 		return swapAmount;
+	}
+	public int getSpecialSwapAmount(){
+		return specialSwapAmount;
 	}
 	public long getTime(){
 		return time;
