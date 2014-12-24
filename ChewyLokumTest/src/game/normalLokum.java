@@ -61,7 +61,9 @@ public class normalLokum extends Lokum {
 		
 	}
 	public boolean repOk(){
-		if(super.getPositionX()<=1 || super.getPositionY()<=1 || color == null){
+		if(super.getPositionX()<0 || super.getPositionY()<0 
+				|| !(color.equals("W") || color.equals("B") || color.equals("G") || 
+				color.equals("R") || color.equals("NULL"))){
 			return false;
 		}
 		return true;

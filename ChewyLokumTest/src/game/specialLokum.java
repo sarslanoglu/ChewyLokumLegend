@@ -30,7 +30,7 @@ public class specialLokum extends Lokum {
 		 */
 	}
 
-	
+
 	public String getColor() {
 
 		return color;
@@ -44,7 +44,7 @@ public class specialLokum extends Lokum {
 	public boolean isSpecial() {
 		return true;
 	}
-	
+
 
 	public boolean isEqual(Lokum l) {
 		if(l.getColor().equals(color)){
@@ -58,7 +58,13 @@ public class specialLokum extends Lokum {
 		return false;
 	}
 	public boolean repOk(){
-		if(super.getPositionX()<=1 || super.getPositionY()<=1 || color == null || type == null){
+		if(super.getPositionX()<0 || super.getPositionY()<0 
+				|| 
+				!(color.equals("W") || color.equals("B") || color.equals("G") || 
+						color.equals("R") || color.equals("NULL")) 
+						||
+						(!(type.equals("HStriped") || type.equals("VStriped") 
+								|| type.equals("Wrapped") || type.equals("BOMB")))){
 			return false;
 		}
 		return true;
