@@ -811,6 +811,7 @@ public class gameEngine extends JFrame implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
+		//javad
 		if(e.getSource() == startButton){
 		//Buralar hep initLevel diye bir method oluþcak orda kullanýlcak
 			board.removeAll();
