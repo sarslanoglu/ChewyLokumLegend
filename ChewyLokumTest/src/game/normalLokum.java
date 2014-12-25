@@ -6,7 +6,7 @@ package game;
  * extends lokum and has a color. 
  *
  */
-// Yiðit Kumral 29766
+
 public class normalLokum extends Lokum {
 
 	private String color;
@@ -60,6 +60,7 @@ public class normalLokum extends Lokum {
 		// TODO Auto-generated method stub
 		
 	}
+	
 	public boolean repOk(){
 		if(super.getPositionX()<0 || super.getPositionY()<0 
 				|| !(color.equals("W") || color.equals("B") || color.equals("G") || 
@@ -68,6 +69,7 @@ public class normalLokum extends Lokum {
 		}
 		return true;
 	}
+	
 	public String toString(){
 		String result = "";
 		result +="normalLokum.toString(): \n";

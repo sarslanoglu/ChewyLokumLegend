@@ -115,7 +115,7 @@ public class gameEngine extends JFrame implements MouseListener{
 		gameTimer = new Timer(1000,new timeEventListener());
 
 		
-		board = new Board(6,4);
+		board = new Board(10,8);
 
 		level= new Level(1,20,5,100000,50);
 		
@@ -382,7 +382,7 @@ public class gameEngine extends JFrame implements MouseListener{
 					}
 				}
 				else if(child.getNodeName() == "goalscore"){
-					updateRequiredScoreLabel(Integer.parseInt(child.getAttribute("gscore")));
+					setRequiredScoreLabel(Integer.parseInt(child.getAttribute("gscore")));
 				}
 				else if(child.getNodeName() == "currentscore"){
 					score = Integer.parseInt(child.getAttribute("cscore"));
@@ -396,7 +396,7 @@ public class gameEngine extends JFrame implements MouseListener{
 		frame.setContentPane(gamePanel);
 		timer.start();
 	}
-	public void updateRequiredScoreLabel(int x){
+	public void setRequiredScoreLabel(int x){
 		requiredScoreLabel.setText("Required Score:" + x);
 	}
 
@@ -812,6 +812,7 @@ public class gameEngine extends JFrame implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == startButton){
+		//Buralar hep initLevel diye bir method oluþcak orda kullanýlcak
 			board.removeAll();
 			board.constructRandomBoard();
 			swapsLeft = level.getswapAmount();

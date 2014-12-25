@@ -32,10 +32,14 @@ public class Level {
 		 *  its required score and its shape of lokums.
 		 */
 	}
+<<<<<<< HEAD
 	/**
 	 * 
 	 * @returns true if level is timeBased (time!=0)
 	 */
+=======
+	
+>>>>>>> origin/master
 	public boolean isTimeBased(){
 		if (time == 0){
 			return false;
