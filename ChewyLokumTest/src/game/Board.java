@@ -755,7 +755,7 @@ public class Board {
 		return result;
 	}
 	public boolean repOk(){
-		if(lokumGrid==null){
+		if(width <= 0 || height <= 0){
 			return false;
 		}
 		return true;
