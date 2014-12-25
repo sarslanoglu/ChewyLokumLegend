@@ -62,7 +62,8 @@ public class Combination {
 		if(Lokums.size() <= 1 || Lokums.size() >5 || type == null 
 				|| 
 				!(type.equals("3H") || type.equals("4H") || type.equals("5H")
-			||  type.equals("3V") || type.equals("4V") || type.equals("5V"))){
+						||  type.equals("3V") || type.equals("4V") || type.equals("5V")
+						|| type.equals("Special"))){
 			return false;
 		}
 		return true;
