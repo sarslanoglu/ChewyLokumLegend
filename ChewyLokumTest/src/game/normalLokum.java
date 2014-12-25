@@ -6,7 +6,7 @@ package game;
  * extends lokum and has a color. 
  *
  */
-
+//asdasd
 //adasd
 public class normalLokum extends Lokum {
 
