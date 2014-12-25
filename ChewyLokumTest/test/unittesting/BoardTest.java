@@ -13,8 +13,8 @@ public class BoardTest {
 	}
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testSwap() {
+		
 	}
 
 }

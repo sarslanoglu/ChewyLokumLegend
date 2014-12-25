@@ -10,6 +10,8 @@ import java.util.Stack;
 public class Board {
 
 	private Lokum[][] lokumGrid;
+	private int height;
+	private int width;
 	private int score;
 	private int multiplier;
 	private long time;
@@ -19,10 +21,12 @@ public class Board {
 	 * 
 	 * @param lokumGrid The two dimensional of lokum array that hold lokums in the board.
 	 */
-	public Board(int width,int length){
-		this.lokumGrid = new Lokum[width][length];
+	public Board(int height,int width){
+		this.lokumGrid = new Lokum[height][width];
 		SLokum1 = new normalLokum(0,0,"NULL",false);
 		SLokum2 = new normalLokum(0,0,"NULL",false);
+		this.width = width;
+		this.height = height;
 		/**
 		 *  The default constructor of board with lokumGrid .
 		 *  
@@ -728,8 +732,17 @@ public class Board {
 			}
 		}
 	}
-	public Lokum[][] getLokumGrid(){
-		return lokumGrid;
+	public void set(int x,int y, Lokum l){
+		lokumGrid[x][y] = l;
+	}
+	public Lokum get(int x,int y){
+		return lokumGrid[x][y];
+	}
+	public int getHeight(){
+		return height;
+	}
+	public int getWidth(){
+		return width;
 	}
 	public String toString(){
 		String result = "";

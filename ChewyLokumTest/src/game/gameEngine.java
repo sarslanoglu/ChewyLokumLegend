@@ -66,8 +66,7 @@ public class gameEngine extends JFrame implements MouseListener{
 	private JLabel requiredScoreLabel;
 	private JButton startButton;
 	private JComboBox<Integer> levelChooser; 
-	private JFrame frame; 
-	private Lokum[][] lokumGrid; 
+	private JFrame frame;  
 	private JPanel gamePanel; 
 	private JPanel startMenu; 
 	private JPanel lokumPanel; 
@@ -118,15 +117,14 @@ public class gameEngine extends JFrame implements MouseListener{
 		gameTimer = new Timer(1000,new timeEventListener());
 
 		
-		board = new Board(8,8);
-		lokumGrid = board.getLokumGrid();
+		board = new Board(6,4);
 
 		level= new Level(1,20,5,100000,50);
 		
 
 		lokumPanel = new JPanel();
 		lokumPanel.addMouseListener(this);
-		lokumPanel.setLocation((frame.getWidth()/2) - ((lokumGrid[0].length*25)/2), 30);		
+		lokumPanel.setLocation((frame.getWidth()/2) - ((board.getWidth()*25)/2), 30);		
 		paintLokumPanel();
 
 		gamePanel = constructGamePanel();
@@ -145,19 +143,30 @@ public class gameEngine extends JFrame implements MouseListener{
 		 */
 	}
 
-	public void readGameState(){
+	public int readGameState(){
+		int result = 0;
 		try {
 			BufferedReader rd = new BufferedReader(new FileReader("gameState.txt"));
+			result = Integer.parseInt(rd.readLine());
+			rd.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return result;
 	}
 
 	public void writeGameState(){
 		try {
 			BufferedWriter wr = new BufferedWriter(new FileWriter("gameState.txt"));
 			wr.write(level.getlevelNumber());
+			wr.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -191,15 +200,11 @@ public class gameEngine extends JFrame implements MouseListener{
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(newXML), "utf-8"));
 			bw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
 			bw.write("<game>\n");
-			bw.write("<player>\n");
-			bw.write("<id>" + 0 + "</id>\n");
-			bw.write("<name>" +"Yigit"+"</name>\n");
-			bw.write("</player>\n");
 			bw.write("<board>\n");
 			bw.write("<lokums>\n");
-			for (int i = 0; i < lokumGrid.length; i++) {
-				for (int j = 0; j < lokumGrid[0].length; j++) {
-					Lokum lokum = lokumGrid[i][j];
+			for (int i = 0; i < board.getHeight(); i++) {
+				for (int j = 0; j < board.getWidth(); j++) {
+					Lokum lokum = board.get(i, j);
 					int xcoord = lokum.getPositionX();
 					int ycoord = lokum.getPositionY();
 					String color = lokum.getColor();
@@ -226,12 +231,11 @@ public class gameEngine extends JFrame implements MouseListener{
 			bw.write("</position>\n");
 			bw.write("</obstacle>\n");
 			bw.write("</obstacles>\n");
-
 			bw.write("</board>\n");
 			bw.write(String.format("<goalscore gscore=\"%d\"/>",level.getlevelRequirementScore()));
 			bw.write(String.format("<currentscore cscore=\"%d\"/>",score));
 			bw.write(String.format("<movesleft swaps=\"%d\"/>",swapsLeft));
-			bw.write(String.format("<level lev=\"%d\"/>",level.getlevelNumber()));
+			bw.write(String.format("<level levelNumber=\"%d\"/>",level.getlevelNumber()));
 			bw.write("</game>\n");
 
 			bw.close();
@@ -367,10 +371,10 @@ public class gameEngine extends JFrame implements MouseListener{
 								}
 								if(type.equals("NotSpecial")){
 									savedLokum = new normalLokum(coordX,coordY,color , false);
-									lokumGrid[savedLokum.getPositionX()][savedLokum.getPositionY()] = savedLokum;
+									board.set(savedLokum.getPositionX(),savedLokum.getPositionY(),savedLokum);
 								}else{
 									savedLokum = new specialLokum(coordX,coordY,color,type);
-									lokumGrid[savedLokum.getPositionX()][savedLokum.getPositionY()] = savedLokum;
+									board.set(savedLokum.getPositionX(),savedLokum.getPositionY(),savedLokum);
 								}
 							}
 						}
@@ -489,7 +493,7 @@ public class gameEngine extends JFrame implements MouseListener{
 		int XcoordInGrid = x/25;
 		int YcoordInGrid = y/22;
 
-		selected = lokumGrid[YcoordInGrid][XcoordInGrid];
+		selected = board.get(YcoordInGrid, XcoordInGrid);
 		if(!specialSwapSelecter.isSelected()){
 			if(sLokum1 != null){
 				int Lok1X = sLokum1.getPositionX();
@@ -562,14 +566,14 @@ public class gameEngine extends JFrame implements MouseListener{
 	 */
 	public void paintLokumPanel(){
 
-		lokumPanel.setSize(25*lokumGrid[0].length,22*lokumGrid.length);
+		lokumPanel.setSize(25*board.getWidth(),22*board.getHeight());
 		lokumPanel.setOpaque(true);
 		lokumPanel.setLayout(null);
 
-		for (int i = 0; i < lokumGrid.length; i++) {
-			for (int j = 0; j < lokumGrid[0].length; j++) {
-				if(lokumGrid[i][j] != null) {
-					Lokum temp = lokumGrid[i][j];
+		for (int i = 0; i < board.getHeight(); i++) {
+			for (int j = 0; j < board.getWidth(); j++) {
+				if(board.get(i,j) != null) {
+					Lokum temp = board.get(i,j);
 					JLabel lokumLabel = getLokumLabel(temp);
 					lokumLabel.setSize(25, 22);
 					lokumLabel.setLocation(25*j, 22*i);

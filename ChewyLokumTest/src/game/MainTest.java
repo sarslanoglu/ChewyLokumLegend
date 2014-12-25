@@ -12,7 +12,7 @@ public class MainTest {
 		gameEngine e = new gameEngine();
 		e.initGame();
 
-		//		//		specialLokum l = new specialLokum(1, 1, "fact", "beyaz");
+		//		specialLokum l = new specialLokum(1, 1, "fact", "beyaz");
 		//		normalLokum a = new normalLokum(1, 1, "beyaz");
 		//		if(l.isEqual(a)){
 		//			System.out.println("ayný");
