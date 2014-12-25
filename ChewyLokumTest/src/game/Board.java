@@ -6,7 +6,7 @@ import java.util.Stack;
  *  Lokum is a class that holds lokums in two dimensional lokum array
  *  and it also operates logic actions(like fill empty spaces, eat, swap...) of game
  */
-
+//deneme
 public class Board {
 
 	private Lokum[][] lokumGrid;
