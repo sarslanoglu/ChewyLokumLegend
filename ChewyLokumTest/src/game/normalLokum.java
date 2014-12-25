@@ -6,8 +6,7 @@ package game;
  * extends lokum and has a color. 
  *
  */
-//asdasd
-//adasd
+// Yiðit Kumral 29766
 public class normalLokum extends Lokum {
 
 	private String color;
