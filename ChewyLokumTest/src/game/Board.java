@@ -21,7 +21,12 @@ public class Board {
 	 * @param lokumGrid The two dimensional of lokum array that hold lokums in the board.
 	 */
 	public Board(int height,int width){
-		this.lokumGrid = new Lokum[height][width];
+		
+		if(0<height && height<30 && 0<width && width<30){
+			this.lokumGrid = new Lokum[height][width];
+			removeAll();
+		}
+		
 		SLokum1 = new normalLokum(0,0,"NULL",false);
 		SLokum2 = new normalLokum(0,0,"NULL",false);
 		this.width = width;
@@ -754,7 +759,7 @@ public class Board {
 		return result;
 	}
 	public boolean repOk(){
-		if(width <= 0 || height <= 0){
+		if(width <= 0 || height <= 0 || height>30 || width > 30){
 			return false;
 		}
 		return true;

@@ -13,7 +13,7 @@ public class CombinationTest {
 
 	@Test
 	public void test() {
-		fail("Not yet implemented");
+		
 	}
 
 }

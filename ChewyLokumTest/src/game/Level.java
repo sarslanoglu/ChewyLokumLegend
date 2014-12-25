@@ -32,6 +32,7 @@ public class Level {
 		 *  its required score and its shape of lokums.
 		 */
 	}
+	
 	public boolean isTimeBased(){
 		if (time == 0){
 			return false;
