@@ -49,9 +49,7 @@ import org.xml.sax.SAXException;
 public class gameEngine extends JFrame implements MouseListener{
 
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private int score;
 	private int swapsLeft;
@@ -142,7 +140,10 @@ public class gameEngine extends JFrame implements MouseListener{
 		 * 
 		 */
 	}
-
+	/**
+	 * 
+	 * 
+	 */
 	public int readGameState(){
 		int result = 0;
 		try {
@@ -175,7 +176,7 @@ public class gameEngine extends JFrame implements MouseListener{
 
 	/**
 	 *  Method that saves current game.
-	 *
+	 *  @requires saveGame(name)!=null
 	 */
 	public void saveGame(){
 		String fileName=JOptionPane.showInputDialog("Select your file name.");
@@ -400,9 +401,11 @@ public class gameEngine extends JFrame implements MouseListener{
 	}
 
 	/**
-	 * @requires 2 selected lokums (in this case; a, b)
-	 * @modifies lokum a, lokum b.
-	 * @effects board.
+	 * @param a First selected lokum for swap.
+	 * @param b Second selected lokum for swap.
+	 * @requires a!=null b!=null
+	 * @effects If a,b swap does not create any combination, then a,b will be unswapped.
+	 * @modifies Board, a, b.
 	 */
 	public void swap (Lokum a, Lokum b){
 		
@@ -434,6 +437,9 @@ public class gameEngine extends JFrame implements MouseListener{
 		increaseScore(board.getScore());
 		updateTime(board.getTime());
 	}
+	/**
+	 * 
+	 */
 	public void checkGameStatus(){
 		if(isLevelRequirementReached()){
 			timer.stop();
@@ -462,7 +468,9 @@ public class gameEngine extends JFrame implements MouseListener{
 	/**
 	 * 
 	 * @param x  the score
+	 * @requires x!=0
 	 * @modifies scoreLabel
+	 * @effects If x equals zero, there won't be any action.
 	 */
 	public void increaseScore(int x){
 		score = score + x;
@@ -483,9 +491,9 @@ public class gameEngine extends JFrame implements MouseListener{
 
 
 	/**
-	 * 
 	 * @param x		x coordination of the location of the lokum. 
 	 * @param y		y coordination of the location of the lokum.
+	 * @requires x!=0 y!=0
 	 */
 
 	public Lokum getSelectedLokum (int x,int y){
@@ -508,25 +516,44 @@ public class gameEngine extends JFrame implements MouseListener{
 		}
 		return selected;
 	}
+	/**
+	 * @modifies swapsLeft
+	 * @param x
+	 */
 	public void setSwapsLeft(int x){
 		swapsLeft = x;
 		swapsLeftLabel.setText("Swaps:" + Integer.toString(swapsLeft));
 	}
+	/**
+	 * @modifies specialSwapLeft
+	 * @param x
+	 */
 	public void setSpecialSwapsLeft(int x){
 		specialSwapsLeft = x;
 		specialSwapCountLabel.setText("SpecialSwaps:" + specialSwapsLeft);
 	}
 	/**
-	 * @effects scoreLabel
+	 * @requires swapsLeft!=0
+	 * @modifies scoreLabel
+	 * @effects If there is no swapsLeft, then game will be finished.
 	 */
 	public void updateSwapsLeft(int x){
 		swapsLeft = swapsLeft+x;
 		swapsLeftLabel.setText("Swaps:" + Integer.toString(swapsLeft));
 	}
+	/**
+	 * It updates the specialswap count.
+	 * @param x
+	 */
 	public void updateSpecialSwaps(int x){
 		specialSwapsLeft = specialSwapsLeft + x;
 		specialSwapCountLabel.setText("SpecialSwaps:" + Integer.toString(specialSwapsLeft));
 	}
+	/**
+	 * @requires time
+	 * @param x
+	 * @modifies timeLabel, time
+	 */
 	public void updateTime(long x){
 		time = time + x;
 		timeLabel.setText("Time:" + Integer.toString((int)time));
@@ -541,6 +568,10 @@ public class gameEngine extends JFrame implements MouseListener{
 		}
 		return false;
 	}
+	/**
+	 * 
+	 * @return returns if time zero and level is timeBased return true else false.
+	 */
 	public boolean isTimeFinished(){
 		if(level.isTimeBased() == true && time == 0){
 			return true;

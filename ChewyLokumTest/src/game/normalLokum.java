@@ -47,6 +47,7 @@ public class normalLokum extends Lokum {
 		}
 		return false;
 	}
+	
 	public boolean isTimeLokum(){
 		if(isTimeLokum == true){
 			return true;

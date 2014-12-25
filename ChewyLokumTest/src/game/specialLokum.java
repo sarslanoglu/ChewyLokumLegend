@@ -53,7 +53,6 @@ public class specialLokum extends Lokum {
 		return false;
 	}
 
-
 	public boolean isTimeLokum() {
 		return false;
 	}

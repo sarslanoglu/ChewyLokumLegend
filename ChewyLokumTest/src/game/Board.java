@@ -184,8 +184,9 @@ public class Board {
 	 * 
 	 * @param a First selected lokum for swap.
 	 * @param b Second selected lokum for swap.
-	 * @effects lokumGrid.
-	 * @modifies lokumGrid.
+	 * @requires a!=null b!=null , a and b must be adjacent
+	 * @effects If a,b swap does not create any combination, then a,b will be unswapped.
+	 * @modifies lokumGrid, a, b.
 	 */
 	public void swap (Lokum a, Lokum b){
 		multiplier = 1;
@@ -212,7 +213,8 @@ public class Board {
 	 * 
 	 * @param a First selected lokum for swap.
 	 * @param b First selected lokum for swap.
-	 * @modifies lokumGrid
+	 * @requires a!=null b!=null
+	 * @modifies lokumGrid, a, b.
 	 */
 	public void unswap(Lokum a,Lokum b){
 		int ax = a.getPositionX();
@@ -415,8 +417,10 @@ public class Board {
 	}
 
 	/**
-	 * @requires board needs to have empty spaces to be filled.
+	 * @requires There should be a null element in Board.
 	 * @modifies board.
+	 * @effects After FillEmptySpaces, there shouldn't be any null spaces.
+	 * 
 	 */
 	public void FillEmptySpaces(){
 		for (int i = 0; i < lokumGrid[0].length; i++) {
@@ -471,6 +475,11 @@ public class Board {
 		}
 		return r;
 	}
+	/**
+	 * @requires lokum l
+	 * @param l
+	 * @modifies lokumGrid
+	 */
 	public void eatLokum(Lokum l){
 		if(l != null){
 			String type = l.getType();
@@ -500,8 +509,9 @@ public class Board {
 	/**
 	 * 
 	 * @param c the combination that will be eat
-	 * @modifies lokumGrid
-	 * 
+	 * @modifies lokumGrid, score, 
+	 * @requires (Combination c!= null)
+	 * @effects After first eat action, if there is an another eat combination, then it again eats.
 	 *
 	 */
 	public void eat(Combination c){
@@ -625,6 +635,10 @@ public class Board {
 			lokumGrid[l.getPositionX()][l.getPositionY()] = null;
 		}
 	}
+	/**
+	 * It constructs a board that filled to random lokums.
+	 * @modifies lokumGrid
+	 */
 	public void constructRandomBoard(){
 		ArrayList<Combination> combinations = checkCombinations();
 		while(combinations.size() != 0){
@@ -635,6 +649,10 @@ public class Board {
 			combinations = checkCombinations();
 		}
 	}
+	/**
+	 * @modifies lokumGrid
+	 * It is used for constructing random board to prevent null point exception.
+	 */
 	public void removeAll(){
 		for (int i = 0; i < lokumGrid.length; i++) {
 			for (int j = 0; j < lokumGrid[0].length; j++) {
@@ -646,7 +664,10 @@ public class Board {
 	/**
 	 * 
 	 * @param column Column index that will be eaten
-	 * @modifies lokumGrid 
+	 * @requires column!=0 isSpecial()==true ¤¤ lokum==v.striped
+	 * @modifies lokumGrid
+	 * @effects It destroys the selected column.
+	 * 
 	 */
 	public void eatAllColumn(int column){
 		for (int i = 0; i < lokumGrid.length; i++) {
@@ -658,7 +679,9 @@ public class Board {
 	/**
 	 * 
 	 * @param row Row index that will be eaten
+	 * @requires row!=0 isSpecial()==true ¤¤ lokum==h.striped
 	 * @modifies lokumGrid
+	 * @effects It destroys the selected row.
 	 */
 	public void eatAllRow(int row){
 		for (int i = 0; i < lokumGrid[0].length; i++) {
@@ -668,7 +691,9 @@ public class Board {
 		}
 	}
 	/**
+	 * @requires lokumGrid!=0 (isSpecial()==true ¤¤ (lokum a==colorBomb && lokum b==colorBomb))
 	 * @modifies lokumGrid
+	 * @effects It destroys all rows and columns.
 	 */
 	public void eatAllLokums(){
 		for (int i = 0; i < lokumGrid.length; i++) {
@@ -698,7 +723,9 @@ public class Board {
 	/**
 	 * 
 	 * @param lokum Lokum that will be ate all over the board
+	 * @requires lokumGrid!=0 isSpecial()==true
 	 * @modifies lokumGrid
+	 * 
 	 */
 	public void eatAllSameType(Lokum lokum){
 		for (int i = 0; i < lokumGrid.length; i++) {
@@ -715,7 +742,9 @@ public class Board {
 	 * 
 	 * @param lokum The lokum that will be changed
 	 * @param type  The type that lokum will changed into
+	 * @requires lokumGrid!=0
 	 * @modifies lokumGrid
+	 * @effects
 	 */
 	public void changeAllLokumType(Lokum lokum){
 		for (int i = 0; i < lokumGrid.length; i++) {
