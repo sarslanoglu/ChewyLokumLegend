@@ -7,7 +7,7 @@ package game;
  *
  */
 
-
+//adasd
 public class normalLokum extends Lokum {
 
 	private String color;
