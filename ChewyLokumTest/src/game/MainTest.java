@@ -11,11 +11,74 @@ public class MainTest {
 		// TODO Auto-generated method stub
 		gameEngine e = new gameEngine();
 		e.initGame();
+		
+		// Only generates normal lokums
+		//		for (int i = 0; i < lokumGrid.length; i++) {
+		//			for (int j = 0; j < lokumGrid[0].length; j++) {
+		//				normalLokum lokum = generateRandom();
+		//				lokum.setPositionX(i);
+		//				lokum.setPositionY(j);
+		//				lokumGrid[i][j] = lokum;
+		//			}
+		//		}
+
+		// Only generates time lokums
+		//		for (int i = 0; i < lokumGrid.length; i++) {
+		//			for (int j = 0; j < lokumGrid[0].length; j++) {
+		//				normalLokum lokum = generateRandomTimeLokum();
+		//				lokum.setPositionX(i);
+		//				lokum.setPositionY(j);
+		//				lokumGrid[i][j] = lokum;
+		//			}
+		//		}
+
+		// Swap action test
+		//		printLokums(lokumGrid);
+		//		System.out.println("\n");
+		//		Lokum a = lokumGrid[2][2];
+		//		Lokum b = lokumGrid[2][3];
+		//		swap(a,b);
+		//		printLokums(lokumGrid);
+
+		// Special swap action test
+		//		printLokums(lokumGrid);
+		//		System.out.println("");
+		//		Lokum c = lokumGrid[0][0];
+		//		Lokum d = lokumGrid[4][4];
+		//		// Initial implementation will be added to the orijinal code
+		//		specialSwap(c,d);
+		//		printLokums(lokumGrid);
+
+		// Working with this one droped 3 lokum to bottom and randomly fill it.
+		//		normalLokum tLokum1 = new normalLokum (0,0,"WT",true);
+		//		normalLokum tLokum2 = new normalLokum (0,1,"WT",true);
+		//		normalLokum tLokum3 = new normalLokum (0,2,"WT",true);
+		//		printLokums(lokumGrid);
+		//		lokumGrid[0][0] = tLokum1;
+		//		lokumGrid[0][1] = tLokum2;
+		//		lokumGrid[0][2] = tLokum3;
+		//		printLokums(lokumGrid);
+		//		FillEmptySpaces();
+		//		printLokums(lokumGrid);
+
+		// Time Lokum combinations
+		normalLokum tLokum1 = new normalLokum (0,0,"WT",true);
+		normalLokum tLokum2 = new normalLokum (0,1,"WT",true);
+		normalLokum tLokum3 = new normalLokum (0,2,"WT",true);
+		printLokums(lokumGrid);
+		lokumGrid[0][0] = tLokum1;
+		lokumGrid[0][1] = tLokum2;
+		lokumGrid[0][2] = tLokum3;
+		printLokums(lokumGrid);
+		ArrayList<Lokum> lokums = new ArrayList<Lokum>();
+		Combination c = new Combination("Special",lokums);
+		eat(c);
+		printLokums(lokumGrid);
 
 		//		specialLokum l = new specialLokum(1, 1, "fact", "beyaz");
 		//		normalLokum a = new normalLokum(1, 1, "beyaz");
 		//		if(l.isEqual(a)){
-		//			System.out.println("ayný");
+		//			System.out.println("aynÃ½");
 		//		}
 		//				int[][] yigit = new int[5][10];
 		//				System.out.println(yigit.length);
@@ -438,7 +501,7 @@ public class MainTest {
 				}
 			}
 		}
-		// T kýsmý
+		// T kÃ½smÃ½
 		ArrayList<Combination> horizontals = new ArrayList<Combination>();
 		ArrayList<Combination> verticals = new ArrayList<Combination>();
 		ArrayList<Combination> usedHorizontals = new ArrayList<Combination>();
