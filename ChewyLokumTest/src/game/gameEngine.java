@@ -42,8 +42,6 @@ import org.xml.sax.SAXException;
  * gameEngine is a class that opens game,
  * handles players actions and contains the graphics 
  * of the game.
- * 
- *
  */
 
 public class gameEngine extends JFrame implements MouseListener{
@@ -458,15 +456,12 @@ public class gameEngine extends JFrame implements MouseListener{
 		updateTime(board.getTime());
 	}
 	/**
-<<<<<<< HEAD
-	 * @effects If required score is reached
-	 * 			If time is finished or required score could not achieve,then level is failed.
-	 * 			
-=======
+	 * @modifies timer, gameTimer, frame
+	 * @effects If required score is reached, it stops the timer and print level succeed.
+	 * 			If time is finished or required score could not achieve,then level is failed. 			
 	 * 	This method check for whether the level in finished or ongoing.
 	 * 	It checks whether the level is succeeded, failed, time finished 
 	 * and it also checks whether special swaps are finished or not.
->>>>>>> origin/master
 	 */
 	public void checkGameStatus(){
 		if(isLevelRequirementReached()){
@@ -508,10 +503,12 @@ public class gameEngine extends JFrame implements MouseListener{
 	public int getScore(){
 		return Integer.parseInt(scoreLabel.getText());
 	}
+	
 	public void setScore(int score){
 		this.score=score;
 		scoreLabel.setText("Score:" + Integer.toString(score));
 	}
+	
 	private void setTime(long x) {
 		time = x;
 		timeLabel.setText("Time:" + Integer.toString((int) time));
@@ -579,6 +576,7 @@ public class gameEngine extends JFrame implements MouseListener{
 		specialSwapCountLabel.setText("SpecialSwaps:" + Integer.toString(specialSwapsLeft));
 	}
 	/**
+	 * It updates the time.
 	 * @requires time
 	 * @param x The change in time
 	 * @modifies timeLabel, time
@@ -589,7 +587,7 @@ public class gameEngine extends JFrame implements MouseListener{
 	}
 	/**
 	 * 
-	 * @return returns true if the score is higher than levelRequirementScore.
+	 * @return Returns true if the score is higher than levelRequirementScore.
 	 */
 	public boolean isLevelRequirementReached(){
 		if(score>=level.getlevelRequirementScore()){
@@ -598,7 +596,7 @@ public class gameEngine extends JFrame implements MouseListener{
 		return false;
 	}
 	/**
-	 * @return if time zero and level is timeBased return true else false.
+	 * @return If time zero and level is timeBased return true else false.
 	 */
 	public boolean isTimeFinished(){
 		if(level.isTimeBased() == true && time == 0){
@@ -608,7 +606,7 @@ public class gameEngine extends JFrame implements MouseListener{
 	}
 	/**
 	 * 
-	 * @return returns true if theres no swapsLeft.
+	 * @return Returns true if theres no swapsLeft.
 	 */
 	public boolean isLevelFailed(){
 		if(swapsLeft==0){

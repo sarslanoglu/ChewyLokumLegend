@@ -421,6 +421,7 @@ public class Board {
 	}
 
 	/**
+	 * It iterates the lokums randomly by looking the right-side of lokumGrid.
 	 * @requires There should be a empty(null) places in lokumGrid.
 	 * @modifies lokumGrid.
 	 * @effects After FillEmptySpaces, there shouldn't be any null spaces.
@@ -457,7 +458,7 @@ public class Board {
 		}
 	}
 	/**
-	 * 
+	 * It creates random normalLokums.
 	 * @return normalLokum choosen arbitrary
 	 */
 	public static normalLokum generateRandom(){

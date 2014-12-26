@@ -11,9 +11,13 @@ public class Level {
 	private int specialSwapAmount;
 	private int levelRequirementScore;
 	private long time;
-
+	
 	/**
-	 * @param levelRequirementScore     the score of the level requirement.  
+	 * @param levelNumber			the number of the level
+	 * @param swapAmount 			the normal swap given for the level
+	 * @param specialSwapAmount 	the special swap given for the level
+	 * @param levelRequirementScore the score of the level requirement.
+	 * @param time 					the time given for the level
 	 */
 	public Level (int levelNumber,int swapAmount,int specialSwapAmount,int levelRequirementScore, long time) {
 		this.levelRequirementScore = levelRequirementScore;
@@ -27,18 +31,11 @@ public class Level {
 		 *  its required score, swap amounts, time and its number.
 		 */
 	}
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
 	/**
 	 * 
 	 * @returns true if level is timeBased (time!=0)
 	 */
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master
 	public boolean isTimeBased(){
 		if (time == 0){
 			
