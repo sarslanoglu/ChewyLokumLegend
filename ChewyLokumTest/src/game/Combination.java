@@ -19,7 +19,7 @@ public class Combination {
 	/**
 	 * 
 	 * @param type      the type of the combination
-	 * @param Lokums    the list of the lokums that uses combination.
+	 * @param Lokums    the list of the lokums that used in combination.
 	 */
 
 
@@ -45,7 +45,7 @@ public class Combination {
 
 	/**
 	 * 
-	 * @return checks each lokum and returns true if lokum is special.
+	 * @return checks size of lokums array list and returns true if size is exactly 2.
 	 */
 	public boolean isSpecial() {
 		if(Lokums.size() == 2){
