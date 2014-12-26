@@ -12,7 +12,8 @@ public class MainTest {
 		gameEngine e = new gameEngine();
 		e.initGame();
 		
-		// Only generates normal lokums
+		// Swap action test
+
 		//		for (int i = 0; i < lokumGrid.length; i++) {
 		//			for (int j = 0; j < lokumGrid[0].length; j++) {
 		//				normalLokum lokum = generateRandom();
@@ -21,18 +22,6 @@ public class MainTest {
 		//				lokumGrid[i][j] = lokum;
 		//			}
 		//		}
-
-		// Only generates time lokums
-		//		for (int i = 0; i < lokumGrid.length; i++) {
-		//			for (int j = 0; j < lokumGrid[0].length; j++) {
-		//				normalLokum lokum = generateRandomTimeLokum();
-		//				lokum.setPositionX(i);
-		//				lokum.setPositionY(j);
-		//				lokumGrid[i][j] = lokum;
-		//			}
-		//		}
-
-		// Swap action test
 		//		printLokums(lokumGrid);
 		//		System.out.println("\n");
 		//		Lokum a = lokumGrid[2][2];
@@ -41,6 +30,15 @@ public class MainTest {
 		//		printLokums(lokumGrid);
 
 		// Special swap action test
+
+		//		for (int i = 0; i < lokumGrid.length; i++) {
+		//			for (int j = 0; j < lokumGrid[0].length; j++) {
+		//				normalLokum lokum = generateRandom();
+		//				lokum.setPositionX(i);
+		//				lokum.setPositionY(j);
+		//				lokumGrid[i][j] = lokum;
+		//			}
+		//		}
 		//		printLokums(lokumGrid);
 		//		System.out.println("");
 		//		Lokum c = lokumGrid[0][0];
@@ -49,7 +47,7 @@ public class MainTest {
 		//		specialSwap(c,d);
 		//		printLokums(lokumGrid);
 
-		// Working with this one droped 3 lokum to bottom and randomly fill it.
+		// Working with this one droped 3 time lokums to bottom and randomly fill it.
 		//		normalLokum tLokum1 = new normalLokum (0,0,"WT",true);
 		//		normalLokum tLokum2 = new normalLokum (0,1,"WT",true);
 		//		normalLokum tLokum3 = new normalLokum (0,2,"WT",true);
@@ -62,46 +60,45 @@ public class MainTest {
 		//		printLokums(lokumGrid);
 
 		// Time Lokum combinations
-		normalLokum tLokum1 = new normalLokum (0,0,"WT",true);
-		normalLokum tLokum2 = new normalLokum (0,1,"WT",true);
-		normalLokum tLokum3 = new normalLokum (0,2,"WT",true);
-		printLokums(lokumGrid);
-		lokumGrid[0][0] = tLokum1;
-		lokumGrid[0][1] = tLokum2;
-		lokumGrid[0][2] = tLokum3;
-		printLokums(lokumGrid);
-		ArrayList<Lokum> lokums = new ArrayList<Lokum>();
-		Combination c = new Combination("Special",lokums);
-		eat(c);
-		printLokums(lokumGrid);
-
-		//		specialLokum l = new specialLokum(1, 1, "fact", "beyaz");
-		//		normalLokum a = new normalLokum(1, 1, "beyaz");
-		//		if(l.isEqual(a)){
-		//			System.out.println("ayný");
+		//		for (int i = 0; i < lokumGrid.length; i++) {
+		//			for (int j = 0; j < lokumGrid[0].length; j++) {
+		//				normalLokum lokum = generateRandomTimeLokum();
+		//				lokum.setPositionX(i);
+		//				lokum.setPositionY(j);
+		//				lokumGrid[i][j] = lokum;
+		//			}
 		//		}
-		//				int[][] yigit = new int[5][10];
-		//				System.out.println(yigit.length);
-		//		
+		//		normalLokum tLokum1 = new normalLokum (0,0,"WT",true);
+		//		normalLokum tLokum2 = new normalLokum (0,1,"WT",true);
+		//		normalLokum tLokum3 = new normalLokum (0,2,"WT",true);
+		//		printLokums(lokumGrid);
+		//		lokumGrid[0][0] = tLokum1;
+		//		lokumGrid[0][1] = tLokum2;
+		//		lokumGrid[0][2] = tLokum3;
+		//		printLokums(lokumGrid);
+		//		ArrayList<Lokum> lokums = new ArrayList<Lokum>();
+		//		Combination c = new Combination("Special",lokums);
+		//		eat(c);
+		//		printLokums(lokumGrid);
+		//	}
 		//
-		//
-		//				for (int i = 0; i < lokumGrid.length; i++) {
-		//					for (int j = 0; j < lokumGrid[0].length; j++) {
-		//						normalLokum lok = generateRandom();
-		//						normalLokum lokum = new normalLokum(i,j,lok.getColor());
-		//						lokumGrid[i][j] = lokum;
-		//					}
-		//				}
-		//		for (int i = 0; i < lokums[0].length; i++) {
-		//			lokums[2][i] = null;
-		//		}
-		//		for (int i = 0; i < lokums.length; i++) {
-		//			lokums[i][1] = null;
-		//		}
-		//		System.out.println("\n");
-		//		swap(lokums[0][0],lokums[0][1],lokums);
-		//		printLokums(lokums);
-		//		System.out.println("\n");
+		//	public static normalLokum generateRandomTimeLokum(){
+		//		normalLokum r;
+		//		Random rand = new Random();
+		//		int randomNum = rand.nextInt(4);
+		//		String type = "";
+		//		switch (randomNum){
+		//		case 0: type="GT";
+		//		break;
+		//		case 1:  type="RT";
+		//		break;
+		//		case 2:  type="WT";
+		//		break;
+		//		case 3:  type="BT";
+		//		} 
+		//		r = new normalLokum(0, 0, type , true);
+		//		return r;
+		//	}
 
 		// 		!!Chain Eat Lokum Test!!
 		//		specialLokum sLokum1 = new specialLokum (0,1,"W","VStriped");
@@ -169,7 +166,28 @@ public class MainTest {
 		//	printLokums(lokumGrid);
 		//	System.out.println("\n");
 
+		//		specialLokum l = new specialLokum(1, 1, "fact", "beyaz");
+		//				normalLokum a = new normalLokum(1, 1, "beyaz");
+		//				if(l.isEqual(a)){
+		//					System.out.println("aynı");
+		//				}
+		//						int[][] semih = new int[5][10];
+		//						System.out.println(semih.length);
+
+
+		//		for (int i = 0; i < lokums[0].length; i++) {
+		//			lokums[2][i] = null;
+		//		}
+		//		for (int i = 0; i < lokums.length; i++) {
+		//			lokums[i][1] = null;
+		//		}
+		//		System.out.println("\n");
+		//		swap(lokums[0][0],lokums[0][1],lokums);
+		//		printLokums(lokums);
+		//		System.out.println("\n");
+
 	}
+
 	public static void FillEmptySpaces(){
 
 		for (int i = 0; i < lokumGrid[0].length; i++) {
