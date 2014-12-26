@@ -456,12 +456,10 @@ public class gameEngine extends JFrame implements MouseListener{
 		updateTime(board.getTime());
 	}
 	/**
+	 * This method check for whether the level in finished or ongoing. It checks whether the level is succeeded, failed, time finished and it also checks whether special swaps are finished or not.
 	 * @modifies timer, gameTimer, frame
 	 * @effects If required score is reached, it stops the timer and print level succeed.
-	 * 			If time is finished or required score could not achieve,then level is failed. 			
-	 * 	This method check for whether the level in finished or ongoing.
-	 * 	It checks whether the level is succeeded, failed, time finished 
-	 * and it also checks whether special swaps are finished or not.
+	 * @effects	If time is finished or required score could not achieve,then level is failed. 			
 	 */
 	public void checkGameStatus(){
 		if(isLevelRequirementReached()){
