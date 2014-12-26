@@ -1,10 +1,7 @@
 package game;
 /**
  * Level is an object class 
- * that holds the score of level requirements 
- * and gets the shape of lokums in level.
- * 
- *
+ * that holds level requirement score, swap amounts and time
  */
 
 
@@ -14,11 +11,13 @@ public class Level {
 	private int specialSwapAmount;
 	private int levelRequirementScore;
 	private long time;
-
+	
 	/**
-	 * 
-	 * @param levelRequirementScore     the score of the level requirement. 
-	 * @param levelShape				Shape of lokums in level. 
+	 * @param levelNumber			the number of the level
+	 * @param swapAmount 			the normal swap given for the level
+	 * @param specialSwapAmount 	the special swap given for the level
+	 * @param levelRequirementScore the score of the level requirement.
+	 * @param time 					the time given for the level
 	 */
 	public Level (int levelNumber,int swapAmount,int specialSwapAmount,int levelRequirementScore, long time) {
 		this.levelRequirementScore = levelRequirementScore;
@@ -29,11 +28,17 @@ public class Level {
 		/**
 		 *  Default constructor of Level.
 		 *  Constructs a level object with
-		 *  its required score and its shape of lokums.
+		 *  its required score, swap amounts, time and its number.
 		 */
 	}
+
+	/**
+	 * 
+	 * @returns true if level is timeBased (time!=0)
+	 */
 	public boolean isTimeBased(){
 		if (time == 0){
+			
 			return false;
 		}
 		else {

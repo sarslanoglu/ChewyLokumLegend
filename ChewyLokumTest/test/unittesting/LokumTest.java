@@ -8,11 +8,6 @@ import org.junit.Test;
 import game.*;
 
 public class LokumTest {
-	
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	
-	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -59,13 +54,47 @@ public class LokumTest {
 
 	}
 	@Test
-	public void testnormalLokum(){
-		normalLokum lok = new normalLokum(0,0,"R",false);
+	public void testWhiteNormalLokum(){
+		normalLokum lok = new normalLokum(0,0,"W",false);
 		assertTrue(lok.repOk());
 	}
 	@Test
-	public void testspecialLokum(){
+	public void testGreenNormalLokum(){
+		normalLokum lok = new normalLokum(0,0,"G",false);
+		assertTrue(lok.repOk());
+	}@Test
+	public void testRedNormalLokum(){
+		normalLokum lok = new normalLokum(0,0,"R",false);
+		assertTrue(lok.repOk());
+	}@Test
+	public void testBrownNormalLokum(){
+		normalLokum lok = new normalLokum(0,0,"B",false);
+		assertTrue(lok.repOk());
+	}
+	@Test
+	public void testTimeLokum(){
+		normalLokum lok = new normalLokum(0,0,"B",true);
+		assertTrue(lok.repOk());
+		assertTrue(lok.isTimeLokum());
+	}
+	@Test
+	public void testVStripedspecialLokum(){
 		specialLokum lok = new specialLokum(0,0,"W","VStriped");
+		assertTrue(lok.repOk());
+	}
+	@Test
+	public void testHStripedspecialLokum(){
+		specialLokum lok = new specialLokum(0,0,"W","HStriped");
+		assertTrue(lok.repOk());
+	}
+	@Test
+	public void testWrappedspecialLokum(){
+		specialLokum lok = new specialLokum(0,0,"W","Wrapped");
+		assertTrue(lok.repOk());
+	}
+	@Test
+	public void testBOMBspecialLokum(){
+		specialLokum lok = new specialLokum(0,0,"W","BOMB");
 		assertTrue(lok.repOk());
 	}
 	@Test
