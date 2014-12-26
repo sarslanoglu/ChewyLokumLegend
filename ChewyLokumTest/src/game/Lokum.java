@@ -3,7 +3,7 @@ package game;
 /**
  * 
  * Lokum is an abstract class that has 
- * a position X, position Y.
+ * a position X and position Y.
 
  *
  */
@@ -15,8 +15,8 @@ public abstract class Lokum {
 	/**
 	 * 
 	 * 	
-	 * @param x       x-coordinate of the location of the center of the lokum.
-	 * @param y       y-coordinate of the location of the center of the lokum.
+	 * @param x       x-coordinate of the lokum.
+	 * @param y       y-coordinate of the lokum.
 	 */
 
 	public Lokum (int x, int y) {
@@ -40,6 +40,7 @@ public abstract class Lokum {
 	public abstract boolean isEqual(Lokum l); 
 	public abstract boolean isTimeLokum();
 	public abstract boolean repOk();
+
 	public int getPositionX() {
 		return positionX;
 	}

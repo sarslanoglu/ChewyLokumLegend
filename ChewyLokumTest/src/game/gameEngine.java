@@ -100,6 +100,8 @@ public class gameEngine extends JFrame implements MouseListener{
 	 * @param sLokum1   the first selected lokum. 
 	 * @param sLokum2 	the second selected lokum.
 	 * @param swapsLeft the amount of swaps that is left after player's moves.
+	 * @param timer 	The thread that used for repaint lokumPanel.
+	 * @param gameTimer The thread that used for decreasing level time.
 	 */
 
 	public gameEngine() {
@@ -135,14 +137,13 @@ public class gameEngine extends JFrame implements MouseListener{
 		startMenu.add(constructTopMenu());
 		/**
 		 * Default constructor of gameEngine.
-		 * It is currently empty.
 		 * Will be modified later.
 		 * 
 		 */
 	}
 	/**
-	 * 
-	 * 
+	 *  This method is used for reading last game state(level that leftover) by using txt file.
+	 * 	@return returns the level that user can select 
 	 */
 	public int readGameState(){
 		int result = 0;
@@ -162,7 +163,9 @@ public class gameEngine extends JFrame implements MouseListener{
 		}
 		return result;
 	}
-
+	/**
+	 *  This method is used for writing game state (current level number) by using txt file.
+	 */
 	public void writeGameState(){
 		try {
 			BufferedWriter wr = new BufferedWriter(new FileWriter("gameState.txt"));
@@ -175,8 +178,8 @@ public class gameEngine extends JFrame implements MouseListener{
 	}
 
 	/**
-	 *  Method that saves current game.
-	 *  @requires saveGame(name)!=null
+	 *  Method that saves current game by creating an xml file.
+	 *  @requires load button must be pushed by user
 	 */
 	public void saveGame(){
 		String fileName=JOptionPane.showInputDialog("Select your file name.");
@@ -248,8 +251,8 @@ public class gameEngine extends JFrame implements MouseListener{
 
 	/**
 	 * 
-	 * @param selectedLoad   selected save game's file which will be loaded.
-	 * @requires It requires a saved game.
+	 * @requires It requires a saved game xml file to be choosen for load.
+	 * @requires load button must be pushed by user
 	 */
 
 	public void loadGame (){
@@ -275,6 +278,13 @@ public class gameEngine extends JFrame implements MouseListener{
 		Document XMLDocument = XMLDocumentConstructor(XMLFile,XSDFile);
 		XMLParser(XMLDocument);
 	}
+	/**
+	 * This method takes two file objects and creates a document for xmlparsing 
+	 * after validation succeeded.
+	 * @param XMLFile XML file that will used for construction Document object
+	 * @param XSDFile XSD schema file that will be used for validation of XML
+	 * @return Document file that will be used for parsing
+	 */
 	private Document XMLDocumentConstructor(File XMLFile,File XSDFile){
 
 		Document xmlDocument=null;
@@ -308,7 +318,11 @@ public class gameEngine extends JFrame implements MouseListener{
 
 		return xmlDocument;		
 	}
-
+	/**
+	 * This medhod takes document and parses its nodes.Finds variables and 
+	 * matches with game engines fields then starts game with updated fileds.
+	 * @param XMLDoc Document that will be parsed.
+	 */
 	public void XMLParser(Document XMLDoc){
 
 		Element root = XMLDoc.getDocumentElement();
@@ -395,7 +409,13 @@ public class gameEngine extends JFrame implements MouseListener{
 		}
 		frame.setContentPane(gamePanel);
 		timer.start();
+		gameTimer.start();
 	}
+	/**
+	 * This method modifies requiredScoreLabels text
+	 * @param x The score that will be set for label
+	 * @modifies requiredScoreLabel
+	 */
 	public void setRequiredScoreLabel(int x){
 		requiredScoreLabel.setText("Required Score:" + x);
 	}
@@ -405,7 +425,7 @@ public class gameEngine extends JFrame implements MouseListener{
 	 * @param b Second selected lokum for swap.
 	 * @requires a!=null b!=null
 	 * @effects If a,b swap does not create any combination, then a,b will be unswapped.
-	 * @modifies Board, a, b.
+	 * @modifies board, a, b.
 	 */
 	public void swap (Lokum a, Lokum b){
 		
@@ -438,9 +458,15 @@ public class gameEngine extends JFrame implements MouseListener{
 		updateTime(board.getTime());
 	}
 	/**
+<<<<<<< HEAD
 	 * @effects If required score is reached
 	 * 			If time is finished or required score could not achieve,then level is failed.
 	 * 			
+=======
+	 * 	This method check for whether the level in finished or ongoing.
+	 * 	It checks whether the level is succeeded, failed, time finished 
+	 * and it also checks whether special swaps are finished or not.
+>>>>>>> origin/master
 	 */
 	public void checkGameStatus(){
 		if(isLevelRequirementReached()){
@@ -470,9 +496,9 @@ public class gameEngine extends JFrame implements MouseListener{
 	/**
 	 * 
 	 * @param x  the score
-	 * @requires x!=0
+	 * @requires x!=null
 	 * @modifies scoreLabel
-	 * @effects If x equals zero, there won't be any action.
+	 * @effects If x equals zero, there won't be any change.
 	 */
 	public void increaseScore(int x){
 		score = score + x;
@@ -495,7 +521,7 @@ public class gameEngine extends JFrame implements MouseListener{
 	/**
 	 * @param x		x coordination of the location of the lokum. 
 	 * @param y		y coordination of the location of the lokum.
-	 * @requires x!=0 y!=0
+	 * @requires    x!=null y!=null
 	 */
 
 	public Lokum getSelectedLokum (int x,int y){
@@ -519,24 +545,24 @@ public class gameEngine extends JFrame implements MouseListener{
 		return selected;
 	}
 	/**
-	 * @modifies swapsLeft
-	 * @param x
+	 * @modifies swapsLeft,swapsLeftLabel
+	 * @param x  The new swap amount for set.
 	 */
 	public void setSwapsLeft(int x){
 		swapsLeft = x;
 		swapsLeftLabel.setText("Swaps:" + Integer.toString(swapsLeft));
 	}
 	/**
-	 * @modifies specialSwapLeft
-	 * @param x
+	 * @modifies specialSwapLeft,specialSwapCountLabel
+	 * @param x	The new special swap amount for set
 	 */
 	public void setSpecialSwapsLeft(int x){
 		specialSwapsLeft = x;
 		specialSwapCountLabel.setText("SpecialSwaps:" + specialSwapsLeft);
 	}
 	/**
-	 * @requires swapsLeft!=0
-	 * @modifies scoreLabel
+	 * @requires swapsLeft!=null
+	 * @modifies swapsLeft,swapsLeftLabel
 	 * @effects If there is no swapsLeft, then game will be finished.
 	 */
 	public void updateSwapsLeft(int x){
@@ -544,8 +570,9 @@ public class gameEngine extends JFrame implements MouseListener{
 		swapsLeftLabel.setText("Swaps:" + Integer.toString(swapsLeft));
 	}
 	/**
-	 * It updates the specialswap count.
-	 * @param x
+	 * It updates the special swaps.
+	 * @param x The change in specialSwaps
+	 * @modifies specialSwapsLeft,specialSwapCountLabel
 	 */
 	public void updateSpecialSwaps(int x){
 		specialSwapsLeft = specialSwapsLeft + x;
@@ -553,7 +580,7 @@ public class gameEngine extends JFrame implements MouseListener{
 	}
 	/**
 	 * @requires time
-	 * @param x
+	 * @param x The change in time
 	 * @modifies timeLabel, time
 	 */
 	public void updateTime(long x){
@@ -562,7 +589,7 @@ public class gameEngine extends JFrame implements MouseListener{
 	}
 	/**
 	 * 
-	 * @return returns true if the level requirement is reached in the game.
+	 * @return returns true if the score is higher than levelRequirementScore.
 	 */
 	public boolean isLevelRequirementReached(){
 		if(score>=level.getlevelRequirementScore()){
@@ -571,8 +598,7 @@ public class gameEngine extends JFrame implements MouseListener{
 		return false;
 	}
 	/**
-	 * 
-	 * @return returns if time zero and level is timeBased return true else false.
+	 * @return if time zero and level is timeBased return true else false.
 	 */
 	public boolean isTimeFinished(){
 		if(level.isTimeBased() == true && time == 0){
@@ -582,7 +608,7 @@ public class gameEngine extends JFrame implements MouseListener{
 	}
 	/**
 	 * 
-	 * @return returns false if level is failed.
+	 * @return returns true if theres no swapsLeft.
 	 */
 	public boolean isLevelFailed(){
 		if(swapsLeft==0){
@@ -590,12 +616,17 @@ public class gameEngine extends JFrame implements MouseListener{
 		}
 		return false;
 	}
+	/**
+	 * Method for initiating game.
+	 * @modifies frame
+	 */
 	public void initGame(){
 		frame.setContentPane(startMenu);
 	} 
 
 	/**
-	 *  @modifies frame.
+	 *  Method that paints lokum panel with boards lokum sequence.
+	 *  @modifies frame,gamePanel.
 	 */
 	public void paintLokumPanel(){
 
@@ -623,11 +654,20 @@ public class gameEngine extends JFrame implements MouseListener{
 		}
 
 	}
+	/**
+	 * Method that repaints lokumPanel by removing all object and painting it again.
+	 * @modifies frame,gamePanel
+	 */
 	public void repaint(){
 		lokumPanel.removeAll();
 		lokumPanel.repaint();
 		paintLokumPanel();
 	}
+	/**
+	 * This method takes a lokum and finds its label and returns it.
+	 * @param l Lokum that will be used for founding its ImageIcon(label).
+	 * @return JLabel presentation of lokum
+	 */
 	public JLabel getLokumLabel(Lokum l){
 		JLabel lokumLabel = new JLabel();
 		if(l.getColor().equals("W")){
@@ -716,6 +756,10 @@ public class gameEngine extends JFrame implements MouseListener{
 
 		return startMenuPanel;
 	}
+	/**
+	 * This method constructs game frame.
+	 * @return A JPanel
+	 */
 	public JPanel constructGamePanel(){
 		JPanel gamePanel = new JPanel();
 		gamePanel.setOpaque(true);
@@ -756,6 +800,10 @@ public class gameEngine extends JFrame implements MouseListener{
 		gamePanel.add(timeLabel);
 		return gamePanel;
 	}
+	/**
+	 * This method creates top menu for frame.
+	 * @return JToolbar with necessary buttons
+	 */
 	public JToolBar constructTopMenu(){
 		JToolBar topMenu = new JToolBar();
 		topMenu.setVisible(true);

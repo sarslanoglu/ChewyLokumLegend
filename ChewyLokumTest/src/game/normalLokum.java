@@ -2,18 +2,19 @@ package game;
 
 /**
  * 
- * normalLokum is an object
- * extends lokum and has a color. 
+ * normalLokum is an object that
+ * extends lokum and has a color and also can be a time lokum. 
  *
  */
 
-public class normalLokum extends Lokum {
+public class normalLokum extends Lokum { 
 
 	private String color;
 	private boolean isTimeLokum;
 	/**
 	 * 	
 	 * @param color  the color of the lokum.
+	 * @param isTimeLokum true if lokum is time lokum false if it is not.
 	 */
  
 
@@ -39,7 +40,9 @@ public class normalLokum extends Lokum {
 		return "NotSpecial";
 	}
 
-	@Override
+	/**
+	 * returns true if two lokums color are match
+	 */
 	public boolean isEqual(Lokum l) {
 		// TODO Auto-generated method stub
 		if(l.getColor().equals(color)){
@@ -47,7 +50,9 @@ public class normalLokum extends Lokum {
 		}
 		return false;
 	}
-	
+	/**
+	 * returns true if isTimeLokum == true.
+	 */
 	public boolean isTimeLokum(){
 		if(isTimeLokum == true){
 			return true;

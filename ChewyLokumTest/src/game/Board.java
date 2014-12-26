@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
 /**
- *  Lokum is a class that holds lokums in two dimensional lokum array
+ *  Board is a class that holds lokums in two dimensional lokum array
  *  and it also operates logic actions(like fill empty spaces, eat, swap...) of game
  */
 public class Board {
@@ -189,8 +189,7 @@ public class Board {
 	 * 
 	 * @param a First selected lokum for swap.
 	 * @param b Second selected lokum for swap.
-	 * @requires a!=null b!=null , a and b must be adjacent
-	 * @effects If a,b swap does not create any combination, then a,b will be unswapped.
+	 * @requires a!=null b!=null
 	 * @modifies lokumGrid, a, b.
 	 */
 	public void swap (Lokum a, Lokum b){
@@ -422,8 +421,8 @@ public class Board {
 	}
 
 	/**
-	 * @requires There should be a null element in Board.
-	 * @modifies board.
+	 * @requires There should be a empty(null) places in lokumGrid.
+	 * @modifies lokumGrid.
 	 * @effects After FillEmptySpaces, there shouldn't be any null spaces.
 	 * 
 	 */
@@ -457,6 +456,10 @@ public class Board {
 			}
 		}
 	}
+	/**
+	 * 
+	 * @return normalLokum choosen arbitrary
+	 */
 	public static normalLokum generateRandom(){
 		normalLokum r;
 		Random rand = new Random();
@@ -634,6 +637,12 @@ public class Board {
 			}
 		}
 	}
+	/**
+	 * This method is used at creation of random board. This method does not create special lokums
+	 * from combination of 3,4,5 lokums.
+	 * @param c Combination that will be eat.
+	 * 
+	 */
 	public void eatForConstructingBoard(Combination c){
 		ArrayList<Lokum> lokums = c.getLokums();
 		for(Lokum l : lokums){
@@ -641,7 +650,7 @@ public class Board {
 		}
 	}
 	/**
-	 * It constructs a board that filled to random lokums.
+	 * It constructs a board with random lokums.
 	 * @modifies lokumGrid
 	 */
 	public void constructRandomBoard(){
@@ -656,7 +665,7 @@ public class Board {
 	}
 	/**
 	 * @modifies lokumGrid
-	 * It is used for constructing random board to prevent null point exception.
+	 * It is used for constructing random board to prevent null pointer exception.
 	 */
 	public void removeAll(){
 		for (int i = 0; i < lokumGrid.length; i++) {
@@ -707,13 +716,13 @@ public class Board {
 			}
 		}
 	}
+	
 	/**
 	 * 
 	 * @param locX The X location of bomb lokum 
 	 * @param locY The Y location of bomb lokum
 	 * @modifies lokumGrid
 	 */
-	//Deðiþti
 	public void eatWrapped(int locX,int locY){
 		eatLokum(lokumGrid[locX][locY]);
 		if(locY+1 < lokumGrid[0].length) 	eatLokum(lokumGrid[locX][locY+1]);
@@ -727,8 +736,8 @@ public class Board {
 	}
 	/**
 	 * 
-	 * @param lokum Lokum that will be ate all over the board
-	 * @requires lokumGrid!=0 isSpecial()==true
+	 * @param lokum Lokum that will be eaten all over the board
+	 * @requires lokumGrid!=null isSpecial()==true
 	 * @modifies lokumGrid
 	 * 
 	 */
@@ -747,9 +756,8 @@ public class Board {
 	 * 
 	 * @param lokum The lokum that will be changed
 	 * @param type  The type that lokum will changed into
-	 * @requires lokumGrid!=0
+	 * @requires lokumGrid!=null
 	 * @modifies lokumGrid
-	 * @effects
 	 */
 	public void changeAllLokumType(Lokum lokum){
 		for (int i = 0; i < lokumGrid.length; i++) {
@@ -765,6 +773,7 @@ public class Board {
 			}
 		}
 	}
+	
 	public void set(int x,int y, Lokum l){
 		lokumGrid[x][y] = l;
 	}
