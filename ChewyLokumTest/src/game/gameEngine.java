@@ -438,7 +438,9 @@ public class gameEngine extends JFrame implements MouseListener{
 		updateTime(board.getTime());
 	}
 	/**
-	 * 
+	 * @effects If required score is reached
+	 * 			If time is finished or required score could not achieve,then level is failed.
+	 * 			
 	 */
 	public void checkGameStatus(){
 		if(isLevelRequirementReached()){
@@ -811,7 +813,7 @@ public class gameEngine extends JFrame implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		//javad
+		
 		if(e.getSource() == startButton){
 		//Buralar hep initLevel diye bir method oluþcak orda kullanýlcak
 			board.removeAll();
