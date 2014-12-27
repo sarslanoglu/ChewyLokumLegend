@@ -24,10 +24,29 @@ public class Combination {
 
 
 	public Combination( String type, ArrayList<Lokum> Lokums) {
-
-		this.type = type;
-		this.Lokums = Lokums;
-
+		boolean validity = true;
+		if(isSpecial()){
+			if(type.equals("3H") || type.equals("4H") || type.equals("5H")
+					|| type.equals("3V") || type.equals("4V") || type.equals("5V")){
+				for(int i=0; i<Lokums.size()-1; i++){
+					if(!Lokums.get(i).isEqual(Lokums.get(i+1))){
+						validity = false;
+					}
+				}
+			}
+		}
+		else{
+			if(Lokums.size() != 2){
+				validity = false;
+			}
+			else if(!Lokums.get(0).isSpecial() && !Lokums.get(1).isSpecial()){
+				validity = false;
+			}
+		}
+		if(validity = true){
+			this.type = type;
+			this.Lokums = Lokums;
+		}
 
 		/**
 		 * 	Default constructor of combination class.
