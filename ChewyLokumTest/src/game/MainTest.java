@@ -13,30 +13,20 @@ public class MainTest {
 		e.initGame();
 		
 		// Swap action test
-
-<<<<<<< HEAD
-		specialLokum l = new specialLokum(1, 1, "fact", "beyaz");
-		normalLokum a = new normalLokum(1, 1, "beyaz");
-		if(l.isEqual(a)){
-			System.out.println("ayný");
-		}
-		int[][] semih = new int[5][10];
-		System.out.println(semih.length);
-=======
-		//		for (int i = 0; i < lokumGrid.length; i++) {
-		//			for (int j = 0; j < lokumGrid[0].length; j++) {
-		//				normalLokum lokum = generateRandom();
-		//				lokum.setPositionX(i);
-		//				lokum.setPositionY(j);
-		//				lokumGrid[i][j] = lokum;
-		//			}
-		//		}
-		//		printLokums(lokumGrid);
-		//		System.out.println("\n");
-		//		Lokum a = lokumGrid[2][2];
-		//		Lokum b = lokumGrid[2][3];
-		//		swap(a,b);
-		//		printLokums(lokumGrid);
+				for (int i = 0; i < lokumGrid.length; i++) {
+					for (int j = 0; j < lokumGrid[0].length; j++) {
+						normalLokum lokum = generateRandom();
+						lokum.setPositionX(i);
+						lokum.setPositionY(j);
+						lokumGrid[i][j] = lokum;
+					}
+				}
+				printLokums(lokumGrid);
+				System.out.println("\n");
+				Lokum a = lokumGrid[2][2];
+				Lokum b = lokumGrid[2][3];
+				swap(a,b);
+				printLokums(lokumGrid);
 
 		// Special swap action test
 
@@ -108,7 +98,7 @@ public class MainTest {
 		//		r = new normalLokum(0, 0, type , true);
 		//		return r;
 		//	}
->>>>>>> origin/master
+
 
 
 
@@ -154,7 +144,7 @@ public class MainTest {
 		lokumGrid[8][7] = lokum3;
 		
 
-<<<<<<< HEAD
+
 		printLokums(lokumGrid);
 		ArrayList<Combination> combos = checkCombinations(lokumGrid);
 		for(Combination c : combos){
@@ -166,7 +156,7 @@ public class MainTest {
 				FillEmptySpaces();
 				System.out.println("\n");
 				printLokums(lokumGrid);
-=======
+
 		//		specialLokum l = new specialLokum(1, 1, "fact", "beyaz");
 		//				normalLokum a = new normalLokum(1, 1, "beyaz");
 		//				if(l.isEqual(a)){
