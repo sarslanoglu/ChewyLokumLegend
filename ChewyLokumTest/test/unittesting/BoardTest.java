@@ -100,9 +100,9 @@ public class BoardTest {
 		assertTrue(lok2.repOk());
 		assertTrue(testBoard.repOk());
 		
-		assertTrue(lok1.getPositionX()==0 && lok1.getPositionY() == 0
-				&& lok2.getPositionX()==1 && lok2.getPositionY() == 1
-				&& testBoard.get(0, 0)==lok1 && testBoard.get(1, 1) == lok2);
+		assertTrue(lok1.getPositionX()==1 && lok1.getPositionY() == 1
+				&& lok2.getPositionX()==0 && lok2.getPositionY() == 0
+				&& testBoard.get(1,1)==lok1 && testBoard.get(0,0) == lok2);
 	}
 	//GlassBox Test
 	@Test
@@ -170,13 +170,38 @@ public class BoardTest {
 			assertFalse(b.repOk());
 		}
 	}
-
+	@Test
+	public void unswapActionTest(){
+		testBoard = new Board(5,5);
+		normalLokum a = new normalLokum (0,0,"W",false);
+		normalLokum b = new normalLokum (1,1,"G",false);
+		
+		testBoard.set(a.getPositionX(),a.getPositionY(),a);
+		testBoard.set(b.getPositionX(),b.getPositionY(),b);
+		
+		int tempx = b.getPositionX();
+		int tempy = b.getPositionY();
+		testBoard.unswap(a, b);
+		int tempx1 = a.getPositionX();
+		int tempy1 = a.getPositionY();
+		
+		if(tempx == tempx1 || tempy == tempy1){
+			assertTrue(a.repOk());
+			assertTrue(b.repOk());
+		}else{
+			assertFalse(a.repOk());
+			assertFalse(b.repOk());
+		}
+		
+	}
 	@Test
 	public void specialSwapActionTest(){
 		testBoard = new Board(5,5);
 		normalLokum c = new normalLokum (0,0,"R",false);
 		normalLokum d = new normalLokum (4,4,"B",false);
 
+		testBoard.set(c.getPositionX(),c.getPositionY(),c);
+		testBoard.set(d.getPositionX(),d.getPositionY(),d);
 	}
 }
 
