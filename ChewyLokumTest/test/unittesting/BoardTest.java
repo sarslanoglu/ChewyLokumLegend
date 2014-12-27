@@ -15,19 +15,35 @@ public class BoardTest {
 		testBoard = new Board(6,6);
 		testBoard.repOk();
 	}
+	@Test
+	public void testLegalBoard(){
+		testBoard = new Board(10,8);
+		assertTrue(testBoard.repOk());
+	}
 	@Test(expected = NullPointerException.class)
 	public void testNullBoard(){
 		testBoard = null;
 		testBoard.repOk();
 	}
 	@Test
-	public void testIllegalBoard(){
+	public void testIllegalNegativeBoard(){
 		testBoard = new Board(-1,-1);
 		assertFalse(testBoard.repOk());
 	}
 	@Test
+	public void testIllegalNegativeBoard2(){
+		testBoard = new Board(-1,1);
+		assertFalse(testBoard.repOk());
+	
+	}
+	@Test
+	public void testIllegalNegativeBoard3(){
+		testBoard = new Board(1,-1);
+		assertFalse(testBoard.repOk());
+	}
+	@Test
 	public void testIllegalLargeBoard(){
-		testBoard = new Board(40,35);
+		testBoard = new Board(40,40);
 		assertFalse(testBoard.repOk());
 	}
 	@Test
@@ -60,6 +76,11 @@ public class BoardTest {
 		assertTrue(lok1.getPositionX()==1 && lok1.getPositionY() == 1
 				&& lok2.getPositionX()==0 && lok2.getPositionY() == 0
 				&& testBoard.get(1, 1)==lok1 && testBoard.get(0, 0) == lok2);	
+	}
+	//GlassBox Test
+	@Test
+	public void testCreationOf3HCombination(){
+		
 	}
 }
 

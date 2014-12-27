@@ -13,8 +13,6 @@ public class LokumTest {
 	public void setUp() throws Exception {
 	
 	}
-
-	
 	@Test(expected = NullPointerException.class)
 	public void testNullnormalLokum() {
 		normalLokum lok = null;

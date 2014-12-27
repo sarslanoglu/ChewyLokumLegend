@@ -91,14 +91,31 @@ public class CombinationTest {
 		Combination c = new Combination("5V",lokums);
 		assertTrue(c.repOk());
 	}
+	@Test
+	public void testTCombination() {
+		lok1.setPositionX(1);
+		lok1.setPositionX(1);
+		lok2.setPositionX(1);
+		lok2.setPositionX(2);
+		
+		lokums.add(lok6);
+		lokums.add(lok7);
+		lokums.add(lok8);
+		lokums.add(lok1);
+		lokums.add(lok2);
+		
+		Combination c = new Combination("T",lokums);
+		assertTrue(c.repOk());
+	}
 	@Test (expected = NullPointerException.class)
 	public void testNullCombination(){
 		Combination c = null;
 		c.repOk();
 	}
-	@Test
+	@Test (expected = NullPointerException.class)
 	public void testIllegalCombination(){
 		lokums.add(lok1);
+		lokums.add(lok2);
 		Combination c = new Combination("3H",lokums);
 		assertTrue(!c.repOk());
 	}
@@ -110,8 +127,18 @@ public class CombinationTest {
 		Combination c = new Combination("6H",lokums);
 		assertTrue(!c.repOk());
 	}
-	@Test
-	public void testisSpecial(){
+	@Test 
+	public void testLegalisSpecial(){
+		specialLokum sLokum = new specialLokum(0,0,"B","VStriped");
+		assertTrue(sLokum.repOk());
+		lokums.add(sLokum);
+		lokums.add(lok1);
+		Combination c = new Combination("Special",lokums);
+		assertTrue(c.repOk());
+		assertTrue(c.isSpecial());
+	}
+	@Test (expected = NullPointerException.class)
+	public void testIllegalisSpecial(){
 		lokums.add(lok1);
 		lokums.add(lok2);
 		Combination c = new Combination("Special",lokums);
@@ -127,4 +154,5 @@ public class CombinationTest {
 		assertTrue(c.repOk());
 		assertFalse(c.isSpecial());
 	}
+	
 }
