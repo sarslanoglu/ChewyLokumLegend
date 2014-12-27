@@ -604,7 +604,7 @@ public class gameEngine extends JFrame implements MouseListener{
 	}
 	/**
 	 * 
-	 * @return Returns true if theres no swapsLeft.
+	 * @return Returns true if there is no swapsLeft.
 	 */
 	public boolean isLevelFailed(){
 		if(swapsLeft==0){
@@ -853,7 +853,7 @@ public class gameEngine extends JFrame implements MouseListener{
 	public int getSelectedLevel(){
 		return (int) levelChooser.getSelectedItem();
 	}
-
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub

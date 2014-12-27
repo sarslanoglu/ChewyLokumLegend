@@ -127,6 +127,33 @@ public class CombinationTest {
 		Combination c = new Combination("6H",lokums);
 		assertTrue(!c.repOk());
 	}
+	@Test
+	public void testIllegalCombination3(){
+		lokums.add(lok1);
+		Combination c = new Combination("3H",lokums);
+		assertTrue(!c.repOk());
+	}
+	@Test
+	public void testIllegalCombination4(){
+		lokums.add(lok1);
+		lokums.add(lok2);
+		Combination c = new Combination("4H",lokums);
+		assertTrue(!c.repOk());
+	}
+	@Test
+	public void testIllegalCombination5(){
+		lokums.add(lok1);
+		lokums.add(lok2);
+		Combination c = new Combination("3V",lokums);
+		assertTrue(!c.repOk());
+	}
+	public void testIllegalCombination6(){
+		lokums.add(lok1);
+		lokums.add(lok2);
+		lokums.add(lok3);
+		Combination c = new Combination("6V",lokums);
+		assertTrue(!c.repOk());
+	}
 	@Test 
 	public void testLegalisSpecial(){
 		specialLokum sLokum = new specialLokum(0,0,"B","VStriped");

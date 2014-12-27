@@ -14,15 +14,15 @@ public class MainTest {
 		
 		// Swap action test
 
-<<<<<<< HEAD
+
 		specialLokum l = new specialLokum(1, 1, "fact", "beyaz");
-		normalLokum a = new normalLokum(1, 1, "beyaz");
+		normalLokum a = new normalLokum(1, 1, "beyaz", false);
 		if(l.isEqual(a)){
 			System.out.println("ayn�");
 		}
 		int[][] semih = new int[5][10];
 		System.out.println(semih.length);
-=======
+
 		//		for (int i = 0; i < lokumGrid.length; i++) {
 		//			for (int j = 0; j < lokumGrid[0].length; j++) {
 		//				normalLokum lokum = generateRandom();
@@ -108,14 +108,15 @@ public class MainTest {
 		//		r = new normalLokum(0, 0, type , true);
 		//		return r;
 		//	}
->>>>>>> origin/master
-
+		
+		//
+		//
 
 
 		for (int i = 0; i < lokumGrid.length; i++) {
 			for (int j = 0; j < lokumGrid[0].length; j++) {
 				normalLokum lok = generateRandom();
-				normalLokum lokum = new normalLokum(i,j,lok.getColor());
+				normalLokum lokum = new normalLokum(i,j,lok.getColor(), false);
 				lokumGrid[i][j] = lokum;
 			}
 		}
@@ -130,7 +131,7 @@ public class MainTest {
 		printLokums(lokums);
 		System.out.println("\n");
 
-		!!Chain Eat Lokum Test!!
+		//!!Chain Eat Lokum Test!!
 		specialLokum sLokum1 = new specialLokum (0,1,"W","VStriped");
 		specialLokum sLokum2 = new specialLokum (7,1,"W","HStriped");
 		specialLokum sLokum3 = new specialLokum (7,4,"W","Wrapped");
@@ -138,23 +139,23 @@ public class MainTest {
 		lokumGrid[7][1] = sLokum2;
 		lokumGrid[7][4] = sLokum3;
 
-		!!Wrapped Lokum Test!!
+		//!!Wrapped Lokum Test!!
 		eatWrapped(0,0);
 		eatWrapped(lokumGrid.length-1,0);
 		eatWrapped(lokumGrid.length-1,lokumGrid[0].length-1);
 		eatWrapped(0,lokumGrid[0].length-1);
 
-		!!CheckCombinations have bug a special test!!
-		normalLokum lokum1 = new normalLokum(6,7,"W");
-		normalLokum lokum2 = new normalLokum(7,7,"W");
-		normalLokum lokum3 = new normalLokum(8,7,"W");
-		normalLokum lokum4 = new normalLokum(9,7,"W");
+		//!!CheckCombinations have bug a special test!!
+		normalLokum lokum1 = new normalLokum(6,7,"W", false);
+		normalLokum lokum2 = new normalLokum(7,7,"W", false);
+		normalLokum lokum3 = new normalLokum(8,7,"W", false);
+		normalLokum lokum4 = new normalLokum(9,7,"W", false);
 		lokumGrid[6][7] = lokum1;
 		lokumGrid[7][7] = lokum2;
 		lokumGrid[8][7] = lokum3;
 		
 
-<<<<<<< HEAD
+
 		printLokums(lokumGrid);
 		ArrayList<Combination> combos = checkCombinations(lokumGrid);
 		for(Combination c : combos){
@@ -162,11 +163,11 @@ public class MainTest {
 			eat(c);
 		}
 
-		      !!Test FillEmptySpaces!!!
+		      //!!Test FillEmptySpaces!!!
 				FillEmptySpaces();
 				System.out.println("\n");
 				printLokums(lokumGrid);
-=======
+
 		//		specialLokum l = new specialLokum(1, 1, "fact", "beyaz");
 		//				normalLokum a = new normalLokum(1, 1, "beyaz");
 		//				if(l.isEqual(a)){
@@ -190,14 +191,14 @@ public class MainTest {
 	}
 
 	public static void FillEmptySpaces(){
->>>>>>> origin/master
 
-				!!Test eatAllSameType!!
-				eatAllSameType(new normalLokum(0,0,"W"));
 
-				!!Change allLokumType test!!
+				//!!Test eatAllSameType!!
+				eatAllSameType(new normalLokum(0,0,"W", false));
+
+				//!!Change allLokumType test!!
 				changeAllLokumType(new specialLokum(0,0,"W","HStriped"));
-		 		!!Test special combo eat!!
+		 		//!!Test special combo eat!!
 				specialLokum lokum1 = new specialLokum(0,2,"W","BOMB");
 				specialLokum lokum2 = new specialLokum(0,3,"W","BOMB");
 				lokumGrid[0][2] = lokum1;
@@ -207,22 +208,22 @@ public class MainTest {
 				lokums.add(lokum2);
 				Combination c = new Combination("Special",lokums);
 				eat(c);
-				normalLokum lokum1 = new normalLokum(0,0,"W");
-				normalLokum lokum2 = new normalLokum(0,0,"W");
-				normalLokum lokum3 = new normalLokum(0,0,"W");
-				ArrayList<Lokum> lokums = new ArrayList<Lokum>();
-				lokums.add(lokum1);
-				lokums.add(lokum2);
-				lokums.add(lokum3);
-				Combination c = new Combination("3H",lokums);
-				Combination d = c;
-				if(c.equals(d)){
+				normalLokum lokum11 = new normalLokum(0,0,"W", false);
+				normalLokum lokum21 = new normalLokum(0,0,"W", false);
+				normalLokum lokum3 = new normalLokum(0,0,"W", false);
+				ArrayList<Lokum> lokums1 = new ArrayList<Lokum>();
+				lokums1.add(lokum11);
+				lokums1.add(lokum21);
+				lokums1.add(lokum3);
+				Combination c1 = new Combination("3H",lokums1);
+				Combination d = c1;
+				if(c1.equals(d)){
 					System.out.println("esit");
 				}
 			printLokums(lokumGrid);
 			System.out.println("\n");
 			}
-		public static void FillEmptySpaces(){
+		public static void FillEmptySpaces1(){
 
 			for (int i = 0; i < lokumGrid[0].length; i++) {
 				Stack<Lokum> s = new Stack<Lokum>();
@@ -614,7 +615,7 @@ public class MainTest {
 				for(Combination c : Tcombos){
 					combinations.add(c);
 				}
-<<<<<<< HEAD
+
 				
 //		 Try for T finding- Result = Fail
 				ArrayList<Combination> combos = new ArrayList<Combination>();
@@ -647,25 +648,25 @@ public class MainTest {
 										}
 									}
 								}
-=======
+
 			}
 		}
 		// T kýsmý
-		ArrayList<Combination> horizontals = new ArrayList<Combination>();
-		ArrayList<Combination> verticals = new ArrayList<Combination>();
-		ArrayList<Combination> usedHorizontals = new ArrayList<Combination>();
-		ArrayList<Combination> usedVerticals = new ArrayList<Combination>();
-		ArrayList<Combination> Tcombos = new ArrayList<Combination>();
+		ArrayList<Combination> horizontals1 = new ArrayList<Combination>();
+		ArrayList<Combination> verticals1 = new ArrayList<Combination>();
+		ArrayList<Combination> usedHorizontals1 = new ArrayList<Combination>();
+		ArrayList<Combination> usedVerticals1 = new ArrayList<Combination>();
+		ArrayList<Combination> Tcombos1 = new ArrayList<Combination>();
 		//ArrayList<Combination> allCombinations = new ArrayList<Combination>();
 
-		for(Combination c : combinations){
-			if(c.getType().equals("3H") || c.getType().equals("4H")){
-				horizontals.add(c);	
+		for(Combination c1 : combinations){
+			if(c1.getType().equals("3H") || c1.getType().equals("4H")){
+				horizontals1.add(c1);	
 			}
 		}
-		for(Combination c : combinations){
-			if(c.getType().equals("3V") || c.getType().equals("4V")){
-				verticals.add(c);	
+		for(Combination c1 : combinations){
+			if(c1.getType().equals("3V") || c1.getType().equals("4V")){
+				verticals1.add(c1);	
 			}
 		}
 		//		for(Combination c : combinations){
@@ -673,42 +674,42 @@ public class MainTest {
 		//				allCombinations.add(c);	
 		//			}
 		//		}
-		for(Combination c: horizontals){
-			for(Combination co : verticals){
-				ArrayList<Lokum> clokums = c.getLokums();
+		for(Combination c1: horizontals1){
+			for(Combination co : verticals1){
+				ArrayList<Lokum> clokums = c1.getLokums();
 				ArrayList<Lokum> coLokums = co.getLokums();
 				for(Lokum l : clokums){
 					if(coLokums.contains(l)){
-						usedVerticals.add(co);
-						usedHorizontals.add(c);
+						usedVerticals1.add(co);
+						usedHorizontals1.add(c1);
 						ArrayList<Lokum> Tlokums = new ArrayList<Lokum>();
 						for(Lokum lokum : clokums){
 							if(!Tlokums.contains(lokum)){
 								Tlokums.add(lokum);	
->>>>>>> origin/master
+
 							}
 						}
-						else if(c.getType().equals("3V")){
+						else if(c1.getType().equals("3V")){
 		
 						}
 					}else{
-						combos.add(c);
+						combos.add(c1);
 					}
 				}
 						Combination temp1 = null;
 						Combination temp2 = null;
-						for(int i=0; i<combinations.size(); i++){
-							Combination c = combinations.get(i);
-							temp1 = c;
+						for(int i1=0; i1<combinations.size(); i1++){
+							Combination c11 = combinations.get(i1);
+							temp1 = c11;
 							
-							if(c.getType().equals("3V")){
+							if(c11.getType().equals("3V")){
 								for(int j=0; j<combinations.size(); j++){
-									Combination co = combinations.get(j);
-									if(co.getType().equals("3H")){
-										for(Lokum l : co.getLokums()){
-											if(c.getLokums().contains(l)){
-												combinations.remove(co);
-												temp2 = co;
+									Combination co1 = combinations.get(j);
+									if(co1.getType().equals("3H")){
+										for(Lokum l : co1.getLokums()){
+											if(c11.getLokums().contains(l)){
+												combinations.remove(co1);
+												temp2 = co1;
 											}
 										}
 									}
@@ -737,7 +738,7 @@ public class MainTest {
 						}
 
 
-				return combinations;
+				return combinations; 
 			}
 			public static void changeAllLokumType(Lokum lokum){
 				for (int i = 0; i < lokumGrid.length; i++) {

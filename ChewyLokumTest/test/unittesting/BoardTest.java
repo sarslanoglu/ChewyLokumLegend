@@ -46,6 +46,10 @@ public class BoardTest {
 		testBoard = new Board(40,40);
 		assertFalse(testBoard.repOk());
 	}
+	public void testBiggerBoard(){
+		testBoard = new Board(100,100);
+		assertFalse(testBoard.repOk());
+	}
 	@Test
 	public void testSetandGet(){
 		normalLokum lok = new normalLokum(2,2,"G",false);
@@ -76,6 +80,25 @@ public class BoardTest {
 		assertTrue(lok1.getPositionX()==1 && lok1.getPositionY() == 1
 				&& lok2.getPositionX()==0 && lok2.getPositionY() == 0
 				&& testBoard.get(1, 1)==lok1 && testBoard.get(0, 0) == lok2);	
+	}
+	@Test 
+	public void testUnswap(){
+		normalLokum lok1 = new normalLokum(0,0,"W",false);
+		normalLokum lok2 = new normalLokum(1,1,"B",false);
+		assertTrue(lok1.repOk());
+		assertTrue(lok2.repOk());
+		
+		testBoard.set(lok1.getPositionX(),lok1.getPositionY(),lok1);
+		testBoard.set(lok2.getPositionX(),lok2.getPositionY(),lok2);
+		testBoard.unswap(lok1,lok2);
+		
+		assertTrue(lok1.repOk());
+		assertTrue(lok2.repOk());
+		assertTrue(testBoard.repOk());
+		
+		assertTrue(lok1.getPositionX()==0 && lok1.getPositionY() == 0
+				&& lok2.getPositionX()==1 && lok2.getPositionY() == 1
+				&& testBoard.get(0, 0)==lok1 && testBoard.get(1, 1) == lok2);
 	}
 	//GlassBox Test
 	@Test
