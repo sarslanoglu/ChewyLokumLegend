@@ -36,6 +36,7 @@ public class Board {
 		 *  
 		 */
 	}
+	
 	public int getScore(){
 		return score;
 	}
@@ -48,6 +49,7 @@ public class Board {
 	public void setTime(long x){
 		time = x;
 	}
+	
 	/**
 	 * 
 	 * @param c The combination which's score will be counted.
@@ -186,7 +188,7 @@ public class Board {
 		return score;
 	}
 	/**
-	 * 
+	 * It replaces the coordinate x and y of lokum a with the coordinate x and y of lokum b.
 	 * @param a First selected lokum for swap.
 	 * @param b Second selected lokum for swap.
 	 * @requires a!=null b!=null
@@ -236,7 +238,8 @@ public class Board {
 		a.setPositionY(by);
 		System.out.println("Unswapped both selected lokums deselected");
 	}
-	/**
+	/** 
+	 * It holds the combinations that are on the board in an array list.
 	 * @requires lokumGrid
 	 * @return returns array list of combinations in the board.
 	 */
@@ -485,6 +488,7 @@ public class Board {
 		return r;
 	}
 	/**
+	 * It is the only method that makes eat action.
 	 * @requires lokum l
 	 * @param l
 	 * @modifies lokumGrid
@@ -516,7 +520,7 @@ public class Board {
 		}
 	}
 	/**
-	 * 
+	 * All cases of eat action are written in this method.
 	 * @param c the combination that will be eat
 	 * @modifies lokumGrid, score, 
 	 * @requires (Combination c!= null)
@@ -677,7 +681,7 @@ public class Board {
 		}
 	}
 	/**
-	 * 
+	 * It eats the all column. 
 	 * @param column Column index that will be eaten
 	 * @requires column!=0 isSpecial()==true ¤¤ lokum==v.striped
 	 * @modifies lokumGrid
@@ -692,7 +696,7 @@ public class Board {
 		}
 	}
 	/**
-	 * 
+	 * It eats the all row.
 	 * @param row Row index that will be eaten
 	 * @requires row!=0 isSpecial()==true ¤¤ lokum==h.striped
 	 * @modifies lokumGrid
@@ -706,6 +710,7 @@ public class Board {
 		}
 	}
 	/**
+	 * It eats the all lokums in the board. It can be done by swapping two color bombs.
 	 * @requires lokumGrid!=0 (isSpecial()==true ¤¤ (lokum a==colorBomb && lokum b==colorBomb))
 	 * @modifies lokumGrid
 	 * @effects It destroys all rows and columns.
@@ -736,7 +741,7 @@ public class Board {
 		if(locX-1 >= 0 && locY+1 < lokumGrid[0].length) eatLokum(lokumGrid[locX-1][locY+1]);
 	}
 	/**
-	 * 
+	 * It eats the all same type of lokums in the board. It can be done by swapping a color bomb and a normal lokum.
 	 * @param lokum Lokum that will be eaten all over the board
 	 * @requires lokumGrid!=null isSpecial()==true
 	 * @modifies lokumGrid
@@ -754,7 +759,7 @@ public class Board {
 		}
 	}
 	/**
-	 * 
+	 * It changes the all lokum types in the board. It can be done by swapping a color bomb and a striped lokum.
 	 * @param lokum The lokum that will be changed
 	 * @param type  The type that lokum will changed into
 	 * @requires lokumGrid!=null
