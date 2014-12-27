@@ -2,6 +2,7 @@ package unittesting;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import org.junit.Before;
@@ -11,7 +12,7 @@ import game.*;
 public class BoardTest {
 
 	private Board testBoard;
-	private static Lokum[][] lokumGrid = new Lokum[5][5];
+	ArrayList<Combination>  combinations = new ArrayList<Combination>();
 
 	@Before
 	public void setUp() throws Exception {
@@ -83,15 +84,55 @@ public class BoardTest {
 	//GlassBox Test
 	@Test
 	public void testCreationOf3HCombination(){
+		testBoard = new Board(5,5);
+		normalLokum lokum1 = new normalLokum (0,0,"W",false);
+		normalLokum lokum2 = new normalLokum (0,1,"W",false);
+		normalLokum lokum3 = new normalLokum (0,3,"W",false);
 
+		testBoard.set(lokum1.getPositionX(),lokum1.getPositionY(),lokum1);
+		testBoard.set(lokum2.getPositionX(),lokum2.getPositionY(),lokum2);
+		testBoard.set(lokum3.getPositionX(),lokum3.getPositionY(),lokum3);
+
+		ArrayList<Combination> c = testBoard.checkCombinations();
+
+		if(c == null){
+			assertTrue(testBoard.repOk());
+		}else{
+			assertFalse(testBoard.repOk());
+		}
+
+		normalLokum lokum4 = new normalLokum (0,2,"G",false);
+		testBoard.set(lokum4.getPositionX(),lokum4.getPositionY(),lokum4);
+		testBoard.swap(lokum3, lokum4);
+
+		ArrayList<Combination> cm = testBoard.checkCombinations();
+
+		if(cm != null){
+			assertTrue(testBoard.repOk());
+		}else{
+			assertFalse(testBoard.repOk());
+		}
+
+		// Yigit burada bir sikinti var
+		//testBoard.eat(cm);
+
+		if(testBoard.get(0, 0) == null){
+			assertTrue(testBoard.repOk());
+		}else{
+			assertFalse(testBoard.repOk());
+		}
 	}
 
-	//GlassBox Test Sarslanoglu
+	//GlassBox Test
 	@Test
-	public void allSwapActionsTest(){
+	public void swapActionTest(){
 		testBoard = new Board(5,5);
 		normalLokum a = new normalLokum (0,0,"W",false);
-		normalLokum b = new normalLokum (4,4,"G",false);
+		normalLokum b = new normalLokum (0,1,"G",false);
+
+		testBoard.set(a.getPositionX(),a.getPositionY(),a);
+		testBoard.set(b.getPositionX(),b.getPositionY(),b);
+
 		int tempx = b.getPositionX();
 		int tempy = b.getPositionY();
 		testBoard.swap(a, b);
@@ -105,6 +146,14 @@ public class BoardTest {
 			assertFalse(a.repOk());
 			assertFalse(b.repOk());
 		}
+	}
+
+	@Test
+	public void specialSwapActionTest(){
+		testBoard = new Board(5,5);
+		normalLokum c = new normalLokum (0,0,"R",false);
+		normalLokum d = new normalLokum (4,4,"B",false);
+
 	}
 }
 
