@@ -583,7 +583,7 @@ public class MainTest {
 				ArrayList<Combination> usedHorizontals = new ArrayList<Combination>();
 				ArrayList<Combination> usedVerticals = new ArrayList<Combination>();
 				ArrayList<Combination> Tcombos = new ArrayList<Combination>();
-				//ArrayList<Combination> allCombinations = new ArrayList<Combination>();
+				ArrayList<Combination> allCombinations = new ArrayList<Combination>();
 		
 				for(Combination c : combinations){
 					if(c.getType().equals("3H") || c.getType().equals("4H")){
