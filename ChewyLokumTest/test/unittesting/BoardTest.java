@@ -1,7 +1,7 @@
 package unittesting;
 
 // GlassBox tests are mentioned before methods,
-// all other tests are specification , unit test or black box tests.
+// all other tests are specification , unit test and black box tests.
 
 import static org.junit.Assert.*;
 
@@ -259,6 +259,8 @@ public class BoardTest {
 		}
 	}
 	//GlassBox Test of EatLokum starts (9 Methods)
+	// This test try to reach every branch of eatLokum method and wants to cover and check  
+	// all affects of eatLokum method on board.
 	@Test
 	public void eatLokumTestNormalLokum(){
 		normalLokum lok = new normalLokum(0,0,"W",false);

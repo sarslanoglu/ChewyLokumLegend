@@ -1,5 +1,8 @@
 package unittesting;
 
+//GlassBox tests are mentioned before methods,
+//all other tests are specification , unit test and black box tests.
+
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
