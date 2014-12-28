@@ -54,7 +54,7 @@ public class BoardTest {
 		testBoard = new Board(40,40);
 		assertFalse(testBoard.repOk());
 	}
-	public void testBiggerBoard(){
+	public void testIllegalBiggerBoard(){
 		testBoard = new Board(100,100);
 		assertFalse(testBoard.repOk());
 	}
@@ -195,8 +195,7 @@ public class BoardTest {
 		testBoard.set(c.getPositionX(),c.getPositionY(),c);
 		testBoard.set(d.getPositionX(),d.getPositionY(),d);
 		
-<<<<<<< HEAD
-=======
+
 		assertTrue(c.repOk());
 		assertTrue(d.repOk());
 		
@@ -403,7 +402,7 @@ public class BoardTest {
 		
 		assertTrue(testBoard.repOk());
 		assertTrue(testBoard.getTime() == 0); // A normal lokum is eaten and we expect boards temporary time to be 0.
->>>>>>> origin/master
+
 	}
 	//GlassBox test of eatLokum ends
 }

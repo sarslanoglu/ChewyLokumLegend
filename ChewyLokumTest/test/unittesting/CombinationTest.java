@@ -116,14 +116,188 @@ public class CombinationTest {
 		c.repOk();
 	}
 	@Test
-	public void testIllegalCombination(){
+	public void testIllegal3VCombination(){
+		lokums.add(lok1);
+		Combination c = new Combination("3V",lokums);
+		assertTrue(!c.repOk());
+	}
+	@Test
+	public void testIllegal3VCombination3(){
+		lokums.add(lok1);
+		lokums.add(lok2);
+		Combination c = new Combination("3V",lokums);
+		assertTrue(!c.repOk());
+	}
+	@Test
+	public void testIllegal4VCombination(){
+		lokums.add(lok1);
+		Combination c = new Combination("4V",lokums);
+		assertTrue(!c.repOk());
+	}
+	@Test
+	public void testIllegal4VCombination2(){
+		lokums.add(lok1);
+		lokums.add(lok2);
+		Combination c = new Combination("4V",lokums);
+		assertTrue(!c.repOk());
+	}
+	@Test
+	public void testIllegal4VCombination3(){
+		lokums.add(lok1);
+		lokums.add(lok2);
+		lokums.add(lok3);
+		Combination c = new Combination("4V",lokums);
+		assertTrue(!c.repOk());
+	}
+	@Test
+	public void testIllegal5VCombination(){
+		lokums.add(lok1);
+		Combination c = new Combination("5V",lokums);
+		assertTrue(!c.repOk());
+	}
+	@Test
+	public void testIllegal5VCombination2(){
+		lokums.add(lok1);
+		lokums.add(lok2);
+		Combination c = new Combination("5V",lokums);
+		assertTrue(!c.repOk());
+	}
+	@Test
+	public void testIllegal5VCombination3(){
+		lokums.add(lok1);
+		lokums.add(lok2);
+		lokums.add(lok3);
+		Combination c = new Combination("5V",lokums);
+		assertTrue(!c.repOk());
+	}
+	@Test
+	public void testIllegal5VCombination4(){
+		lokums.add(lok1);
+		lokums.add(lok2);
+		lokums.add(lok3);
+		lokums.add(lok4);
+		Combination c = new Combination("5V",lokums);
+		assertTrue(!c.repOk());
+	}
+	@Test
+	public void testIllegal6VCombination(){
+		lokums.add(lok1);
+		Combination c = new Combination("6V",lokums);
+		assertTrue(!c.repOk());
+	}
+	@Test
+	public void testIllegal6VCombination2(){
+		lokums.add(lok1);
+		lokums.add(lok2);
+		Combination c = new Combination("6V",lokums);
+		assertTrue(!c.repOk());
+	}
+	@Test
+	public void testIllegal6VCombination3(){
+		lokums.add(lok1);
+		lokums.add(lok2);
+		lokums.add(lok3);
+		Combination c = new Combination("6V",lokums);
+		assertTrue(!c.repOk());
+	}
+	@Test
+	public void testIllegal6VCombination4(){
+		lokums.add(lok1);
+		lokums.add(lok2);
+		lokums.add(lok3);
+		lokums.add(lok4);
+		Combination c = new Combination("6V",lokums);
+		assertTrue(!c.repOk());
+	}
+	@Test
+	public void testIllegal6VCombination5(){
+		lokums.add(lok1);
+		lokums.add(lok2);
+		lokums.add(lok3);
+		lokums.add(lok4);
+		lokums.add(lok5);
+		Combination c = new Combination("6V",lokums);
+		assertTrue(!c.repOk());
+	}
+	@Test
+	public void testIllegal3HCombination(){
+		lokums.add(lok1);
+		Combination c = new Combination("3H",lokums);
+		assertTrue(!c.repOk());
+	}
+	@Test
+	public void testIllegal3HCombination2(){
 		lokums.add(lok1);
 		lokums.add(lok2);
 		Combination c = new Combination("3H",lokums);
 		assertTrue(!c.repOk());
 	}
 	@Test
-	public void testIllegalCombination2(){
+	public void testIllegal4HCombination(){
+		lokums.add(lok1);
+		Combination c = new Combination("4H",lokums);
+		assertTrue(!c.repOk());
+	}
+	@Test
+	public void testIllegal4HCombination2(){
+		lokums.add(lok1);
+		lokums.add(lok2);
+		Combination c = new Combination("4H",lokums);
+		assertTrue(!c.repOk());
+	}
+	@Test
+	public void testIllegal4HCombination3(){
+		lokums.add(lok1);
+		lokums.add(lok2);
+		lokums.add(lok3);
+		Combination c = new Combination("4H",lokums);
+		assertTrue(!c.repOk());
+	}
+	@Test
+	public void testIllegal5HCombination(){
+		lokums.add(lok1);
+		Combination c = new Combination("5H",lokums);
+		assertTrue(!c.repOk());
+	}
+	@Test
+	public void testIllegal5HCombination2(){
+		lokums.add(lok1);
+		lokums.add(lok2);
+		Combination c = new Combination("5H",lokums);
+		assertTrue(!c.repOk());
+	}
+	@Test
+	public void testIllegal5HCombination3(){
+		lokums.add(lok1);
+		lokums.add(lok2);
+		lokums.add(lok3);
+		Combination c = new Combination("5H",lokums);
+		assertTrue(!c.repOk());
+	}
+	@Test
+	public void testIllegal5HCombination4(){
+		lokums.add(lok1);
+		lokums.add(lok2);
+		lokums.add(lok3);
+		lokums.add(lok4);
+		Combination c = new Combination("5H",lokums);
+		assertTrue(!c.repOk());
+	}
+	@Test
+	public void testIllegal6HCombination(){
+		lokums.add(lok1);
+		Combination c = new Combination("6H",lokums);
+		assertTrue(!c.repOk());
+	}
+	@Test
+	public void testIllegal6HCombination2(){
+		lokums.add(lok1);
+		lokums.add(lok2);
+		Combination c = new Combination("6H",lokums);
+		assertTrue(!c.repOk());
+	}
+	@Test
+	public void testIllegal6HCombination3(){
 		lokums.add(lok1);
 		lokums.add(lok2);
 		lokums.add(lok3);
@@ -131,32 +305,24 @@ public class CombinationTest {
 		assertTrue(!c.repOk());
 	}
 	@Test
-	public void testIllegalCombination3(){
-		lokums.add(lok1);
-		Combination c = new Combination("3H",lokums);
-		assertTrue(!c.repOk());
-	}
-	@Test
-	public void testIllegalCombination4(){
-		lokums.add(lok1);
-		lokums.add(lok2);
-		Combination c = new Combination("4H",lokums);
-		assertTrue(!c.repOk());
-	}
-	@Test
-	public void testIllegalCombination5(){
-		lokums.add(lok1);
-		lokums.add(lok2);
-		Combination c = new Combination("3V",lokums);
-		assertTrue(!c.repOk());
-	}
-	public void testIllegalCombination6(){
+	public void testIllegal6HCombination4(){
 		lokums.add(lok1);
 		lokums.add(lok2);
 		lokums.add(lok3);
-		Combination c = new Combination("6V",lokums);
+		lokums.add(lok4);
+		Combination c = new Combination("6H",lokums);
 		assertTrue(!c.repOk());
 	}
+	@Test
+	public void testIllegal6HCombination5(){
+		lokums.add(lok1);
+		lokums.add(lok2);
+		lokums.add(lok3);
+		lokums.add(lok4);
+		lokums.add(lok5);
+		Combination c = new Combination("6H",lokums);
+		assertTrue(!c.repOk());
+	}	
 	@Test 
 	public void testLegalisSpecial(){
 		specialLokum sLokum = new specialLokum(0,0,"B","VStriped");

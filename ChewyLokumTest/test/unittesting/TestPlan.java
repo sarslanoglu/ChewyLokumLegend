@@ -188,7 +188,14 @@ public class TestPlan {
 		for (int i = 0; i < levelLokumGrid[0].length; i++) {
 			if(levelLokumGrid[0][i] !=null){
 				testResult = false; }
-	} }
+	} 
+		if(!board.repOk()){
+			assertFalse("Board becomes unvalid after eat.",true);
+		};
+		
+		assertTrue("All row is eaten." , testResult);
+		assertTrue("All row is not eaten.", !testResult);	
+	}	
 	@Test
 	public void testEatAllColumn(){
 		boolean testResult = true;
@@ -199,8 +206,15 @@ public class TestPlan {
 		for (int i = 0; i < levelLokumGrid.length; i++) {
 			if(levelLokumGrid[i][0] != null){
 				testResult = false;
-		}
-	} }
+			}
+		} 
+		if(!board.repOk()){
+			assertFalse("Board becomes unvalid after eat.",true);
+		};
+		
+		assertTrue("All column is eaten." , testResult);
+		assertTrue("All column is not eaten.", !testResult);	
+	}
 	@Test
 	public void testEatAllLokums(){
 		boolean testResult = true;

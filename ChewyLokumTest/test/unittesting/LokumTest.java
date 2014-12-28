@@ -70,6 +70,16 @@ public class LokumTest {
 		assertTrue(!lok.repOk());
 	}
 	@Test
+	public void testillegalspecialLokum4(){
+		specialLokum lok = new specialLokum(1,-1,"W","VStriped");
+		assertTrue(!lok.repOk());
+	}
+	@Test
+	public void testillegalspecialLokum5(){
+		specialLokum lok = new specialLokum(-1,1,"W","VStriped");
+		assertTrue(!lok.repOk());
+	}
+	@Test
 	public void testWhiteNormalLokum(){
 		normalLokum lok = new normalLokum(0,0,"W",false);
 		assertTrue(lok.repOk());
