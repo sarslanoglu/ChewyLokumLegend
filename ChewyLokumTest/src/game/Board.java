@@ -51,7 +51,8 @@ public class Board {
 	}
 	
 	/**
-	 * 
+	 * This method takes a combination as a argument and calculates that combinations score
+	 * by looking the all cases that combination can be. Measurements based on project requirements.
 	 * @param c The combination which's score will be counted.
 	 * @requires (Combination c).
 	 * @return returns score of that combination.
@@ -236,7 +237,6 @@ public class Board {
 		b.setPositionY(ay);
 		a.setPositionX(bx);
 		a.setPositionY(by);
-		System.out.println("Unswapped both selected lokums deselected");
 	}
 	/** 
 	 * It holds the combinations that are on the board in an array list.
@@ -464,7 +464,7 @@ public class Board {
 	 * It creates random normalLokums.
 	 * @return normalLokum choosen arbitrary
 	 */
-	public static normalLokum generateRandom(){
+	public normalLokum generateRandom(){
 		normalLokum r;
 		Random rand = new Random();
 		int randomNum = rand.nextInt(4);
