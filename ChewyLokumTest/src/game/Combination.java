@@ -93,7 +93,7 @@ public class Combination {
 
 	}
 	public boolean repOk(){
-		if(Lokums.size() <= 1 || Lokums.size() > 6 || Lokums == null || type == null 
+		if( Lokums == null || type == null || Lokums.size() <= 1 || Lokums.size() > 6 
 				|| 
 				!(type.equals("3H") || type.equals("4H") || type.equals("5H")
 						||  type.equals("3V") || type.equals("4V") || type.equals("5V")

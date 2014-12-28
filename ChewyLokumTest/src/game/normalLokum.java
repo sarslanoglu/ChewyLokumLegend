@@ -32,6 +32,7 @@ public class normalLokum extends Lokum {
 	public String getColor() {
 		return color;
 	}
+
 	public boolean isSpecial() {
 		return false;
 	}

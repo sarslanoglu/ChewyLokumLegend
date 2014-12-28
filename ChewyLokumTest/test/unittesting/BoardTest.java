@@ -50,6 +50,10 @@ public class BoardTest {
 		testBoard = new Board(40,40);
 		assertFalse(testBoard.repOk());
 	}
+	public void testBiggerBoard(){
+		testBoard = new Board(100,100);
+		assertFalse(testBoard.repOk());
+	}
 	@Test
 	public void testSetandGet(){
 		normalLokum lok = new normalLokum(2,2,"G",false);
@@ -80,6 +84,25 @@ public class BoardTest {
 		assertTrue(lok1.getPositionX()==1 && lok1.getPositionY() == 1
 				&& lok2.getPositionX()==0 && lok2.getPositionY() == 0
 				&& testBoard.get(1, 1)==lok1 && testBoard.get(0, 0) == lok2);	
+	}
+	@Test 
+	public void testUnswap(){
+		normalLokum lok1 = new normalLokum(0,0,"W",false);
+		normalLokum lok2 = new normalLokum(1,1,"B",false);
+		assertTrue(lok1.repOk());
+		assertTrue(lok2.repOk());
+		
+		testBoard.set(lok1.getPositionX(),lok1.getPositionY(),lok1);
+		testBoard.set(lok2.getPositionX(),lok2.getPositionY(),lok2);
+		testBoard.unswap(lok1,lok2);
+		
+		assertTrue(lok1.repOk());
+		assertTrue(lok2.repOk());
+		assertTrue(testBoard.repOk());
+		
+		assertTrue(lok1.getPositionX()==1 && lok1.getPositionY() == 1
+				&& lok2.getPositionX()==0 && lok2.getPositionY() == 0
+				&& testBoard.get(1,1)==lok1 && testBoard.get(0,0) == lok2);
 	}
 	//GlassBox Test
 	@Test
@@ -147,13 +170,38 @@ public class BoardTest {
 			assertFalse(b.repOk());
 		}
 	}
-
+	@Test
+	public void unswapActionTest(){
+		testBoard = new Board(5,5);
+		normalLokum a = new normalLokum (0,0,"W",false);
+		normalLokum b = new normalLokum (1,1,"G",false);
+		
+		testBoard.set(a.getPositionX(),a.getPositionY(),a);
+		testBoard.set(b.getPositionX(),b.getPositionY(),b);
+		
+		int tempx = b.getPositionX();
+		int tempy = b.getPositionY();
+		testBoard.unswap(a, b);
+		int tempx1 = a.getPositionX();
+		int tempy1 = a.getPositionY();
+		
+		if(tempx == tempx1 || tempy == tempy1){
+			assertTrue(a.repOk());
+			assertTrue(b.repOk());
+		}else{
+			assertFalse(a.repOk());
+			assertFalse(b.repOk());
+		}
+		
+	}
 	@Test
 	public void specialSwapActionTest(){
 		testBoard = new Board(5,5);
 		normalLokum c = new normalLokum (0,0,"R",false);
 		normalLokum d = new normalLokum (4,4,"B",false);
 
+		testBoard.set(c.getPositionX(),c.getPositionY(),c);
+		testBoard.set(d.getPositionX(),d.getPositionY(),d);
 	}
 }
 

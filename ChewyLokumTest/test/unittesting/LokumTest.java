@@ -24,6 +24,11 @@ public class LokumTest {
 		lok.repOk();
 	}
 	@Test
+	public void testNormalLokum(){
+		normalLokum lok = new normalLokum(0,0,"W",false);
+		assertTrue(lok.repOk());
+	}
+	@Test
 	public void testillegalnormalLokum(){
 		normalLokum lok = new normalLokum(-1,-1,"W",false);
 		assertTrue(!lok.repOk());
@@ -35,6 +40,16 @@ public class LokumTest {
 		assertTrue(!lok.repOk());	
 		}
 	@Test
+	public void testillegalnormalLokum3(){
+		normalLokum lok = new normalLokum(1,-1,"P",false);
+		assertTrue(!lok.repOk());	
+		}
+	@Test
+	public void testillegalnormalLokum4(){
+		normalLokum lok = new normalLokum(-1,1,"P",false);
+		assertTrue(!lok.repOk());	
+		}
+	@Test
 	public void testillegalspecialLokum(){
 		specialLokum lok = new specialLokum(-1,-1,"W","VStriped");
 		assertTrue(!lok.repOk());
@@ -43,13 +58,11 @@ public class LokumTest {
 	public void testillegalspecialLokum2(){
 		specialLokum lok = new specialLokum(0,0,"P","VStriped");
 		assertTrue(!lok.repOk());
-
 	}
 	@Test
 	public void testillegalspecialLokum3(){
 		specialLokum lok = new specialLokum(0,0,"NULL","TYPE");
 		assertTrue(!lok.repOk());
-
 	}
 	@Test
 	public void testWhiteNormalLokum(){
@@ -69,9 +82,26 @@ public class LokumTest {
 		normalLokum lok = new normalLokum(0,0,"B",false);
 		assertTrue(lok.repOk());
 	}
+	@Test 
+	public void testIllegalTimeLokum(){
+		normalLokum lok = new normalLokum(-1,-1,"P",true);
+		assertTrue(!lok.repOk());
+	}
+	@Test public void testIllegalTimeLokum2(){
+		normalLokum lok = new normalLokum(-1,-1,"W",true);
+		assertTrue(!lok.repOk());
+	}
+	@Test public void testIllegalTimeLokum3(){
+		normalLokum lok = new normalLokum(1,-1,"G",true);
+		assertTrue(!lok.repOk());
+	}
+	@Test public void testIllegalTimeLokum4(){
+		normalLokum lok = new normalLokum(-1,1,"R",true);
+		assertTrue(!lok.repOk());
+	}
 	@Test
 	public void testTimeLokum(){
-		normalLokum lok = new normalLokum(0,0,"B",true);
+		normalLokum lok = new normalLokum(0,0,"W",true);
 		assertTrue(lok.repOk());
 		assertTrue(lok.isTimeLokum());
 	}
@@ -104,6 +134,12 @@ public class LokumTest {
 		assertTrue(lok1.isEqual(lok2));
 	}
 	@Test
+	public void testIsTimeLokum(){
+		normalLokum lok1 = new normalLokum(0,0,"B",true);
+		assertTrue(lok1.repOk());
+		assertTrue(lok1.isTimeLokum());
+	}
+	@Test
 	public void testnormalLokumisSpecial(){
 		normalLokum lok = new normalLokum(0,0,"W",false);
 		assertTrue(lok.repOk());
@@ -114,5 +150,17 @@ public class LokumTest {
 		specialLokum lok = new specialLokum(0,0,"B","VStriped");
 		assertTrue(lok.repOk());
 		assertTrue(lok.isSpecial());
+	}
+	@Test
+	public void testTimeLokumisNormalLokum(){
+		normalLokum lok = new normalLokum(0,0,"B",true);
+		assertTrue(lok.repOk());
+		assertTrue(lok.isTimeLokum());
+	}
+	@Test
+	public void testTimeLokumisSpecial(){
+		normalLokum lok = new normalLokum(0,0,"B",true);
+		assertTrue(lok.repOk());
+		assertTrue(!lok.isSpecial());
 	}
 }
