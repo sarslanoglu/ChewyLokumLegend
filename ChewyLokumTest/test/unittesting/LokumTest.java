@@ -1,4 +1,9 @@
 package unittesting;
+
+//GlassBox tests are mentioned before methods,
+//all other tests are specification , unit test and black box tests.
+
+
 import static org.junit.Assert.*;
 
 import org.junit.Before;
@@ -82,25 +87,26 @@ public class LokumTest {
 		normalLokum lok = new normalLokum(0,0,"B",false);
 		assertTrue(lok.repOk());
 	}
-	@Test public void testIllegalTimeLokum(){
-		normalLokum lok = new normalLokum(0,0,"T",false);
+	@Test 
+	public void testIllegalTimeLokum(){
+		normalLokum lok = new normalLokum(-1,-1,"P",true);
 		assertTrue(!lok.repOk());
 	}
 	@Test public void testIllegalTimeLokum2(){
-		normalLokum lok = new normalLokum(-1,-1,"T",false);
+		normalLokum lok = new normalLokum(-1,-1,"W",true);
 		assertTrue(!lok.repOk());
 	}
 	@Test public void testIllegalTimeLokum3(){
-		normalLokum lok = new normalLokum(1,-1,"T",false);
+		normalLokum lok = new normalLokum(1,-1,"G",true);
 		assertTrue(!lok.repOk());
 	}
 	@Test public void testIllegalTimeLokum4(){
-		normalLokum lok = new normalLokum(-1,1,"T",false);
+		normalLokum lok = new normalLokum(-1,1,"R",true);
 		assertTrue(!lok.repOk());
 	}
 	@Test
 	public void testTimeLokum(){
-		normalLokum lok = new normalLokum(0,0,"T",true);
+		normalLokum lok = new normalLokum(0,0,"W",true);
 		assertTrue(lok.repOk());
 		assertTrue(lok.isTimeLokum());
 	}

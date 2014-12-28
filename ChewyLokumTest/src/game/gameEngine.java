@@ -15,7 +15,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -442,6 +441,7 @@ public class gameEngine extends JFrame implements MouseListener{
 			if(combinations.size() == 0){
 				board.unswap(a, b);
 				updateSwapsLeft(1);
+				System.out.println("Unswapped both selected lokums deselected");
 			}
 		}
 		
@@ -860,7 +860,6 @@ public class gameEngine extends JFrame implements MouseListener{
 		
 		if(e.getSource() == startButton){
 		//Buralar hep initLevel diye bir method oluþcak orda kullanýlcak
-			board.removeAll();
 			board.constructRandomBoard();
 			swapsLeft = level.getswapAmount();
 			specialSwapsLeft = level.getSpecialSwapAmount();

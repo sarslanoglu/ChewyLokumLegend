@@ -1,5 +1,8 @@
 package unittesting;
 
+//GlassBox tests are mentioned before methods,
+//all other tests are specification , unit test and black box tests.
+
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
@@ -112,7 +115,7 @@ public class CombinationTest {
 		Combination c = null;
 		c.repOk();
 	}
-	@Test (expected = NullPointerException.class)
+	@Test
 	public void testIllegalCombination(){
 		lokums.add(lok1);
 		lokums.add(lok2);
@@ -169,7 +172,7 @@ public class CombinationTest {
 		lokums.add(lok1);
 		lokums.add(lok2);
 		Combination c = new Combination("Special",lokums);
-		assertTrue(c.repOk());
+		assertTrue(!c.repOk());
 		assertTrue(c.isSpecial());
 	}
 	@Test
