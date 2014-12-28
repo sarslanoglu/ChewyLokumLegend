@@ -202,6 +202,7 @@ public class BoardTest {
 
 		testBoard.set(c.getPositionX(),c.getPositionY(),c);
 		testBoard.set(d.getPositionX(),d.getPositionY(),d);
+		
 	}
 }
 
