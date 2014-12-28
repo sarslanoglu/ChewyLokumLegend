@@ -487,7 +487,7 @@ public class gameEngine extends JFrame implements MouseListener{
 	}
 
 	/**
-	 * 
+	 * It increases the score by adding the gaining point.
 	 * @param x  the score
 	 * @requires x!=null
 	 * @modifies scoreLabel
@@ -497,16 +497,22 @@ public class gameEngine extends JFrame implements MouseListener{
 		score = score + x;
 		scoreLabel.setText("Score:" + Integer.toString(score));
 	}
-
+	/**
+	 * @return Returns the score.
+	 */
 	public int getScore(){
 		return Integer.parseInt(scoreLabel.getText());
 	}
-	
+	/**
+	 * @param score
+	 */
 	public void setScore(int score){
 		this.score=score;
 		scoreLabel.setText("Score:" + Integer.toString(score));
 	}
-	
+	/**
+	 * @param x
+	 */
 	private void setTime(long x) {
 		time = x;
 		timeLabel.setText("Time:" + Integer.toString((int) time));
@@ -556,6 +562,7 @@ public class gameEngine extends JFrame implements MouseListener{
 		specialSwapCountLabel.setText("SpecialSwaps:" + specialSwapsLeft);
 	}
 	/**
+	 * It updates the swap counts.
 	 * @requires swapsLeft!=null
 	 * @modifies swapsLeft,swapsLeftLabel
 	 * @effects If there is no swapsLeft, then game will be finished.
@@ -584,7 +591,6 @@ public class gameEngine extends JFrame implements MouseListener{
 		timeLabel.setText("Time:" + Integer.toString((int)time));
 	}
 	/**
-	 * 
 	 * @return Returns true if the score is higher than levelRequirementScore.
 	 */
 	public boolean isLevelRequirementReached(){
@@ -849,7 +855,9 @@ public class gameEngine extends JFrame implements MouseListener{
 		return topMenu;
 
 	}
-
+	/**
+	 * @return Returns the selected level.
+	 */
 	public int getSelectedLevel(){
 		return (int) levelChooser.getSelectedItem();
 	}

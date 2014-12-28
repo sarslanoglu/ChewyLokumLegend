@@ -30,7 +30,7 @@ public class specialLokum extends Lokum {
 		 */
 	}
 
-
+	
 	public String getColor() {
 
 		return color;
@@ -52,7 +52,7 @@ public class specialLokum extends Lokum {
 		}
 		return false;
 	}
-
+	
 	public boolean isTimeLokum() {
 		return false;
 	}

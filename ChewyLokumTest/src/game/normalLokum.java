@@ -11,13 +11,11 @@ public class normalLokum extends Lokum {
 
 	private String color;
 	private boolean isTimeLokum;
+	
 	/**
-	 * 	
 	 * @param color  the color of the lokum.
 	 * @param isTimeLokum true if lokum is time lokum false if it is not.
 	 */
- 
-
 	public normalLokum (int x, int y,String color, boolean timeLokum) {
 		super(x, y);
 		this.color = color;
@@ -32,7 +30,7 @@ public class normalLokum extends Lokum {
 	public String getColor() {
 		return color;
 	}
-
+	
 	public boolean isSpecial() {
 		return false;
 	}
@@ -52,7 +50,7 @@ public class normalLokum extends Lokum {
 		return false;
 	}
 	/**
-	 * returns true if isTimeLokum == true.
+	 * Returns true if isTimeLokum == true.
 	 */
 	public boolean isTimeLokum(){
 		if(isTimeLokum == true){

@@ -217,7 +217,7 @@ public class Board {
 
 	}
 	/**
-	 * 
+	 * It replaces the coordinate x and y of lokum a with the coordinate x and y of lokum b.
 	 * @param a First selected lokum for swap.
 	 * @param b First selected lokum for swap.
 	 * @requires a!=null b!=null
@@ -780,16 +780,35 @@ public class Board {
 			}
 		}
 	}
-	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param l
+	 */
 	public void set(int x,int y, Lokum l){
 		lokumGrid[x][y] = l;
 	}
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @return Returns the lokumGrid.
+	 */
 	public Lokum get(int x,int y){
 		return lokumGrid[x][y];
 	}
+	/**
+	 * 
+	 * @return Returns the height of board.
+	 */
 	public int getHeight(){
 		return height;
 	}
+	/**
+	 * 
+	 * @return Returns the width of board.
+	 */
 	public int getWidth(){
 		return width;
 	}

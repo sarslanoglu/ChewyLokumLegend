@@ -45,18 +45,33 @@ public class Level {
 			return true;
 		}
 	}
+	/**
+	 * @return Returns the required score for the level.
+	 */
 	public int getlevelRequirementScore(){
 		return levelRequirementScore; 
 	}
+	/**
+	 * @return Returns the level number.
+	 */
 	public int getlevelNumber(){
 		return levelNumber;
 	}
+	/**
+	 * @return Returns the swap amounts.
+	 */
 	public int getswapAmount(){
 		return swapAmount;
 	}
+	/**
+	 * @return Returns the special swap amounts.
+	 */
 	public int getSpecialSwapAmount(){
 		return specialSwapAmount;
 	}
+	/**
+	 * @return Returns the time.
+	 */
 	public long getTime(){
 		return time;
 	}

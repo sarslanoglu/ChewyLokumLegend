@@ -40,19 +40,28 @@ public abstract class Lokum {
 	public abstract boolean isEqual(Lokum l); 
 	public abstract boolean isTimeLokum();
 	public abstract boolean repOk();
-
+	
+	/**
+	 * @return Returns the X position of a lokum.
+	 */
 	public int getPositionX() {
 		return positionX;
 	}
-
+	/**
+	 * @param positionX
+	 */
 	public void setPositionX(int positionX) {
 		this.positionX = positionX;
 	}
-
+	/**
+	 * @return Returns the Y position of a lokum.
+	 */
 	public int getPositionY() {
 		return positionY;
 	}
-
+	/**
+	 * @param positionY
+	 */
 	public void setPositionY(int positionY) {
 		this.positionY = positionY;
 	}

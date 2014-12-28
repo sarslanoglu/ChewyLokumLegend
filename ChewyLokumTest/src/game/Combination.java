@@ -72,7 +72,10 @@ public class Combination {
 		 */
 
 	}
-
+	/**
+	 * 
+	 * @return Returns the combination type.
+	 */
 	public String getType() {
 		return type;
 	}
@@ -87,7 +90,10 @@ public class Combination {
 		}
 		return false;
 	}
-
+	/**
+	 * 
+	 * @return Returns the lokums in an arraylist.
+	 */
 	public ArrayList<Lokum> getLokums() {
 		return Lokums;
 
