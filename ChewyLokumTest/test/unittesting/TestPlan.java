@@ -1,5 +1,5 @@
 package unittesting;
-
+// Phase 1 Unit Testing And Documentation.
 import static org.junit.Assert.*;
 
 import java.awt.Point;

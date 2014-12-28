@@ -17,6 +17,7 @@ public class BoardTest {
 	@Before
 	public void setUp() throws Exception {
 		testBoard = new Board(6,6);
+		testBoard.constructRandomBoard();
 		testBoard.repOk();
 	}
 	@Test
@@ -107,7 +108,7 @@ public class BoardTest {
 	//GlassBox Test
 	@Test
 	public void testCreationOf3HCombination(){
-		testBoard = new Board(5,5);
+		testBoard = new Board(1,4);
 		normalLokum lokum1 = new normalLokum (0,0,"W",false);
 		normalLokum lokum2 = new normalLokum (0,1,"W",false);
 		normalLokum lokum3 = new normalLokum (0,3,"W",false);
@@ -118,32 +119,16 @@ public class BoardTest {
 
 		ArrayList<Combination> c = testBoard.checkCombinations();
 
-		if(c == null){
-			assertTrue(testBoard.repOk());
-		}else{
-			assertFalse(testBoard.repOk());
-		}
-
+		assertTrue(c.size() == 0);
+	
 		normalLokum lokum4 = new normalLokum (0,2,"G",false);
+		
 		testBoard.set(lokum4.getPositionX(),lokum4.getPositionY(),lokum4);
 		testBoard.swap(lokum3, lokum4);
 
 		ArrayList<Combination> cm = testBoard.checkCombinations();
-
-		if(cm != null){
-			assertTrue(testBoard.repOk());
-		}else{
-			assertFalse(testBoard.repOk());
-		}
-
-		// Yigit burada bir sikinti var
-		//testBoard.eat(cm);
-
-		if(testBoard.get(0, 0) == null){
-			assertTrue(testBoard.repOk());
-		}else{
-			assertFalse(testBoard.repOk());
-		}
+		assertTrue(cm.size() != 0);
+		assertTrue(cm.get(0).getType().equals("3H"));
 	}
 
 	//GlassBox Test
@@ -152,17 +137,22 @@ public class BoardTest {
 		testBoard = new Board(5,5);
 		normalLokum a = new normalLokum (0,0,"W",false);
 		normalLokum b = new normalLokum (0,1,"G",false);
-
+		
 		testBoard.set(a.getPositionX(),a.getPositionY(),a);
 		testBoard.set(b.getPositionX(),b.getPositionY(),b);
-
+		
+		assertTrue(a.repOk());
+		assertTrue(b.repOk());
+		
 		int tempx = b.getPositionX();
 		int tempy = b.getPositionY();
+		
 		testBoard.swap(a, b);
+		
 		int tempx1 = a.getPositionX();
 		int tempy1 = a.getPositionY();
 
-		if(tempx == tempx1 || tempy == tempy1){
+		if(tempx == tempx1 && tempy == tempy1){
 			assertTrue(a.repOk());
 			assertTrue(b.repOk());
 		}else{
@@ -181,11 +171,13 @@ public class BoardTest {
 		
 		int tempx = b.getPositionX();
 		int tempy = b.getPositionY();
+		
 		testBoard.unswap(a, b);
+		
 		int tempx1 = a.getPositionX();
 		int tempy1 = a.getPositionY();
 		
-		if(tempx == tempx1 || tempy == tempy1){
+		if(tempx == tempx1 && tempy == tempy1){
 			assertTrue(a.repOk());
 			assertTrue(b.repOk());
 		}else{
@@ -202,6 +194,17 @@ public class BoardTest {
 
 		testBoard.set(c.getPositionX(),c.getPositionY(),c);
 		testBoard.set(d.getPositionX(),d.getPositionY(),d);
+		
+		assertTrue(c.repOk());
+		assertTrue(d.repOk());
+		
+		testBoard.swap(c, d);
+		
+		assertTrue(c.repOk());
+		assertTrue(d.repOk());
+		assertTrue(testBoard.repOk());
+		
+		assertTrue(testBoard.get(0,0) == d && testBoard.get(4,4) == c);
 	}
 }
 

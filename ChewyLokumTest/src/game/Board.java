@@ -644,11 +644,11 @@ public class Board {
 	}
 	/**
 	 * This method is used at creation of random board. This method does not create special lokums
-	 * from combination of 3,4,5 lokums.
+	 * from combination of 3,4,5 lokums  and invisible to other classes.
 	 * @param c Combination that will be eat.
 	 * 
 	 */
-	public void eatForConstructingBoard(Combination c){
+	private void eatForConstructingBoard(Combination c){
 		ArrayList<Lokum> lokums = c.getLokums();
 		for(Lokum l : lokums){
 			lokumGrid[l.getPositionX()][l.getPositionY()] = null;
@@ -659,6 +659,7 @@ public class Board {
 	 * @modifies lokumGrid
 	 */
 	public void constructRandomBoard(){
+		removeAll();
 		ArrayList<Combination> combinations = checkCombinations();
 		while(combinations.size() != 0){
 			for(Combination c : combinations){
@@ -670,9 +671,9 @@ public class Board {
 	}
 	/**
 	 * @modifies lokumGrid
-	 * It is used for constructing random board to prevent null pointer exception.
+	 * It is used for constructing random board to prevent null pointer exception. It is invisible to other classes
 	 */
-	public void removeAll(){
+	private void removeAll(){
 		for (int i = 0; i < lokumGrid.length; i++) {
 			for (int j = 0; j < lokumGrid[0].length; j++) {
 				normalLokum lokum = new normalLokum(i,j,"NULL",false);
@@ -724,7 +725,7 @@ public class Board {
 	}
 	
 	/**
-	 * 
+	 * It used at eat of a wrapped lokum.
 	 * @param locX The X location of bomb lokum 
 	 * @param locY The Y location of bomb lokum
 	 * @modifies lokumGrid

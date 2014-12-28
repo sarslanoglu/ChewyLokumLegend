@@ -860,7 +860,6 @@ public class gameEngine extends JFrame implements MouseListener{
 		
 		if(e.getSource() == startButton){
 		//Buralar hep initLevel diye bir method oluþcak orda kullanýlcak
-			board.removeAll();
 			board.constructRandomBoard();
 			swapsLeft = level.getswapAmount();
 			specialSwapsLeft = level.getSpecialSwapAmount();
