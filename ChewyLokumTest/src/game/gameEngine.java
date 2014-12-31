@@ -27,9 +27,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.Timer;
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -46,7 +51,7 @@ import org.xml.sax.SAXException;
 public class gameEngine extends JFrame implements MouseListener{
 
 
-	
+
 	private static final long serialVersionUID = 1L;
 	private int score;
 	private int swapsLeft;
@@ -102,7 +107,8 @@ public class gameEngine extends JFrame implements MouseListener{
 	 */
 
 	public gameEngine() {
-
+		//		Level l = new Level(new Board(3,8),2,15,2,75000,20);
+		//		createLevelXML(l);
 		frame = new JFrame("ChewyLokumLegend");
 		frame.setSize(500, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -113,28 +119,17 @@ public class gameEngine extends JFrame implements MouseListener{
 		timer = new Timer(100,new AnimationEventListener());
 		gameTimer = new Timer(1000,new timeEventListener());
 
-		
-		board = new Board(10,8);
-
-		level= new Level(1,20,5,100000,50);
-		
-
 		lokumPanel = new JPanel();
 		lokumPanel.addMouseListener(this);
-		lokumPanel.setLocation((frame.getWidth()/2) - ((board.getWidth()*25)/2), 30);		
-		paintLokumPanel();
-
-		gamePanel = constructGamePanel();
-		gamePanel.addMouseListener(this);
 
 		startMenu = constructStartMenu();
 		startMenu.addMouseListener(this);
-
-		gamePanel.add(constructTopMenu());
 		startMenu.add(constructTopMenu());
+
+
 		/**
 		 * Default constructor of gameEngine.
-		 * Will be modified later.
+		 * 
 		 * 
 		 */
 	}
@@ -179,8 +174,10 @@ public class gameEngine extends JFrame implements MouseListener{
 	 *  @requires load button must be pushed by user
 	 */
 	public void saveGame(){
-		String fileName=JOptionPane.showInputDialog("Select your file name.");
+		gameTimer.stop();
+		timer.stop();
 
+		String fileName=JOptionPane.showInputDialog("Select your file name.");
 		JFileChooser chooser = new JFileChooser(); 
 		chooser.setCurrentDirectory(new java.io.File("."));
 		chooser.setDialogTitle("Choose the save directory");
@@ -192,6 +189,8 @@ public class gameEngine extends JFrame implements MouseListener{
 		}
 		else {
 			JOptionPane.showMessageDialog(null,"No file Selected!");
+			gameTimer.start();
+			timer.start();
 			return;
 		}
 
@@ -202,6 +201,8 @@ public class gameEngine extends JFrame implements MouseListener{
 			bw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
 			bw.write("<game>\n");
 			bw.write("<board>\n");
+			bw.write(String.format("<width w=\"%d\"/>\n",board.getWidth()));
+			bw.write(String.format("<height h=\"%d\"/>\n",board.getHeight()));
 			bw.write("<lokums>\n");
 			for (int i = 0; i < board.getHeight(); i++) {
 				for (int j = 0; j < board.getWidth(); j++) {
@@ -221,22 +222,12 @@ public class gameEngine extends JFrame implements MouseListener{
 				}
 			}
 			bw.write("</lokums>\n");
-
-			// Implementation does not have obstacles it is constructed for validation xsd file
-			bw.write("<obstacles>\n");
-			bw.write("<obstacle>\n");
-			bw.write(String.format("<color> %s </color>\n","color"));
-			bw.write("<position>\n");
-			bw.write(String.format("<xcoord> %d </xcoord>\n",0));
-			bw.write(String.format("<ycoord> %d </ycoord>\n",0));
-			bw.write("</position>\n");
-			bw.write("</obstacle>\n");
-			bw.write("</obstacles>\n");
 			bw.write("</board>\n");
-			bw.write(String.format("<goalscore gscore=\"%d\"/>",level.getlevelRequirementScore()));
-			bw.write(String.format("<currentscore cscore=\"%d\"/>",score));
+			bw.write(String.format("<currentscore score=\"%d\"/>",score));
 			bw.write(String.format("<movesleft swaps=\"%d\"/>",swapsLeft));
+			bw.write(String.format("<specialMovesLeft specialSwaps=\"%d\"/>",specialSwapsLeft));
 			bw.write(String.format("<level levelNumber=\"%d\"/>",level.getlevelNumber()));
+			bw.write(String.format("<time t=\"%d\"/>",time));
 			bw.write("</game>\n");
 
 			bw.close();
@@ -244,8 +235,82 @@ public class gameEngine extends JFrame implements MouseListener{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		gameTimer.start();
+		timer.start();
 	}
+	public void createLevelXML(Level l){
+		try {
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(String.format(("Level%d.xml"),l.getlevelNumber())), "utf-8"));
+			bw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+			bw.write("<level>\n");
+			bw.write("<board>\n");
+			bw.write(String.format("<width w=\"%d\"/>\n",l.getBoard().getWidth()));
+			bw.write(String.format("<height h=\"%d\"/>\n",l.getBoard().getHeight()));
+			bw.write("</board>\n");
+			bw.write(String.format("<requiredScore score=\"%d\"/>",l.getlevelRequirementScore()));
+			bw.write(String.format("<swapAmount swaps=\"%d\"/>",l.getswapAmount()));
+			bw.write(String.format("<specialSwapAmount specialSwaps=\"%d\"/>",l.getSpecialSwapAmount()));
+			bw.write(String.format("<level levelNumber=\"%d\"/>",l.getlevelNumber()));
+			bw.write(String.format("<time t=\"%d\"/>",l.getTime()));
+			bw.write("</level>\n");
+			bw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public Level readLevelXML(int levelNumber){
+		Level result;
+		int requiredScore=0,swapAmount=0,specialSwapAmount=0,width = 0,height = 0,time=0;
+		Board board = null;
 
+		File XSDFile =new File("Levels/Level.xsd");
+		File XMLFile =new File(String.format("Levels/Level%d.xml",levelNumber));
+
+		Document XMLDocument = XMLDocumentConstructor(XMLFile,XSDFile);
+
+		Element root = XMLDocument.getDocumentElement();
+		NodeList nodes = root.getChildNodes();
+		for (int i = 0; i < nodes.getLength(); i++) {
+			Node node = nodes.item(i);
+			if(node instanceof Element){
+				Element childElement = (Element) node;
+				if(childElement.getNodeName() == "board"){
+
+					NodeList boardNodes = childElement.getChildNodes();
+					for(int j = 0; j<boardNodes.getLength(); j++){
+
+						Node childNode = boardNodes.item(j);
+
+						if(childNode.getNodeName() == "width"){
+							Element widthElem = (Element) childNode;
+							width = Integer.parseInt(widthElem.getAttribute("w"));
+						}
+						if (childNode.getNodeName() == "height"){
+							Element heightElem = (Element) childNode;
+							height = Integer.parseInt(heightElem.getAttribute("h"));
+
+							board = new Board(height,width);		
+						}
+					}
+				}
+				else if(childElement.getNodeName() == "requiredScore"){
+					requiredScore = Integer.parseInt(childElement.getAttribute("score"));
+				}
+				else if(childElement.getNodeName() == "swapAmount"){
+					swapAmount = Integer.parseInt(childElement.getAttribute("swaps"));
+				}
+				else if(childElement.getNodeName() == "specialSwapAmount"){
+					specialSwapAmount = Integer.parseInt(childElement.getAttribute("specialSwaps"));
+				}
+				else if((childElement.getNodeName() == "time")){
+					time = Integer.parseInt(childElement.getAttribute("t"));
+				}
+			}
+		}
+		result = new Level(board,levelNumber,swapAmount,specialSwapAmount,requiredScore,time);
+		return result;
+	}
 	/**
 	 * 
 	 * @requires It requires a saved game xml file to be choosen for load.
@@ -310,9 +375,22 @@ public class gameEngine extends JFrame implements MouseListener{
 			JOptionPane.showMessageDialog(null,"XML filepath is invalid! Please choose a valid XML file.");
 			loadGame();
 		}
+		Schema xmlSchema = null;
+		try {
+			String xmlLang = XMLConstants.W3C_XML_SCHEMA_NS_URI;
+			SchemaFactory factory = SchemaFactory.newInstance(xmlLang);
+			xmlSchema = factory.newSchema(XSDFile);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-		// NOTE:Since validation no longer required we dont validate XML file
-
+		Validator validator = xmlSchema.newValidator();
+		try {
+			validator.validate(new DOMSource(xmlDocument));
+		} catch (SAXException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return xmlDocument;		
 	}
 	/**
@@ -324,19 +402,33 @@ public class gameEngine extends JFrame implements MouseListener{
 
 		Element root = XMLDoc.getDocumentElement();
 		NodeList nodes = root.getChildNodes();
+		int width = 0,height = 0;
 
 		for (int i = 0; i < nodes.getLength(); i++) {
 
 			Node node = nodes.item(i);
 
 			if(node instanceof Element){
-				Element child = (Element) node;
+				Element childElement = (Element) node;
 
-				if(child.getNodeName() == "board"){
-					NodeList boardNodes = child.getChildNodes();
+				if(childElement.getNodeName() == "board"){
+					NodeList boardNodes = childElement.getChildNodes();
+
 					for(int j = 0; j<boardNodes.getLength(); j++){
 
 						Node childNode = boardNodes.item(j);
+
+						if(childNode.getNodeName() == "width"){
+							Element widthElem = (Element) childNode;
+							width = Integer.parseInt(widthElem.getAttribute("w"));
+						}
+						if (childNode.getNodeName() == "height"){
+							Element heightElem = (Element) childNode;
+							height = Integer.parseInt(heightElem.getAttribute("h"));
+
+							board = new Board(height,width);		
+						}
+
 						if(childNode.getNodeName() == "lokums"){
 							NodeList lokums = childNode.getChildNodes();
 							for (int k = 0; k < lokums.getLength(); k++) {
@@ -392,18 +484,22 @@ public class gameEngine extends JFrame implements MouseListener{
 						}
 					}
 				}
-				else if(child.getNodeName() == "goalscore"){
-					setRequiredScoreLabel(Integer.parseInt(child.getAttribute("gscore")));
-				}
-				else if(child.getNodeName() == "currentscore"){
-					score = Integer.parseInt(child.getAttribute("cscore"));
+				else if(childElement.getNodeName() == "currentscore"){
+					score = Integer.parseInt(childElement.getAttribute("score"));
 					setScore(score);
 				}
-				else if(child.getNodeName() == "movesleft"){
-					setSwapsLeft(Integer.parseInt(child.getAttribute("swaps")));
+				else if(childElement.getNodeName() == "movesleft"){
+					setSwapsLeft(Integer.parseInt(childElement.getAttribute("swaps")));
+				}
+				else if(childElement.getNodeName() == "specialMovesLeft"){
+					setSpecialSwapsLeft(Integer.parseInt(childElement.getAttribute("specialSwaps")));
+				}
+				else if(childElement.getNodeName() == "time"){
+					setTime(Integer.parseInt(childElement.getAttribute("t")));
 				}
 			}
 		}
+		lokumPanel.setLocation((frame.getWidth()/2) - ((board.getWidth()*25)/2), 30);
 		frame.setContentPane(gamePanel);
 		timer.start();
 		gameTimer.start();
@@ -425,7 +521,7 @@ public class gameEngine extends JFrame implements MouseListener{
 	 * @modifies board, a, b.
 	 */
 	public void swap (Lokum a, Lokum b){
-		
+
 		if(specialSwapSelecter.isSelected()){
 			updateSpecialSwaps(-1);
 		}
@@ -433,7 +529,7 @@ public class gameEngine extends JFrame implements MouseListener{
 			updateSwapsLeft(-1);
 		}
 		board.setScore(0);
-		board.setTime(0);
+		if(level.isTimeBased()) board.setTime(0);
 		board.swap(a,b);
 		ArrayList<Combination> combinations = board.checkCombinations();
 
@@ -444,7 +540,7 @@ public class gameEngine extends JFrame implements MouseListener{
 				System.out.println("Unswapped both selected lokums deselected");
 			}
 		}
-		
+
 		while(combinations.size() != 0){
 			for(Combination c : combinations){
 				board.eat(c);
@@ -453,7 +549,7 @@ public class gameEngine extends JFrame implements MouseListener{
 			combinations = board.checkCombinations();
 		}
 		increaseScore(board.getScore());
-		updateTime(board.getTime());
+		if(level.isTimeBased()) updateTime(board.getTime());
 	}
 	/**
 	 * This method check for whether the level in finished or ongoing. It checks whether the level is succeeded, failed, time finished and it also checks whether special swaps are finished or not.
@@ -465,8 +561,16 @@ public class gameEngine extends JFrame implements MouseListener{
 		if(isLevelRequirementReached()){
 			timer.stop();
 			gameTimer.stop();
-			JOptionPane.showMessageDialog(null, "Level succeded test level is over returning start menu.");
-			frame.setContentPane(startMenu);
+
+			if(level.getlevelNumber()==5){
+				JOptionPane.showMessageDialog(null, "Last level finished GAME OVER.");
+				frame.setContentPane(startMenu);
+			}
+			else{
+				JOptionPane.showMessageDialog(null, "Level succeded press for next level.");
+				initLevel(level.getlevelNumber()+1);	
+
+			}
 		}
 		if(isLevelFailed()){
 			timer.stop();
@@ -624,7 +728,34 @@ public class gameEngine extends JFrame implements MouseListener{
 	 */
 	public void initGame(){
 		frame.setContentPane(startMenu);
+		timer.stop();
+		gameTimer.stop();
 	} 
+	public void initLevel(int x){
+
+		level = readLevelXML(x);
+
+		board =level.getBoard();
+		board.constructRandomBoard();
+
+
+		gamePanel = constructGamePanel();
+		gamePanel.add(constructTopMenu());
+
+
+		setSwapsLeft(level.getswapAmount());
+		setSpecialSwapsLeft(level.getSpecialSwapAmount());
+		setTime(level.getTime());
+		setScore(0);
+
+
+		frame.setContentPane(gamePanel);
+
+		timer.start();
+		if(level.isTimeBased()){
+			gameTimer.start();
+		}
+	}
 
 	/**
 	 *  Method that paints lokum panel with boards lokum sequence.
@@ -654,7 +785,6 @@ public class gameEngine extends JFrame implements MouseListener{
 				}
 			}
 		}
-
 	}
 	/**
 	 * Method that repaints lokumPanel by removing all object and painting it again.
@@ -745,7 +875,7 @@ public class gameEngine extends JFrame implements MouseListener{
 		startButton = new JButton("Start");
 		startButton.addMouseListener(this);
 		levelChooser = new JComboBox<Integer>();
-		for (int i = 1; i < 11; i++) {
+		for (int i = 1; i < 6; i++) {
 			levelChooser.addItem(i);
 		}
 		startMenuPanel.setSize(frame.getHeight(),frame.getWidth());
@@ -771,11 +901,11 @@ public class gameEngine extends JFrame implements MouseListener{
 		scoreLabel = new JLabel("Score:" + Integer.toString(score));
 		scoreLabel.setLocation(frame.getWidth()/2-80,frame.getHeight()-50);
 		scoreLabel.setSize(75,25);
-		
+
 		swapsLeftLabel = new JLabel("Swaps:"+Integer.toString(swapsLeft));
 		swapsLeftLabel.setLocation(frame.getWidth()/2+10,frame.getHeight()-50);
 		swapsLeftLabel.setSize(125,25);
-		
+
 		requiredScoreLabel = new JLabel("Required Score:" + level.getlevelRequirementScore());
 		requiredScoreLabel.setLocation(frame.getWidth()/2-75,frame.getHeight()-75);
 		requiredScoreLabel.setSize(160,25);
@@ -792,7 +922,12 @@ public class gameEngine extends JFrame implements MouseListener{
 		timeLabel = new JLabel("Time:" + Long.toString(time));
 		timeLabel.setLocation(frame.getWidth()-100,frame.getHeight()-50);
 		timeLabel.setSize(100,25);
-		
+
+		scoreLabel.addMouseListener(this);
+
+		paintLokumPanel();
+		lokumPanel.setLocation((frame.getWidth()/2) - ((board.getWidth()*25)/2), 30);
+
 		gamePanel.add(scoreLabel);
 		gamePanel.add(swapsLeftLabel);
 		gamePanel.add(requiredScoreLabel);
@@ -800,6 +935,8 @@ public class gameEngine extends JFrame implements MouseListener{
 		gamePanel.add(specialSwapSelecter);
 		gamePanel.add(specialSwapCountLabel);
 		gamePanel.add(timeLabel);
+		gamePanel.addMouseListener(this);
+
 		return gamePanel;
 	}
 	/**
@@ -861,25 +998,13 @@ public class gameEngine extends JFrame implements MouseListener{
 	public int getSelectedLevel(){
 		return (int) levelChooser.getSelectedItem();
 	}
-	
+
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 		if(e.getSource() == startButton){
-		//Buralar hep initLevel diye bir method oluþcak orda kullanýlcak
-			board.constructRandomBoard();
-			swapsLeft = level.getswapAmount();
-			specialSwapsLeft = level.getSpecialSwapAmount();
-			time = level.getTime();
-			setSwapsLeft(swapsLeft);
-			setSpecialSwapsLeft(specialSwapsLeft);
-			setScore(0);
-			setTime(time);
-			frame.setContentPane(gamePanel);
-			repaint();
-			timer.start();
-			gameTimer.start();
+			initLevel((int)levelChooser.getSelectedItem());
 		}
 		if(e.getSource() == lokumPanel){
 			System.out.println(e.getX() + " " + e.getY());
@@ -902,7 +1027,9 @@ public class gameEngine extends JFrame implements MouseListener{
 				}
 			}
 		}
-
+		if(e.getSource() == scoreLabel){
+			increaseScore(10000);
+		}
 
 	}
 
@@ -935,7 +1062,6 @@ public class gameEngine extends JFrame implements MouseListener{
 	// A class that implements ActionListener for repainting lokums
 	class AnimationEventListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("repainted");
 			repaint();
 			checkGameStatus();
 		}

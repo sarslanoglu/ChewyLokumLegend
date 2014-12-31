@@ -6,6 +6,7 @@ package game;
 
 
 public class Level {
+	private Board board;
 	private int levelNumber;
 	private int swapAmount;
 	private int specialSwapAmount;
@@ -19,12 +20,13 @@ public class Level {
 	 * @param levelRequirementScore the score of the level requirement.
 	 * @param time 					the time given for the level
 	 */
-	public Level (int levelNumber,int swapAmount,int specialSwapAmount,int levelRequirementScore, long time) {
+	public Level (Board board,int levelNumber,int swapAmount,int specialSwapAmount,int levelRequirementScore, long time) {
 		this.levelRequirementScore = levelRequirementScore;
 		this.levelNumber = levelNumber;
 		this.swapAmount = swapAmount;
 		this.specialSwapAmount = specialSwapAmount;
 		this.time = time;
+		this.board = board;
 		/**
 		 *  Default constructor of Level.
 		 *  Constructs a level object with
@@ -74,6 +76,9 @@ public class Level {
 	 */
 	public long getTime(){
 		return time;
+	}
+	public Board getBoard(){
+		return board;
 	}
 }
 	

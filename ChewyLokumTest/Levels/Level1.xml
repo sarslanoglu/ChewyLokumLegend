@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<level>
+<board>
+<width w="6"/>
+<height h="8"/>
+</board>
+<requiredScore score="10000"/><swapAmount swaps="10"/><specialSwapAmount specialSwaps="2"/><level levelNumber="1"/><time t="0"/></level>

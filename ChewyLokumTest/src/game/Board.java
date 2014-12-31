@@ -609,9 +609,11 @@ public class Board {
 			else if(first.getType().equals("BOMB") && second.getType().equals("BOMB")){
 				eatAllLokums();
 			}else if(first.getType().equals("BOMB") && !second.isSpecial()){
+				eatLokum(first);
 				eatAllSameType(second);
 			}else if(!first.isSpecial() && second.getType().equals("BOMB")){
 				eatAllSameType(first);
+				eatLokum(second);
 			}
 		}
 		else{
