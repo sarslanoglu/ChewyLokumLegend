@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
          <!-- XML Schema Generated from XML Document on Sun Oct 26 2014 16:33:00 GMT+0000 (GMT) -->
          <!-- with XmlGrid.net Free Online Service http://xmlgrid.net -->
          <xs:element name="game">
@@ -60,6 +60,11 @@
                                  </xs:complexType>
                            </xs:element>
                            <xs:element name="currentscore">
+                                 <xs:complexType>
+                                       <xs:attribute name="score" type="xs:int"></xs:attribute>
+                                 </xs:complexType>
+                           </xs:element>
+                           <xs:element name="requiredScore">
                                  <xs:complexType>
                                        <xs:attribute name="score" type="xs:int"></xs:attribute>
                                  </xs:complexType>

@@ -11,7 +11,7 @@ public class Level {
 	private int swapAmount;
 	private int specialSwapAmount;
 	private int levelRequirementScore;
-	private long time;
+	private int time;
 	
 	/**
 	 * @param levelNumber			the number of the level
@@ -20,7 +20,7 @@ public class Level {
 	 * @param levelRequirementScore the score of the level requirement.
 	 * @param time 					the time given for the level
 	 */
-	public Level (Board board,int levelNumber,int swapAmount,int specialSwapAmount,int levelRequirementScore, long time) {
+	public Level (Board board,int levelNumber,int swapAmount,int specialSwapAmount,int levelRequirementScore, int time) {
 		this.levelRequirementScore = levelRequirementScore;
 		this.levelNumber = levelNumber;
 		this.swapAmount = swapAmount;
@@ -74,7 +74,7 @@ public class Level {
 	/**
 	 * @return Returns the time.
 	 */
-	public long getTime(){
+	public int getTime(){
 		return time;
 	}
 	public Board getBoard(){
