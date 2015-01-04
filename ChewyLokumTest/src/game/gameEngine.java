@@ -97,6 +97,12 @@ public class gameEngine extends JFrame implements MouseListener{
 	private ImageIcon greenHStriped = new ImageIcon("Lokums/greenHStriped.png");
 	private ImageIcon greenWrapped = new ImageIcon("Lokums/greenWrapped.png");
 
+	private ImageIcon redTime = new ImageIcon("Lokums/redTime.png");
+	private ImageIcon blueTime = new ImageIcon("Lokums/blueTime.png");
+	private ImageIcon yellowTime = new ImageIcon("Lokums/yellowTime.png");
+	private ImageIcon greenTime = new ImageIcon("Lokums/greenTime.png");
+
+
 	private ImageIcon BOMB = new ImageIcon("Lokums/BOMB.png");
 	private ImageIcon nullSpace= new ImageIcon("Lokums/NULLSPACE.png");
 
@@ -506,7 +512,7 @@ public class gameEngine extends JFrame implements MouseListener{
 				}
 				else if(childElement.getNodeName() == "requiredScore"){
 					requiredScore = Integer.parseInt(childElement.getAttribute("score"));
-					
+
 				}
 				else if(childElement.getNodeName() == "movesleft"){
 					swapsLeft = Integer.parseInt(childElement.getAttribute("swaps"));
@@ -565,7 +571,7 @@ public class gameEngine extends JFrame implements MouseListener{
 		while(combinations.size() != 0){
 			for(Combination c : combinations){
 				board.eat(c);
-				
+
 
 			}
 			board.FillEmptySpaces();
@@ -836,7 +842,12 @@ public class gameEngine extends JFrame implements MouseListener{
 				lokumLabel = new JLabel(yellowWrapped);
 			}
 			else{
-				lokumLabel = new JLabel(yellow);
+				if(l.isTimeLokum() && level.isTimeBased()){
+					lokumLabel = new JLabel(yellowTime);
+				}
+				else{
+					lokumLabel = new JLabel(yellow);
+				}
 			}
 		}
 		else if(l.getColor().equals("B")){
@@ -850,7 +861,12 @@ public class gameEngine extends JFrame implements MouseListener{
 				lokumLabel = new JLabel(blueWrapped);
 			}
 			else{
-				lokumLabel = new JLabel(blue);
+				if(l.isTimeLokum()  && level.isTimeBased()){
+					lokumLabel = new JLabel(blueTime);
+				}
+				else{
+					lokumLabel = new JLabel(blue);
+				}
 			}
 		}
 		else if(l.getColor().equals("G")){
@@ -864,7 +880,12 @@ public class gameEngine extends JFrame implements MouseListener{
 				lokumLabel = new JLabel(greenWrapped);
 			}
 			else{
-				lokumLabel = new JLabel(green);
+				if(l.isTimeLokum()  && level.isTimeBased()){
+					lokumLabel = new JLabel(greenTime);
+				}
+				else{
+					lokumLabel = new JLabel(green);
+				}
 			}
 		}
 		else if(l.getColor().equals("R")){
@@ -878,7 +899,12 @@ public class gameEngine extends JFrame implements MouseListener{
 				lokumLabel = new JLabel(redWrapped);
 			}	
 			else{
-				lokumLabel = new JLabel(red);
+				if(l.isTimeLokum() && level.isTimeBased()){
+					lokumLabel = new JLabel(redTime);
+				}
+				else{
+					lokumLabel = new JLabel(red);
+				}
 			}
 		}
 		else if(l.getType().equals("BOMB")){
