@@ -478,7 +478,7 @@ public class Board {
 		break;
 		case 3:  type="B";
 		}
-		int randomNum2 = rand.nextInt(5);
+		int randomNum2 = rand.nextInt(10);
 		if(randomNum2<1){
 			r = new normalLokum(0, 0, type,true);	
 		}

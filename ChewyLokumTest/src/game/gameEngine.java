@@ -217,6 +217,7 @@ public class gameEngine extends JFrame implements MouseListener{
 					int ycoord = lokum.getPositionY();
 					String color = lokum.getColor();
 					String type = lokum.getType();
+					boolean timeLokum = lokum.isTimeLokum();
 					bw.write("<lokum>\n");
 					bw.write(String.format("<color c=\"%s\"/>\n",color));
 					bw.write("<position>\n");
@@ -224,6 +225,7 @@ public class gameEngine extends JFrame implements MouseListener{
 					bw.write(String.format("<ycoord y=\"%d\"/>",ycoord));
 					bw.write("</position>\n");
 					bw.write(String.format("<type t=\"%s\"/>",type));
+					bw.write(String.format("<isTime time=\"%s\"/>",timeLokum));
 					bw.write("</lokum>");
 				}
 			}
@@ -444,7 +446,7 @@ public class gameEngine extends JFrame implements MouseListener{
 								int coordY = 0;
 								String type = "";
 								String color = "";
-
+								boolean timeLokum = false;
 								Node lokumNode = lokums.item(k);
 								if(lokumNode instanceof Element){
 									Element lokumElement = (Element) lokumNode;
@@ -477,11 +479,19 @@ public class gameEngine extends JFrame implements MouseListener{
 													}
 												}
 											}
+											else if(nodeTElem.getNodeName() == "isTime"){
+												if(nodeTElem.getAttribute("time").equals("true")){
+													timeLokum = true;
+												}
+												else{
+													timeLokum = false;
+												}
+											}
 										}
 									}
 								}
 								if(type.equals("NotSpecial")){
-									savedLokum = new normalLokum(coordX,coordY,color , false);
+									savedLokum = new normalLokum(coordX,coordY,color , timeLokum);
 									board.set(savedLokum.getPositionX(),savedLokum.getPositionY(),savedLokum);
 								}else{
 									savedLokum = new specialLokum(coordX,coordY,color,type);

@@ -8,98 +8,98 @@
 <color c="G"/>
 <position>
 <xcoord x="0"/><ycoord y="0"/></position>
-<type t="NotSpecial"/></lokum><lokum>
-<color c="G"/>
+<type t="NotSpecial"/><isTime time="true"/></lokum><lokum>
+<color c="R"/>
 <position>
 <xcoord x="0"/><ycoord y="1"/></position>
-<type t="NotSpecial"/></lokum><lokum>
-<color c="R"/>
-<position>
-<xcoord x="0"/><ycoord y="2"/></position>
-<type t="NotSpecial"/></lokum><lokum>
-<color c="G"/>
-<position>
-<xcoord x="0"/><ycoord y="3"/></position>
-<type t="NotSpecial"/></lokum><lokum>
+<type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
 <color c="W"/>
 <position>
-<xcoord x="0"/><ycoord y="4"/></position>
-<type t="NotSpecial"/></lokum><lokum>
+<xcoord x="0"/><ycoord y="2"/></position>
+<type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
+<color c="W"/>
+<position>
+<xcoord x="0"/><ycoord y="3"/></position>
+<type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
 <color c="R"/>
 <position>
+<xcoord x="0"/><ycoord y="4"/></position>
+<type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
+<color c="W"/>
+<position>
 <xcoord x="0"/><ycoord y="5"/></position>
-<type t="NotSpecial"/></lokum><lokum>
-<color c="B"/>
+<type t="NotSpecial"/><isTime time="true"/></lokum><lokum>
+<color c="W"/>
 <position>
 <xcoord x="0"/><ycoord y="6"/></position>
-<type t="NotSpecial"/></lokum><lokum>
+<type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
 <color c="R"/>
 <position>
 <xcoord x="0"/><ycoord y="7"/></position>
-<type t="NotSpecial"/></lokum><lokum>
+<type t="NotSpecial"/><isTime time="true"/></lokum><lokum>
 <color c="W"/>
 <position>
 <xcoord x="1"/><ycoord y="0"/></position>
-<type t="NotSpecial"/></lokum><lokum>
-<color c="W"/>
+<type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
+<color c="R"/>
 <position>
 <xcoord x="1"/><ycoord y="1"/></position>
-<type t="NotSpecial"/></lokum><lokum>
-<color c="R"/>
+<type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
+<color c="G"/>
 <position>
 <xcoord x="1"/><ycoord y="2"/></position>
-<type t="NotSpecial"/></lokum><lokum>
-<color c="R"/>
-<position>
-<xcoord x="1"/><ycoord y="3"/></position>
-<type t="NotSpecial"/></lokum><lokum>
+<type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
 <color c="W"/>
 <position>
+<xcoord x="1"/><ycoord y="3"/></position>
+<type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
+<color c="B"/>
+<position>
 <xcoord x="1"/><ycoord y="4"/></position>
-<type t="NotSpecial"/></lokum><lokum>
+<type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
 <color c="G"/>
 <position>
 <xcoord x="1"/><ycoord y="5"/></position>
-<type t="NotSpecial"/></lokum><lokum>
+<type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
 <color c="W"/>
 <position>
 <xcoord x="1"/><ycoord y="6"/></position>
-<type t="NotSpecial"/></lokum><lokum>
-<color c="B"/>
+<type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
+<color c="G"/>
 <position>
 <xcoord x="1"/><ycoord y="7"/></position>
-<type t="NotSpecial"/></lokum><lokum>
-<color c="W"/>
+<type t="NotSpecial"/><isTime time="true"/></lokum><lokum>
+<color c="G"/>
 <position>
 <xcoord x="2"/><ycoord y="0"/></position>
-<type t="NotSpecial"/></lokum><lokum>
-<color c="G"/>
+<type t="NotSpecial"/><isTime time="true"/></lokum><lokum>
+<color c="B"/>
 <position>
 <xcoord x="2"/><ycoord y="1"/></position>
-<type t="NotSpecial"/></lokum><lokum>
-<color c="G"/>
-<position>
-<xcoord x="2"/><ycoord y="2"/></position>
-<type t="NotSpecial"/></lokum><lokum>
+<type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
 <color c="NULL"/>
 <position>
-<xcoord x="2"/><ycoord y="3"/></position>
-<type t="BOMB"/></lokum><lokum>
+<xcoord x="2"/><ycoord y="2"/></position>
+<type t="BOMB"/><isTime time="false"/></lokum><lokum>
 <color c="G"/>
+<position>
+<xcoord x="2"/><ycoord y="3"/></position>
+<type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
+<color c="R"/>
 <position>
 <xcoord x="2"/><ycoord y="4"/></position>
-<type t="NotSpecial"/></lokum><lokum>
-<color c="G"/>
+<type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
+<color c="R"/>
 <position>
 <xcoord x="2"/><ycoord y="5"/></position>
-<type t="NotSpecial"/></lokum><lokum>
-<color c="R"/>
+<type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
+<color c="B"/>
 <position>
 <xcoord x="2"/><ycoord y="6"/></position>
-<type t="NotSpecial"/></lokum><lokum>
-<color c="R"/>
+<type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
+<color c="B"/>
 <position>
 <xcoord x="2"/><ycoord y="7"/></position>
-<type t="NotSpecial"/></lokum></lokums>
+<type t="NotSpecial"/><isTime time="false"/></lokum></lokums>
 </board>
-<currentscore score="680"/><requiredScore score="15000"/><movesleft swaps="13"/><specialMovesLeft specialSwaps="0"/><level levelNumber="2"/><time t="2"/></game>
+<currentscore score="200"/><requiredScore score="15000"/><movesleft swaps="15"/><specialMovesLeft specialSwaps="1"/><level levelNumber="2"/><time t="9"/></game>
