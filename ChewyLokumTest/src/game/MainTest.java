@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
 
-
+//ilgligli
 	public class MainTest {
 	public static Lokum[][] lokumGrid = new Lokum[5][5]; 
 
