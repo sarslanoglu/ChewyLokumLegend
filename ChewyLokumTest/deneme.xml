@@ -5,83 +5,83 @@
 <height h="3"/>
 <lokums>
 <lokum>
-<color c="G"/>
+<color c="R"/>
 <position>
 <xcoord x="0"/><ycoord y="0"/></position>
-<type t="NotSpecial"/><isTime time="true"/></lokum><lokum>
-<color c="R"/>
+<type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
+<color c="B"/>
 <position>
 <xcoord x="0"/><ycoord y="1"/></position>
 <type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
-<color c="W"/>
+<color c="B"/>
 <position>
 <xcoord x="0"/><ycoord y="2"/></position>
 <type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
-<color c="W"/>
+<color c="G"/>
 <position>
 <xcoord x="0"/><ycoord y="3"/></position>
 <type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
-<color c="R"/>
+<color c="B"/>
 <position>
 <xcoord x="0"/><ycoord y="4"/></position>
 <type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
-<color c="W"/>
+<color c="B"/>
 <position>
 <xcoord x="0"/><ycoord y="5"/></position>
-<type t="NotSpecial"/><isTime time="true"/></lokum><lokum>
+<type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
 <color c="W"/>
 <position>
 <xcoord x="0"/><ycoord y="6"/></position>
 <type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
-<color c="R"/>
+<color c="B"/>
 <position>
 <xcoord x="0"/><ycoord y="7"/></position>
-<type t="NotSpecial"/><isTime time="true"/></lokum><lokum>
+<type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
 <color c="W"/>
 <position>
 <xcoord x="1"/><ycoord y="0"/></position>
 <type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
-<color c="R"/>
+<color c="G"/>
 <position>
 <xcoord x="1"/><ycoord y="1"/></position>
 <type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
-<color c="G"/>
+<color c="R"/>
 <position>
 <xcoord x="1"/><ycoord y="2"/></position>
 <type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
-<color c="W"/>
+<color c="B"/>
 <position>
 <xcoord x="1"/><ycoord y="3"/></position>
 <type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
-<color c="B"/>
+<color c="W"/>
 <position>
 <xcoord x="1"/><ycoord y="4"/></position>
-<type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
-<color c="G"/>
+<type t="NotSpecial"/><isTime time="true"/></lokum><lokum>
+<color c="R"/>
 <position>
 <xcoord x="1"/><ycoord y="5"/></position>
-<type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
-<color c="W"/>
+<type t="NotSpecial"/><isTime time="true"/></lokum><lokum>
+<color c="B"/>
 <position>
 <xcoord x="1"/><ycoord y="6"/></position>
 <type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
-<color c="G"/>
+<color c="W"/>
 <position>
 <xcoord x="1"/><ycoord y="7"/></position>
-<type t="NotSpecial"/><isTime time="true"/></lokum><lokum>
-<color c="G"/>
+<type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
+<color c="W"/>
 <position>
 <xcoord x="2"/><ycoord y="0"/></position>
-<type t="NotSpecial"/><isTime time="true"/></lokum><lokum>
+<type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
 <color c="B"/>
 <position>
 <xcoord x="2"/><ycoord y="1"/></position>
 <type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
-<color c="NULL"/>
+<color c="R"/>
 <position>
 <xcoord x="2"/><ycoord y="2"/></position>
-<type t="BOMB"/><isTime time="false"/></lokum><lokum>
-<color c="G"/>
+<type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
+<color c="B"/>
 <position>
 <xcoord x="2"/><ycoord y="3"/></position>
 <type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
@@ -89,11 +89,11 @@
 <position>
 <xcoord x="2"/><ycoord y="4"/></position>
 <type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
-<color c="R"/>
+<color c="W"/>
 <position>
 <xcoord x="2"/><ycoord y="5"/></position>
 <type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
-<color c="B"/>
+<color c="G"/>
 <position>
 <xcoord x="2"/><ycoord y="6"/></position>
 <type t="NotSpecial"/><isTime time="false"/></lokum><lokum>
@@ -102,4 +102,4 @@
 <xcoord x="2"/><ycoord y="7"/></position>
 <type t="NotSpecial"/><isTime time="false"/></lokum></lokums>
 </board>
-<currentscore score="200"/><requiredScore score="15000"/><movesleft swaps="15"/><specialMovesLeft specialSwaps="1"/><level levelNumber="2"/><time t="9"/></game>
+<currentscore score="0"/><requiredScore score="15000"/><movesleft swaps="15"/><specialMovesLeft specialSwaps="2"/><level levelNumber="2"/><time t="18"/></game>

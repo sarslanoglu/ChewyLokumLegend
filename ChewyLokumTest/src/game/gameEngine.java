@@ -1,5 +1,4 @@
 package game;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -74,7 +73,6 @@ public class gameEngine extends JFrame implements MouseListener{
 	private JLabel specialSwapCountLabel;
 	private JLabel timeLabel;
 	private Timer timer; 
-	private Timer timer2;
 	private Timer gameTimer;
 	//Images for representing lokums
 	private ImageIcon red = new ImageIcon("Lokums/redone.png");
@@ -761,6 +759,10 @@ public class gameEngine extends JFrame implements MouseListener{
 		gameTimer.stop();
 	} 
 	public void initLevel(Level level,boolean loadedGame){
+		
+		sLokum1 = null;
+		sLokum2 = null;
+		
 		this.level = level;
 
 		if(!loadedGame){
