@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+         <!-- XML Schema Generated from XML Document on Sun Oct 26 2014 16:33:00 GMT+0000 (GMT) -->
+         <!-- with XmlGrid.net Free Online Service http://xmlgrid.net -->
+         <xs:element name="game">
+               <xs:complexType>
+                     <xs:sequence>
+                           <xs:element name="board">
+                                 <xs:complexType>
+                                       <xs:sequence>
+                                             <xs:element name="width">
+                                                   <xs:complexType>
+                                                         <xs:attribute name="w" type="xs:int"></xs:attribute>
+                                                   </xs:complexType>
+                                             </xs:element>
+                                             <xs:element name="height">
+                                                   <xs:complexType>
+                                                         <xs:attribute name="h" type="xs:int"></xs:attribute>
+                                                   </xs:complexType>
+                                             </xs:element>
+                                             <xs:element name="lokums">
+                                                   <xs:complexType>
+                                                         <xs:sequence>
+                                                               <xs:element name="lokum" maxOccurs="unbounded">
+                                                                     <xs:complexType>
+                                                                           <xs:sequence>
+                                                                                 <xs:element name="color">
+                                                                                       <xs:complexType>
+                                                                                             <xs:attribute name="c" type="xs:string"></xs:attribute>
+                                                                                       </xs:complexType>
+                                                                                 </xs:element>
+                                                                                 <xs:element name="position">
+                                                                                       <xs:complexType>
+                                                                                             <xs:sequence>
+                                                                                                   <xs:element name="xcoord">
+                                                                                                         <xs:complexType>
+                                                                                                               <xs:attribute name="x" type="xs:int"></xs:attribute>
+                                                                                                         </xs:complexType>
+                                                                                                   </xs:element>
+                                                                                                   <xs:element name="ycoord">
+                                                                                                         <xs:complexType>
+                                                                                                               <xs:attribute name="y" type="xs:int"></xs:attribute>
+                                                                                                         </xs:complexType>
+                                                                                                   </xs:element>
+                                                                                             </xs:sequence>
+                                                                                       </xs:complexType>
+                                                                                 </xs:element>
+                                                                                 <xs:element name="type">
+                                                                                       <xs:complexType>
+                                                                                             <xs:attribute name="t" type="xs:string"></xs:attribute>
+                                                                                       </xs:complexType>
+                                                                                 </xs:element>
+                                                                                 <xs:element name="isTime">
+                                                                                       <xs:complexType>
+                                                                                             <xs:attribute name="time" type="xs:string"></xs:attribute>
+                                                                                       </xs:complexType>
+                                                                                 </xs:element>
+                                                                           </xs:sequence>
+                                                                     </xs:complexType>
+                                                               </xs:element>
+                                                         </xs:sequence>
+                                                   </xs:complexType>
+                                             </xs:element>
+                                       </xs:sequence>
+                                 </xs:complexType>
+                           </xs:element>
+                           <xs:element name="currentscore">
+                                 <xs:complexType>
+                                       <xs:attribute name="score" type="xs:int"></xs:attribute>
+                                 </xs:complexType>
+                           </xs:element>
+                           <xs:element name="requiredScore">
+                                 <xs:complexType>
+                                       <xs:attribute name="score" type="xs:int"></xs:attribute>
+                                 </xs:complexType>
+                           </xs:element>
+                           <xs:element name="movesleft">
+                                 <xs:complexType>
+                                       <xs:attribute name="swaps" type="xs:int"></xs:attribute>
+                                 </xs:complexType>
+                           </xs:element>
+                           <xs:element name="specialMovesLeft">
+                                 <xs:complexType>
+                                       <xs:attribute name="specialSwaps" type="xs:int"></xs:attribute>
+                                 </xs:complexType>
+                           </xs:element>
+                           <xs:element name="level">
+                                 <xs:complexType>
+                                       <xs:attribute name="levelNumber" type="xs:int"></xs:attribute>
+                                 </xs:complexType>
+                           </xs:element>
+                           <xs:element name="time">
+                                 <xs:complexType>
+                                       <xs:attribute name="t" type="xs:int"></xs:attribute>
+                                 </xs:complexType>
+                           </xs:element>
+                     </xs:sequence>
+               </xs:complexType>
+         </xs:element>
+   </xs:schema>
+ 
